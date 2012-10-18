@@ -1,0 +1,110 @@
+[
+{
+  "name": "classes",
+  "version": "0.0.1",
+  "description": "Cross-browser element class list",
+  "keywords": [
+    "dom",
+    "html",
+    "classList",
+    "class",
+    "ui"
+  ],
+  "scripts": [
+    "index.js"
+  ],
+  "dependencies": {
+    "component/indexof": "*"
+  },
+  "repo": "component/classes",
+  "stars": 0
+},
+{
+  "name": "string.js",
+  "repo": "jprichardson/string.js",
+  "description": "string contains methods that aren't included in the vanilla JavaScript string such as escaping HTML, decoding HTML entities, stripping tags, etc.",
+  "version": "1.0.0",
+  "keywords": [
+    "string",
+    "strings",
+    "string.js",
+    "stringjs",
+    "S",
+    "s",
+    "csv",
+    "html",
+    "entities",
+    "parse",
+    "html",
+    "tags",
+    "strip",
+    "trim",
+    "encode",
+    "decode",
+    "escape",
+    "unescape"
+  ],
+  "dependencies": {},
+  "development": {},
+  "scripts": [
+    "lib/string.min.js"
+  ],
+  "stars": 0
+},
+{
+  "name": "escape-html",
+  "description": "Escape HTML entities",
+  "version": "0.0.1",
+  "keywords": [
+    "escape",
+    "html",
+    "utility"
+  ],
+  "dependencies": {},
+  "scripts": [
+    "index.js"
+  ],
+  "repo": "component/escape-html",
+  "stars": 0
+},
+{
+  "name": "dom",
+  "version": "0.0.1",
+  "description": "DOM traversal, manipulation and events aggregate library",
+  "keywords": [
+    "html",
+    "dom",
+    "ui",
+    "jquery"
+  ],
+  "scripts": [
+    "index.js"
+  ],
+  "dependencies": {
+    "component/type": "*",
+    "component/event": "*",
+    "component/delegate": "*",
+    "component/indexof": "*",
+    "component/domify": "*",
+    "component/classes": "*"
+  },
+  "repo": "component/dom",
+  "stars": 0
+},
+{
+  "name": "domify",
+  "version": "0.0.3",
+  "description": "turn HTML into DOM elements",
+  "keywords": [
+    "dom",
+    "html",
+    "client",
+    "browser",
+    "component"
+  ],
+  "scripts": [
+    "index.js"
+  ],
+  "repo": "component/domify",
+  "stars": 0
+}]

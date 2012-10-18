@@ -1,0 +1,26 @@
+{
+  "name": "component-dashdoc",
+  "version": "0.0.0",
+  "description": "Dash docset for published components.",
+  "main": "index.js",
+  "directories": {
+    "example": "examples",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "",
+  "author": "Tim Oxley",
+  "license": "MIT",
+  "dependencies": {
+    "component": "~0.4.2",
+    "JSONStream": "~0.4.2",
+    "event-stream": "~3.0.7",
+    "github-flavored-markdown": "~1.0.1",
+    "async": "~0.1.22",
+    "mkdirp": "~0.3.4",
+    "superagent": "~0.9.6",
+    "rimraf": "~2.0.2"
+  }
+}
