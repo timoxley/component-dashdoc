@@ -1,0 +1,36 @@
+<h1>preload</h1>
+
+<p>Preload images.</p>
+
+<h2>Installation</h2>
+
+<pre><code>$ component install component/preload
+</code></pre>
+
+<h2>Example</h2>
+
+<div class="highlight"><pre lang="js">var p = document.querySelector('p');
+var Preloader = require('preloader');
+var imgs = new Preloader;
+
+imgs.add('<a href='http://mousebreath.com/wp-content/uploads/2011/08/maru__02.jpg'>http://mousebreath.com/wp-content/uploads/2011/08/maru__02.jpg</a>');
+imgs.add('<a href='http://www.weruletheinternet.com/wp-content/uploads/images/2011/june/maru_the_cat/maru_the_cat_4.jpg'>http://www.weruletheinternet.com/wp-content/uploads/images/2011/june/maru_the_cat/maru_the_cat_4.jpg</a>');
+imgs.add('<a href='http://lovemeow.com/wp-content/uploads/2010/05/DSC_0959_20100420083642.jpg'>http://lovemeow.com/wp-content/uploads/2010/05/DSC_0959_20100420083642.jpg</a>');
+
+imgs.on('progress', function(e){
+  p.textContent = e.percent + '%';
+});
+
+imgs.end(function(){
+  p.textContent = 'complete';
+  imgs.urls.forEach(function(url){
+    var img = new Image;
+    img.src = url;
+    document.body.appendChild(img);
+  });
+});
+</pre></div>
+
+<h2>License</h2>
+
+<p>MIT</p>

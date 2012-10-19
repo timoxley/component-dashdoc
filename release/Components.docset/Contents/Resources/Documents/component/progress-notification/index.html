@@ -1,0 +1,49 @@
+<h1>ProgressNotification</h1>
+
+<p>Progress notification component with a clean slate to build off of.</p>
+
+<p><img src="http://f.cl.ly/items/0R0k131Q41452x1D303u/Screen%20Shot%202012-09-07%20at%2011.30.02%20AM.png" alt="progress notification component" title="" /></p>
+
+<h2>Installation</h2>
+
+<div class="highlight"><pre lang="">$ component install component/progress-notification
+</pre></div>
+
+<h2>Features</h2>
+
+<ul>
+<li>all the features of <a href="http://github.com/component/notification">notification</a></li>
+</ul>
+
+<h2>Example</h2>
+
+<div class="highlight"><pre lang="js">var notify = require('progress-notification');
+
+var progress = notify('Uploading maru.png');
+var n = 0;
+setInterval(function(){
+  progress.update(n++);
+}, 50);
+</pre></div>
+
+<h2>API</h2>
+
+<h3>notify(msg)</h3>
+
+<p>Notify with the given <code>msg</code> and no title.</p>
+
+<h3>notify(title, msg)</h3>
+
+<p>Notify with the given <code>msg</code> and <code>title</code>.</p>
+
+<h3>ProgressNotification#update(n)</h3>
+
+<p>Update percentage to <code>n</code>.</p>
+
+<h3>ProgressNotification#size(n)</h3>
+
+<p>Update progress indicator size to <code>n</code>.</p>
+
+<h2>License</h2>
+
+<p>MIT</p>

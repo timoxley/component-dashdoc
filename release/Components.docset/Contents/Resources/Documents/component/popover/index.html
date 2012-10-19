@@ -1,0 +1,42 @@
+<h1>Popover</h1>
+
+<p>Popover component built on top of <a href="http://github.com/component/tip">Tip</a>.</p>
+
+<p><img src="http://f.cl.ly/items/282X271J2Y1s1P342o02/Screen%20Shot%202012-08-02%20at%205.07.07%20PM.png" alt="js popover component" title="" /></p>
+
+<h2>Installation</h2>
+
+<div class="highlight"><pre lang="">$ npm install popover-component
+</pre></div>
+
+<h2>Features</h2>
+
+<ul>
+<li>events for composition</li>
+<li>"auto" positioning</li>
+<li>fluent API</li>
+<li>minimal base styling</li>
+</ul>
+
+<h2>API</h2>
+
+<h3>new Popover(content, [title])</h3>
+
+<p>Create a new popover with <code>content</code> being<br />  either a string, html, or element, and optional<br />  <code>title</code> which may contain html or be an element as well.</p>
+
+<div class="highlight"><pre lang="js">var Popover = require('popover');
+var popover = new Popover('You have mail!!!', 'Mail');
+popover.show('#avatar');
+</pre></div>
+
+<p>View <a href="http://github.com/component/tip">Tip</a> for additional<br /> API documentation.</p>
+
+<h2>Themes</h2>
+
+<ul>
+<li><a href="https://github.com/component/aurora-popover">Aurora</a></li>
+</ul>
+
+<h2>License</h2>
+
+<p>MIT</p>

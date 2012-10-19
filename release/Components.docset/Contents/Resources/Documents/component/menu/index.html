@@ -1,0 +1,149 @@
+<h1>Menu</h1>
+
+<p>Menu component with structural styling to give you a clean slate.</p>
+
+<p><img src="http://f.cl.ly/items/1Z1d3B1j283y3e200g3E/Screen%20Shot%202012-07-31%20at%203.57.10%20PM.png" alt="js menu component" title="" /></p>
+
+<h2>Installation</h2>
+
+<div class="highlight"><pre lang="">$ npm install menu-component
+</pre></div>
+
+<h2>Features</h2>
+
+<ul>
+<li>events for composition</li>
+<li>structural CSS letting you decide on style</li>
+<li>fluent API</li>
+<li>arrow key navigation</li>
+</ul>
+
+<h2>Events</h2>
+
+<ul>
+<li><code>show</code> when shown</li>
+<li><code>hide</code> when hidden</li>
+<li><code>remove</code> (item) when an item is removed</li>
+<li><code>select</code> (item) when an item is selected</li>
+<li><code>*</code> menu item events are emitted when clicked</li>
+</ul>
+
+<h2>Example</h2>
+
+<div class="highlight"><pre lang="js">var Menu = require('menu');
+
+var menu = new Menu;
+
+menu
+.add('Add item')
+.add('Edit item', function(){ console.log('edit'); })
+.add('Remove item', function(){ console.log('remove'); })
+.add('Remove "Add item"', function(){
+  menu.remove('Add item');
+  menu.remove('Remove "Add item"');
+});
+
+menu.on('select', function(item){
+  console.log('selected "%s"', item);
+});
+
+menu.on('Add item', function(){
+  console.log('added an item');
+});
+
+oncontextmenu = function(e){
+  e.preventDefault();
+  menu.moveTo(e.pageX, e.pageY);
+  menu.show();
+};
+</pre></div>
+
+<h2>API</h2>
+
+<h3>Menu()</h3>
+
+<p>Create a new <code>Menu</code>:</p>
+
+<div class="highlight"><pre lang="js">var Menu = require('menu');
+var menu = new Menu();
+var menu = Menu();
+</pre></div>
+
+<h3>Menu#add([slug], text, [fn])</h3>
+
+<p>Add a new menu item with the given <code>text</code>, optional <code>slug</code> and callback <code>fn</code>.</p>
+
+<p>Using events to handle selection:</p>
+
+<div class="highlight"><pre lang="js">menu.add('Hello');
+
+menu.on('Hello', function(){
+  console.log('clicked hello');
+});
+</pre></div>
+
+<p>Using callbacks:</p>
+
+<div class="highlight"><pre lang="js">menu.add('Hello', function(){
+  console.log('clicked hello');
+});
+</pre></div>
+
+<p>Using a custom slug, otherwise "hello" is generated<br />  from the <code>text</code> given, which may conflict with "rich"<br />  styling like icons within menu items, or i18n.</p>
+
+<div class="highlight"><pre lang="js">menu.add('add-item', 'Add Item');
+
+menu.on('add-item', function(){
+  console.log('clicked "Add Item"');
+});
+
+menu.add('add-item', 'Add Item', function(){
+  console.log('clicked "Add Item"');
+});
+</pre></div>
+
+<h3>Menu#remove(slug)</h3>
+
+<p>Remove an item by the given <code>slug</code>:</p>
+
+<div class="highlight"><pre lang="js">menu.add('Add item');
+menu.remove('Add item');
+</pre></div>
+
+<p>Or with custom slugs:</p>
+
+<div class="highlight"><pre lang="js">menu.add('add-item', 'Add item');
+menu.remove('add-item');
+</pre></div>
+
+<h3>Menu#has(slug)</h3>
+
+<p>Check if a menu item is present.</p>
+
+<div class="highlight"><pre lang="js">menu.add('Add item');
+
+menu.has('Add item');
+// => true
+
+menu.has('add-item');
+// => true
+
+menu.has('Foo');
+// => false
+</pre></div>
+
+<h3>Menu#moveTo(x, y)</h3>
+
+<p>Move the menu to <code>(x, y)</code>.</p>
+
+<h3>Menu#show()</h3>
+
+<p>Show the menu.</p>
+
+<h3>Menu#hide()</h3>
+
+<p>Hide the menu.</p>
+
+<h2>License</h2>
+
+<p>MIT</p>

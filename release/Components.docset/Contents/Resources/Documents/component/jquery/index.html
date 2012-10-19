@@ -1,0 +1,339 @@
+<h1><a href="http://jquery.com/">jQuery</a> - New Wave JavaScript</h1>
+
+<h2>Contribution Guides</h2>
+
+<p>In the spirit of open source software development, jQuery always encourages community code contribution. To help you get started and before you jump into writing code, be sure to read these important contribution guidelines thoroughly:</p>
+
+<ol>
+<li><a href="http://docs.jquery.com/Getting_Involved">Getting Involved</a></li>
+<li><a href="http://docs.jquery.com/JQuery_Core_Style_Guidelines">Core Style Guide</a></li>
+<li><a href="http://docs.jquery.com/Tips_for_jQuery_Bug_Patching">Tips For Bug Patching</a></li>
+</ol>
+
+<h2>What you need to build your own jQuery</h2>
+
+<p>In order to build jQuery, you need to have GNU make 3.8 or later, Node.js/npm latest, and git 1.7 or later.<br />(Earlier versions might work OK, but are not tested.)</p>
+
+<p>Windows users have two options:</p>
+
+<ol>
+<li>Install <a href="https://code.google.com/p/msysgit/">msysgit</a> (Full installer for official Git),
+<a href="http://gnuwin32.sourceforge.net/packages/make.htm">GNU make for Windows</a>, and a
+<a href="http://node-js.prcn.co.cc/">binary version of Node.js</a>. Make sure all three packages are installed to the same
+location (by default, this is C:\Program Files\Git).</li>
+<li>Install <a href="http://cygwin.com/">Cygwin</a> (make sure you install the git, make, and which packages), then either follow
+the <a href="https://github.com/ry/node/wiki/Building-node.js-on-Cygwin-%28Windows%29">Node.js build instructions</a> or install
+the <a href="http://node-js.prcn.co.cc/">binary version of Node.js</a>.</li>
+</ol>
+
+<p>Mac OS users should install Xcode (comes on your Mac OS install DVD, or downloadable from<br /><a href="http://developer.apple.com/technologies/xcode.html">Apple's Xcode site</a>) and<br /><a href="http://mxcl.github.com/homebrew/">Homebrew</a>. Once Homebrew is installed, run <code>brew install git</code> to install git,<br />and <code>brew install node</code> to install Node.js.</p>
+
+<p>Linux/BSD users should use their appropriate package managers to install make, git, and node, or build from source<br />if you swing that way. Easy-peasy.</p>
+
+<h2>How to build your own jQuery</h2>
+
+<p>First, clone a copy of the main jQuery git repo by running:</p>
+
+<div class="highlight"><pre lang="bash">git clone git://github.com/jquery/jquery.git
+</pre></div>
+
+<p>Enter the directory and install the Node dependencies:</p>
+
+<div class="highlight"><pre lang="bash">cd jquery && npm install
+</pre></div>
+
+<p>Make sure you have <code>grunt</code> installed by testing:</p>
+
+<div class="highlight"><pre lang="bash">grunt -version
+</pre></div>
+
+<p>Then, to get a complete, minified (w/ Uglify.js), linted (w/ JSHint) version of jQuery, type the following:</p>
+
+<div class="highlight"><pre lang="bash">grunt
+</pre></div>
+
+<p>The built version of jQuery will be put in the <code>dist/</code> subdirectory.</p>
+
+<h3>Modules (new in 1.8)</h3>
+
+<p>Starting in jQuery 1.8, special builds can now be created that optionally exclude or include any of the following modules:</p>
+
+<ul>
+<li>ajax</li>
+<li>css</li>
+<li>dimensions</li>
+<li>effects</li>
+<li>offset</li>
+</ul>
+
+<p>Before creating a custom build for use in production, be sure to check out the latest stable version:</p>
+
+<div class="highlight"><pre lang="bash">git pull; git checkout $(git describe --abbrev=0 --tags)
+</pre></div>
+
+<p>Then, make sure all Node dependencies are installed and all Git submodules are checked out:</p>
+
+<div class="highlight"><pre lang="bash">npm install && grunt
+</pre></div>
+
+<p>To create a custom build, use the following special <code>grunt</code> commands:</p>
+
+<p>Exclude <strong>ajax</strong>:</p>
+
+<div class="highlight"><pre lang="bash">grunt custom:-ajax
+</pre></div>
+
+<p>Exclude <strong>css</strong>:</p>
+
+<div class="highlight"><pre lang="bash">grunt custom:-css
+</pre></div>
+
+<p>Exclude <strong>deprecated</strong>:</p>
+
+<div class="highlight"><pre lang="bash">grunt custom:-deprecated
+</pre></div>
+
+<p>Exclude <strong>dimensions</strong>:</p>
+
+<div class="highlight"><pre lang="bash">grunt custom:-dimensions
+</pre></div>
+
+<p>Exclude <strong>effects</strong>:</p>
+
+<div class="highlight"><pre lang="bash">grunt custom:-effects
+</pre></div>
+
+<p>Exclude <strong>offset</strong>:</p>
+
+<div class="highlight"><pre lang="bash">grunt custom:-offset
+</pre></div>
+
+<p>Exclude <strong>all</strong> optional modules:</p>
+
+<div class="highlight"><pre lang="bash">grunt custom:-ajax,-css,-deprecated,-dimensions,-effects,-offset
+</pre></div>
+
+<p>Note: dependencies will be handled internally, by the build process.</p>
+
+<h2>Running the Unit Tests</h2>
+
+<p>Start grunt to auto-build jQuery as you work:</p>
+
+<div class="highlight"><pre lang="bash">cd jquery && grunt watch
+</pre></div>
+
+<p>Run the unit tests with a local server that supports PHP. No database is required. Pre-configured php local servers are available for Windows and Mac. Here are some options:</p>
+
+<ul>
+<li>Windows: <a href="http://www.wampserver.com/en/">WAMP download</a></li>
+<li>Mac: <a href="http://www.mamp.info/en/index.html">MAMP download</a></li>
+<li>Linux: <a href="https://www.linux.com/learn/tutorials/288158-easy-lamp-server-installation">Setting up LAMP</a></li>
+<li><a href="http://code.google.com/p/mongoose/">Mongoose (most platforms)</a></li>
+</ul>
+
+<h2>Building to a different directory</h2>
+
+<p>If you want to build jQuery to a directory that is different from the default location:</p>
+
+<div class="highlight"><pre lang="bash">grunt && grunt dist:/path/to/special/location/
+</pre></div>
+
+<p>With this example, the output files would be:</p>
+
+<div class="highlight"><pre lang="bash">/path/to/special/location/jquery.js
+/path/to/special/location/jquery.min.js
+</pre></div>
+
+<p>If you want to add a permanent copy destination, create a file in <code>dist/</code> called ".destination.json". Inside the file, paste and customize the following:</p>
+
+<div class="highlight"><pre lang="json">
+{
+  "/Absolute/path/to/other/destination": true
+}
+</pre></div>
+
+<p>Additionally, both methods can be combined.</p>
+
+<h2>Updating Submodules</h2>
+
+<p>Update the submodules to what is probably the latest upstream code.</p>
+
+<div class="highlight"><pre lang="bash">grunt submodules
+</pre></div>
+
+<p>Note: This task will also be run any time the default <code>grunt</code> command is used.</p>
+
+<h2>Git for dummies</h2>
+
+<p>As the source code is handled by the version control system Git, it's useful to know some features used.</p>
+
+<h3>Submodules</h3>
+
+<p>The repository uses submodules, which normally are handled directly by the Makefile, but sometimes you want to<br />be able to work with them manually.</p>
+
+<p>Following are the steps to manually get the submodules:</p>
+
+<div class="highlight"><pre lang="bash">git clone <a href='https://github.com/jquery/jquery.git'>https://github.com/jquery/jquery.git</a>
+cd jquery
+git submodule init
+git submodule update
+</pre></div>
+
+<p>Or:</p>
+
+<div class="highlight"><pre lang="bash">git clone <a href='https://github.com/jquery/jquery.git'>https://github.com/jquery/jquery.git</a>
+cd jquery
+git submodule update --init
+</pre></div>
+
+<p>Or:</p>
+
+<div class="highlight"><pre lang="bash">git clone --recursive <a href='https://github.com/jquery/jquery.git'>https://github.com/jquery/jquery.git</a>
+cd jquery
+</pre></div>
+
+<p>If you want to work inside a submodule, it is possible, but first you need to checkout a branch:</p>
+
+<div class="highlight"><pre lang="bash">cd src/sizzle
+git checkout master
+</pre></div>
+
+<p>After you've committed your changes to the submodule, you'll update the jquery project to point to the new commit,<br />but remember to push the submodule changes before pushing the new jquery commit:</p>
+
+<div class="highlight"><pre lang="bash">cd src/sizzle
+git push origin master
+cd ..
+git add src/sizzle
+git commit
+</pre></div>
+
+<h3>cleaning</h3>
+
+<p>If you want to purge your working directory back to the status of upstream, following commands can be used (remember everything you've worked on is gone after these):</p>
+
+<div class="highlight"><pre lang="bash">git reset --hard upstream/master
+git clean -fdx
+</pre></div>
+
+<h3>rebasing</h3>
+
+<p>For feature/topic branches, you should always used the <code>--rebase</code> flag to <code>git pull</code>, or if you are usually handling many temporary "to be in a github pull request" branches, run following to automate this:</p>
+
+<div class="highlight"><pre lang="bash">git config branch.autosetuprebase local
+</pre></div>
+
+<p>(see <code>man git-config</code> for more information)</p>
+
+<h3>handling merge conflicts</h3>
+
+<p>If you're getting merge conflicts when merging, instead of editing the conflicted files manually, you can use the feature<br /><code>git mergetool</code>. Even though the default tool <code>xxdiff</code> looks awful/old, it's rather useful.</p>
+
+<p>Following are some commands that can be used there:</p>
+
+<ul>
+<li><code>Ctrl + Alt + M</code> - automerge as much as possible</li>
+<li><code>b</code> - jump to next merge conflict</li>
+<li><code>s</code> - change the order of the conflicted lines</li>
+<li><code>u</code> - undo an merge</li>
+<li><code>left mouse button</code> - mark a block to be the winner</li>
+<li><code>middle mouse button</code> - mark a line to be the winner</li>
+<li><code>Ctrl + S</code> - save</li>
+<li><code>Ctrl + Q</code> - quit</li>
+</ul>
+
+<h2><a href="http://docs.jquery.com/QUnit">QUnit</a> Reference</h2>
+
+<h3>Test methods</h3>
+
+<div class="highlight"><pre lang="js">expect( numAssertions );
+stop();
+start();
+</pre></div>
+
+<p>note: QUnit's eventual addition of an argument to stop/start is ignored in this test suite so that start and stop can be passed as callbacks without worrying about their parameters</p>
+
+<h3>Test assertions</h3>
+
+<div class="highlight"><pre lang="js">ok( value, [message] );
+equal( actual, expected, [message] );
+notEqual( actual, expected, [message] );
+deepEqual( actual, expected, [message] );
+notDeepEqual( actual, expected, [message] );
+strictEqual( actual, expected, [message] );
+notStrictEqual( actual, expected, [message] );
+raises( block, [expected], [message] );
+</pre></div>
+
+<h2>Test Suite Convenience Methods Reference (See <a href="https://github.com/jquery/jquery/blob/master/test/data/testinit.js">test/data/testinit.js</a>)</h2>
+
+<h3>Returns an array of elements with the given IDs</h3>
+
+<div class="highlight"><pre lang="js">q( ... );
+</pre></div>
+
+<p>Example:</p>
+
+<div class="highlight"><pre lang="js">q("main", "foo", "bar");
+
+=> [ div#main, span#foo, input#bar ]
+</pre></div>
+
+<h3>Asserts that a selection matches the given IDs</h3>
+
+<div class="highlight"><pre lang="js">t( testName, selector, [ "array", "of", "ids" ] );
+</pre></div>
+
+<p>Example:</p>
+
+<div class="highlight"><pre lang="js">t("Check for something", "//[a]", ["foo", "baar"]);
+</pre></div>
+
+<h3>Fires a native DOM event without going through jQuery</h3>
+
+<div class="highlight"><pre lang="js">fireNative( node, eventType )
+</pre></div>
+
+<p>Example:</p>
+
+<div class="highlight"><pre lang="js">fireNative( jQuery("#elem")[0], "click" );
+</pre></div>
+
+<h3>Add random number to url to stop caching</h3>
+
+<div class="highlight"><pre lang="js">url( "some/url.php" );
+</pre></div>
+
+<p>Example:</p>
+
+<div class="highlight"><pre lang="js">url("data/test.html");
+
+=> "data/test.html?10538358428943"
+
+
+url("data/test.php?foo=bar");
+
+=> "data/test.php?foo=bar&10538358345554"
+</pre></div>
+
+<h3>Load tests in an iframe</h3>
+
+<p>Loads a given page constructing a url with fileName: <code>"./data/" + fileName + ".html"</code><br />and fires the given callback on jQuery ready (using the jQuery loading from that page)<br />and passes the iFrame's jQuery to the callback.</p>
+
+<div class="highlight"><pre lang="js">testIframe( fileName, testName, callback );
+</pre></div>
+
+<p>Callback arguments:</p>
+
+<div class="highlight"><pre lang="js">callback( jQueryFromIFrame, iFrameWindow, iFrameDocument );
+</pre></div>
+
+<h3>Load tests in an iframe (window.iframeCallback)</h3>
+
+<p>Loads a given page constructing a url with fileName: <code>"./data/" + fileName + ".html"</code><br />The given callback is fired when window.iframeCallback is called by the page<br />The arguments passed to the callback are the same as the<br />arguments passed to window.iframeCallback, whatever that may be</p>
+
+<div class="highlight"><pre lang="js">testIframeWithCallback( testName, fileName, callback );
+</pre></div>
+
+<h2>Questions?</h2>
+
+<p>If you have any questions, please feel free to ask on the<br /><a href="http://forum.jquery.com/developing-jquery-core">Developing jQuery Core forum</a> or in #jquery on irc.freenode.net.</p>

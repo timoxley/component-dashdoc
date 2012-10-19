@@ -1,0 +1,31 @@
+<h1>map</h1>
+
+<p>Map utility</p>
+
+<h2>Installation</h2>
+
+<pre><code>$ component install component/map
+</code></pre>
+
+<h2>API</h2>
+
+<h3>map(array, fn)</h3>
+
+<p>Map returning a new array:</p>
+
+<div class="highlight"><pre lang="js">var names = map(users, function(user){
+  return user.name;
+});
+</pre></div>
+
+<h3>map(array, string)</h3>
+
+<p>Map properties in <code>string</code> returning a new array:</p>
+
+<div class="highlight"><pre lang="js">var names = map(users, 'user.name');
+var firstNames = map(users, 'user.name.first');
+</pre></div>
+
+<h1>License</h1>
+
+<p>MIT</p>

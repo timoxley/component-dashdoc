@@ -1,0 +1,32 @@
+<h1>Query String</h1>
+
+<p>Simple key / value pair query-string parser and formatter.</p>
+
+<h2>Installation</h2>
+
+<div class="highlight"><pre lang="">$ component install component/query-string
+</pre></div>
+
+<h2>API</h2>
+
+<h3>.parse(string)</h3>
+
+<p>Parse the given query <code>string</code>:</p>
+
+<div class="highlight"><pre lang="js">var query = require('query-string');
+query.parse('name=tobi&species=ferret');
+// => { name: 'tobi', species: 'ferret' }
+</pre></div>
+
+<h3>.stringify(object)</h3>
+
+<p>Stringify the given <code>object</code>:</p>
+
+<div class="highlight"><pre lang="js">var query = require('query-string');
+query.stringify({ name: 'tobi', species: 'ferret' });
+// => "name=tobi&species=ferret"
+</pre></div>
+
+<h2>License</h2>
+
+<p>MIT</p>

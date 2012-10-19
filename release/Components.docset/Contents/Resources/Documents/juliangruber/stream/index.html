@@ -1,0 +1,56 @@
+<h1>stream</h1>
+
+<p>Node.js streams in the browser.</p>
+
+<p>Ported straight from the <a href="https://github.com/joyent/node/blob/master/lib/stream.js">Node.js core</a> and adapted to <a href="https://github.com/component/emitter">component/emitter</a>'s api.</p>
+
+<p>For docs:</p>
+
+<ul>
+<li><a href="http://nodejs.org/api/stream.html">Stream Node.js v0.8.9 Manual &amp; Documentation</a></li>
+<li><a href="https://github.com/substack/stream-handbook">Stream Handbook</a></li>
+</ul>
+
+<p>A <a href="https://github.com/juliangruber/stream/blob/master/test.html">testsuite</a> for the browser is there too. Just issue <code>npm install</code> after you've cloned this repo and then open the html file.</p>
+
+<h2>Installation</h2>
+
+<p>Install with <a href="https://github.com/component/component">component(1)</a></p>
+
+<div class="highlight"><pre lang="bash">$ component install juliangruber/stream
+</pre></div>
+
+<p>or</p>
+
+<div class="highlight"><pre lang="">$ npm install stream
+</pre></div>
+
+<h2>Usage example</h2>
+
+<div class="highlight"><pre lang="javascript">var Stream = require('stream');
+
+var src = new Stream();
+src.readable = true;
+
+var dest = new Stream();
+dest.writable = true;
+dest.write = function(data) {
+  assert(data == 'test');
+};
+
+src.pipe(dest);
+
+src.emit('data', 'test');
+</pre></div>
+
+<h2>License</h2>
+
+<p>(MIT)</p>
+
+<p>Copyright (c) 2012 Julian Gruber &lt;<a href='mailto:julian@juliangruber.com'>julian@juliangruber.com</a>&gt;</p>
+
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
+
+<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>

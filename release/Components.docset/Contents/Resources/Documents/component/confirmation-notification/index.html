@@ -1,0 +1,66 @@
+<h1>ConfirmationNotification</h1>
+
+<p>Confirmation notification component with a clean slate to build off of.</p>
+
+<p><img src="http://f.cl.ly/items/2P2H0s3U2m0p1L0C3m1c/Screen%20Shot%202012-08-30%20at%2011.44.16%20AM.png" alt="js confirmation notification" title="" /></p>
+
+<h2>Installation</h2>
+
+<div class="highlight"><pre lang="">$ component install component/confirmation-notification
+</pre></div>
+
+<h2>Features</h2>
+
+<ul>
+<li>all the features of <a href="http://github.com/component/notification">notification</a></li>
+</ul>
+
+<h2>Events</h2>
+
+<ul>
+<li><code>close</code> the notification is closed via the X</li>
+<li><code>click</code> the notification is clicked</li>
+<li><code>cancel</code> the user closed the notification or cancelled</li>
+<li><code>ok</code> the user accepted</li>
+</ul>
+
+<h2>Example</h2>
+
+<div class="highlight"><pre lang="js">var notify = require('confirmation-notification');
+
+notify('Accept friend request?', function(yes){
+  alert(yes ? 'wahoo' : 'nope');
+})
+</pre></div>
+
+<h2>API</h2>
+
+<h3>notify(msg, [fn])</h3>
+
+<p>Notify with the given <code>msg</code> and no title. If a<br />  function is given it will be invoked with a boolean<br />  representing the user's choice.</p>
+
+<h3>notify(title, msg, [fn])</h3>
+
+<p>Notify with the given <code>msg</code> and <code>title</code>. If a<br />  function is given it will be invoked with a boolean<br />  representing the user's choice.</p>
+
+<h3>.focus(type)</h3>
+
+<p>By default the "cancel" button is focused, however you<br />  may invoke <code>.focus('ok')</code>.</p>
+
+<h3>.cancel(text)</h3>
+
+<p>Set cancel button <code>text</code>.</p>
+
+<h3>.ok(text)</h3>
+
+<p>Set cancel ok <code>text</code>.</p>
+
+<h3>.show([fn])</h3>
+
+<p>Show the notification and invoke <code>fn</code> with<br />  a boolean representing the user's choice.</p>
+
+<p>When <code>fn</code> is omitted you may still utilize the <code>cancel</code> / <code>ok</code> events.</p>
+
+<h2>License</h2>
+
+<p>MIT</p>

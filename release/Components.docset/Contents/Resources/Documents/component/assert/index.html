@@ -1,0 +1,21 @@
+<h1>assert</h1>
+
+<p>C-style assertion lib.</p>
+
+<h2>Example</h2>
+
+<p>With custom assertion message:</p>
+
+<div class="highlight"><pre lang="js">var assert = require('assert');
+assert(expr, 'oh no it broke');
+</pre></div>
+
+<p>Or auto-generated assertion message in<br />  browsers that support <code>Error.captureStackTrace()</code>:</p>
+
+<div class="highlight"><pre lang="js">var assert = require('assert');
+assert(user.name == 'Tobi');
+</pre></div>
+
+<h2>License</h2>
+
+<p>MIT</p>

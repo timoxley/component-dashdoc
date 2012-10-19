@@ -1,0 +1,32 @@
+<h1>Thumb</h1>
+
+<p>Scale an image or data uri within the given dimensions.</p>
+
+<p><img src="http://f.cl.ly/items/3V2X113N01042G1H0A1u/Screen%20Shot%202012-08-09%20at%2011.35.20%20AM.png" alt="canvas thumbnail image generator" title="" /></p>
+
+<h2>Installation</h2>
+
+<div class="highlight"><pre lang="">$ npm install thumb-component
+</pre></div>
+
+<h2>Example</h2>
+
+<div class="highlight"><pre lang="js">var thumb = require('thumb');
+var input = document.querySelector('input');
+
+input.onchange = function(e){
+  var reader = new FileReader;
+
+  reader.onload = function(){
+    thumb(reader.result, 200, 200, function(err, img, datauri){
+      document.body.appendChild(img);
+    });
+  };
+
+  reader.readAsDataURL(input.files[0]);
+};
+</pre></div>
+
+<h2>License</h2>
+
+<p>MIT</p>

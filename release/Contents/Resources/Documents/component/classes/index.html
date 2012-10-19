@@ -1,0 +1,40 @@
+<h1>classes</h1>
+
+<p>Cross-browser element class manipulation, utilizing the native <code>.classList</code> when possible. This is not designed to be a <code>.classList</code> polyfill.</p>
+
+<h2>Installation</h2>
+
+<div class="highlight"><pre lang="">$ component install component/classes
+</pre></div>
+
+<h2>Example</h2>
+
+<div class="highlight"><pre lang="js">var classes = require('classes');
+classes(el).add('foo').toggle('bar');
+</pre></div>
+
+<h2>API</h2>
+
+<h3>.add(class)</h3>
+
+<p>Add <code>class</code>.</p>
+
+<h3>.remove(class)</h3>
+
+<p>Remove <code>class</code>.</p>
+
+<h3>.toggle(class)</h3>
+
+<p>Toggle <code>class</code>.</p>
+
+<h3>.has(class)</h3>
+
+<p>Check if <code>class</code> is present.</p>
+
+<h3>.array()</h3>
+
+<p>Return an array of classes.</p>
+
+<h2>License</h2>
+
+<p>MIT</p>

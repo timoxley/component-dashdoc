@@ -1,0 +1,46 @@
+<h1>pager</h1>
+
+<p>Pager ui component.</p>
+
+<p><img src="http://f.cl.ly/items/023v0g1I2p2D4313033a/Screen%20Shot%202012-09-17%20at%202.40.06%20PM.png" alt="" title="" /></p>
+
+<h2>Installation</h2>
+
+<pre><code>$ component install component/pager
+</code></pre>
+
+<h2>Events</h2>
+
+<ul>
+<li><code>show</code> (n) emitted when a page is selected (0-based)</li>
+</ul>
+
+<h2>API</h2>
+
+<h3>Pager#total(n)</h3>
+
+<p>Set the total number of items to <code>n</code>.</p>
+
+<h3>Pager#perpage(n)</h3>
+
+<p>Set the number of items per page to <code>n</code>. [5]</p>
+
+<h3>Pager#pages()</h3>
+
+<p>Return the total number of pages.</p>
+
+<h3>Pager#show(n)</h3>
+
+<p>Select page <code>n</code>, <code>.render()</code>, and emit "show".</p>
+
+<h3>Pager#select(n)</h3>
+
+<p>Select page <code>n</code> and <code>.render()</code>.</p>
+
+<h3>Pager#render()</h3>
+
+<p>Re-render the pager.</p>
+
+<h1>License</h1>
+
+<p>MIT</p>

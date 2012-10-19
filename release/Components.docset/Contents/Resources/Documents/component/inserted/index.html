@@ -1,0 +1,30 @@
+<h1>inserted</h1>
+
+<p>Invoke a callback when a DOM element is inserted.</p>
+
+<h2>Installation</h2>
+
+<pre><code>$ component install component/inserted
+</code></pre>
+
+<h2>Example</h2>
+
+<div class="highlight"><pre lang="js">var inserted = require('inserted');
+inserted(el, function(){
+  console.log('element was inserted!');
+});
+</pre></div>
+
+<h2>API</h2>
+
+<h3>inserted(el, fn)</h3>
+
+<p>Invokes <code>fn</code> when <code>el</code> is inserted from the DOM.</p>
+
+<h3>.interval</h3>
+
+<p>The <code>setInterval</code> fallback uses <code>inserted.interval</code>, defaulting to 200ms.</p>
+
+<h1>License</h1>
+
+<p>MIT</p>

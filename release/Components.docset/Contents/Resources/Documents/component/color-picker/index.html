@@ -1,0 +1,53 @@
+<h1>ColorPicker</h1>
+
+<p>Simple color picker component. Chuck it on a page, in<br />  a <a href="http://github.com/component/dialog">Dialog</a>, in<br />  a <a href="http://github.com/component/popover">Popover</a> etc.</p>
+
+<p><img src="http://f.cl.ly/items/1y3c0s2N2N1c2T292l2b/Screen%20Shot%202012-09-06%20at%206.33.07%20PM.png" alt="js color picker component" title="" /></p>
+
+<h2>Installation</h2>
+
+<pre><code>$ component install component/color-picker
+</code></pre>
+
+<h2>Example</h2>
+
+<div class="highlight"><pre lang="js">var ColorPicker = require('color-picker');
+
+var picker = new ColorPicker;
+picker.el.appendTo('body');
+picker.on('change', function(color){
+  $('.rgb').text(color.toString()).css('background', color);
+});
+</pre></div>
+
+<h2>Events</h2>
+
+<ul>
+<li><code>change</code> (color) when the color selection changes</li>
+</ul>
+
+<h2>API</h2>
+
+<h3>ColorPicker#size(n)</h3>
+
+<p>Define the color picker width / height.</p>
+
+<h3>ColorPicker#width(n)</h3>
+
+<p>Define the color picker width.</p>
+
+<h3>ColorPicker#height(n)</h3>
+
+<p>Define the color picker height.</p>
+
+<h3>ColorPicker#color()</h3>
+
+<p>Get the current selected color object with <code>.r</code>, <code>.g</code>, and <code>.b</code><br />  values. The <code>.toString()</code> method on these color objects is the<br />  string representation such as "rgb(255,0,0)".</p>
+
+<h3>ColorPicker#color(str)</h3>
+
+<p>Set the color value to <code>str</code>.</p>
+
+<h2>License</h2>
+
+<p>MIT</p>

@@ -1,0 +1,58 @@
+<h1>trim</h1>
+
+<p>Trims string whitespace.</p>
+
+<h2>Installation</h2>
+
+<div class="highlight"><pre lang="">$ npm install trim
+$ component install component/trim
+</pre></div>
+
+<h2>API</h2>
+
+<ul>
+<li><a href="#trimstr">trim(str)</a></li>
+<li><a href="#leftstr">.left(str)</a></li>
+<li><a href="#rightstr">.right(str)</a>
+<a name="" /></li>
+</ul>
+
+<p><a name="trimstr" /></p>
+
+<h3>trim(str)</h3>
+
+<p>should trim leading / trailing whitespace.</p>
+
+<div class="highlight"><pre lang="js">trim('  foo bar  ').should.equal('foo bar');
+trim('\n\n\nfoo bar\n\r\n\n').should.equal('foo bar');
+</pre></div>
+
+<p><a name="leftstr" /></p>
+
+<h3>.left(str)</h3>
+
+<p>should trim leading whitespace.</p>
+
+<div class="highlight"><pre lang="js">trim.left('  foo bar  ').should.equal('foo bar  ');
+</pre></div>
+
+<p><a name="rightstr" /></p>
+
+<h3>.right(str)</h3>
+
+<p>should trim trailing whitespace.</p>
+
+<div class="highlight"><pre lang="js">trim.right('  foo bar  ').should.equal('  foo bar');
+</pre></div>
+
+<h2>License</h2>
+
+<p>(The MIT License)</p>
+
+<p>Copyright (c) 2012 TJ Holowaychuk &lt;<a href='mailto:tj@vision-media.ca'>tj@vision-media.ca</a>&gt;</p>
+
+<p>Permission is hereby granted, free of charge, to any person obtaining<br />a copy of this software and associated documentation files (the<br />'Software'), to deal in the Software without restriction, including<br />without limitation the rights to use, copy, modify, merge, publish,<br />distribute, sublicense, and/or sell copies of the Software, and to<br />permit persons to whom the Software is furnished to do so, subject to<br />the following conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be<br />included in all copies or substantial portions of the Software.</p>
+
+<p>THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,<br />EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF<br />MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.<br />IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY<br />CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,<br />TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE<br />SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>

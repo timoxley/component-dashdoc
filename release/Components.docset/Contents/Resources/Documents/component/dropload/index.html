@@ -1,0 +1,41 @@
+<h1>upload</h1>
+
+<p>file upload and progress api</p>
+
+<h2>Installation</h2>
+
+<pre><code>$ component install component/upload
+</code></pre>
+
+<h2>Events</h2>
+
+<ul>
+<li><code>upload</code> (upload) a file was dropped</li>
+</ul>
+
+<h2>Example</h2>
+
+<div class="highlight"><pre lang="js">var Dropload = require('dropload');
+var drop = Dropload(document.getElementById('drop'));
+
+drop.on('error', function(err){
+  console.error(err.message);
+});
+
+drop.on('upload', function(upload){
+  console.log('uploading %s', upload.file.name);
+  upload.to('/upload');
+});
+</pre></div>
+
+<h2>Running example</h2>
+
+<p>Run the Express test server:</p>
+
+<div class="highlight"><pre lang="">$ npm install
+$ make test
+</pre></div>
+
+<h1>License</h1>
+
+<p>MIT</p>

@@ -1,0 +1,60 @@
+<h1>Confirmation</h1>
+
+<p>Confirmation component with structural styling to give you a clean slate. Built on<br />  the <a href="http://github.com/component/dialog">Dialog</a> component.</p>
+
+<p><img src="http://f.cl.ly/items/142j0B0d1E2K3z0r3h0i/Screen%20Shot%202012-08-03%20at%2011.37.49%20AM.png" alt="js confirmation component" title="" /><br />  <img src="http://f.cl.ly/items/0o0z3T2R0o1v3S1E3d2W/Screen%20Shot%202012-08-03%20at%2011.37.57%20AM.png" alt="confirm" title="" /></p>
+
+<h2>Installation</h2>
+
+<div class="highlight"><pre lang="">$ npm install confirmation-component
+</pre></div>
+
+<h2>Features</h2>
+
+<ul>
+<li>events for composition</li>
+<li>structural CSS letting you decide on style</li>
+<li>overlay, modal, escapable etc from Dialog</li>
+<li>fluent API</li>
+</ul>
+
+<h2>Events</h2>
+
+<ul>
+<li><code>show</code> the confirmation is shown</li>
+<li><code>hide</code> the confirmation is hidden</li>
+<li><code>cancel</code> the user closed the confirmation or cancelled</li>
+<li><code>ok</code> the user accepted</li>
+</ul>
+
+<h2>API</h2>
+
+<h3>confirm(msg)</h3>
+
+<p>Display a confirmation dialog with a <code>msg</code> only.</p>
+
+<h3>confirm(title, msg)</h3>
+
+<p>Display a confirmation dialog with <code>title</code> and <code>msg</code>.</p>
+
+<h3>Confirmation#focus(type)</h3>
+
+<p>By default the "cancel" button is focused, however you<br />  may invoke <code>.focus('ok')</code>.</p>
+
+<h3>Confirmation#cancel(text)</h3>
+
+<p>Set cancel button <code>text</code>.</p>
+
+<h3>Confirmation#ok(text)</h3>
+
+<p>Set cancel ok <code>text</code>.</p>
+
+<h3>Confirmation#show([fn])</h3>
+
+<p>Show the confirmation and invoke <code>fn</code> with<br />  a boolean representing the user's choice.</p>
+
+<p>View the <a href="http://github.com/component/dialog">Dialog</a> API for<br />  additional methods such as <code>.modal()</code>, <code>.closable()</code> etc.</p>
+
+<h2>License</h2>
+
+<p>MIT</p>

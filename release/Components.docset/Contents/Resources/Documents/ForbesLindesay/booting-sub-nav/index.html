@@ -1,0 +1,27 @@
+<h1>booting-sub-nav</h1>
+
+<p>Intended to fix subnav to the top when it scrolls out of view (works great with bootstrap).  This library can easilly be used to add a class to something when it scrolls out of view, and remove the class when it scrolls back into view.</p>
+
+<h2>Using it stand-alone</h2>
+
+<p>Add a script tag for <code>booting-sub-nav.min.js</code> (which you can download from downloads), then use the following to use:</p>
+
+<div class="highlight"><pre lang="javascript">bootingSubNav(document.getElementById('subnav'), offset, class);
+</pre></div>
+
+<div class="highlight"><pre lang="css">.booting-sub-nav.navbar-fixed-top {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1020;
+}
+</pre></div>
+
+<p>If you don't specify either offset or class or offset then <code>'navbar-fixed-top'</code> is used for class and <code>0</code> is used for offset.  The class <code>'booting-sub-nav'</code> is also added to all elements that are attached to subnav, regardless of whether they have scrolled out of view or not.</p>
+
+<p>If you set a non-zero offset, you should remember to adjust top to compensate.  You will want to add an offset if this is an actual sub-nav, as the offset will be needed to account for the height of the main menu.</p>
+
+<h2>Using it as a component</h2>
+
+<p>You can <code>require('booting-sub-nav')</code> to get the exact same api.  You'll also get the css above for free (don't forget to override the <code>top</code> property if you're adding an offset though).</p>

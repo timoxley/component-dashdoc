@@ -1,0 +1,46 @@
+<h1>Progress</h1>
+
+<p>Circular progress indicator using canvas.</p>
+
+<p><img src="http://f.cl.ly/items/1i0B0D1i1D1Y1e1M1S08/Screen%20Shot%202012-08-10%20at%2011.48.22%20AM.png" alt="js progress indicator component" title="" /></p>
+
+<h2>Installation</h2>
+
+<div class="highlight"><pre lang="">$ npm install progress-component
+</pre></div>
+
+<h2>Example</h2>
+
+<div class="highlight"><pre lang="js">var Progress = require('progress');
+
+var progress = new Progress;
+document.body.appendChild(progress.el);
+
+var n = 0;
+var id = setInterval(function(){
+  if (n == 100) clearInterval(id);
+  progress.update(n++);
+}, 50);
+</pre></div>
+
+<h2>API</h2>
+
+<h3>Progress#update(n)</h3>
+
+<p>Update the indicator to <code>n</code> and re-draw.</p>
+
+<h3>Progress#font(family)</h3>
+
+<p>Change the font to <code>family</code>.</p>
+
+<h3>Progress#fontSize(n)</h3>
+
+<p>Change the font size to <code>n</code>.</p>
+
+<h3>Progress#size(n)</h3>
+
+<p>Change the indicator diameter to <code>n</code>, defaults to 50.</p>
+
+<h2>License</h2>
+
+<p>MIT</p>

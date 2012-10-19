@@ -1,0 +1,52 @@
+<h1>Datecalc Component</h1>
+
+<p>Datecalc is a component with a few, hopefully useful, date calculation utilities.</p>
+
+<h3>Installation</h3>
+
+<div class="highlight"><pre lang="">$ component install colinf/datecalc
+</pre></div>
+
+<p>You can find out more about using and installing components <a href="https://github.com/component/component">here</a>.</p>
+
+<h3>Example Usage</h3>
+
+<div class="highlight"><pre lang="js">var datecalc = require('datecalc');
+var daysInFeb2012 = datecalc.daysInMonth(2012,1);
+</pre></div>
+
+<h3>API</h3>
+
+<ul>
+<li><a href="#daysInMonth">.daysInMonth(year, month)</a></li>
+<li><a href="#age">.age(fromDate, toDate)</a></li>
+</ul>
+
+<p><a id="daysInMonth"></a></p>
+
+<h3>.daysInMonth(year, month)</h3>
+
+<p>Returns the days in the given month. Year should be a number in the form YYYY and month is zero-based i.e. 0 is January, 1 is February.</p>
+
+<div class="highlight"><pre lang="js">var datecalc = require('datecalc');
+var daysInFeb2012 = datecalc.daysInMonth(2012,1);
+</pre></div>
+
+<p><a id="age"></a></p>
+
+<h3>.age(fromDate, toDate)</h3>
+
+<p>Calculates the difference between two dates in years, months and days. Returns an object in the form {years: n, months: n, days: n}. fromDate and toDate must both be valid Date objects and toDate must be after fromDate, otherwise an Error is thrown.</p>
+
+<div class="highlight"><pre lang="js">var datecalc = require('datecalc');
+var age = datecalc.age(new Date(2000,11,30), new Date(2012,0,5));
+</pre></div>
+
+<p>In this example age is set to the object:</p>
+
+<div class="highlight"><pre lang="">{ years: 11, months: 0, days: 6 }
+</pre></div>
+
+<h3>License</h3>
+
+<p>The MIT License - see the file LICENSE.txt within the repository for details.</p>

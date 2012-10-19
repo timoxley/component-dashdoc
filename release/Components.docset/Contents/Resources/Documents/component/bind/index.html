@@ -1,0 +1,68 @@
+<h1>bind</h1>
+
+<p>Function binding utility.</p>
+
+<h2>Installation</h2>
+
+<div class="highlight"><pre lang="">$ component install component/bind
+</pre></div>
+
+<h2>API</h2>
+
+<ul>
+<li><a href="#bindobj-fn">bind(obj, fn)</a></li>
+<li><a href="#bindobj-fn-">bind(obj, fn, ...)</a></li>
+<li><a href="#bindobj-name">bind(obj, name)</a>
+<a name="" /></li>
+</ul>
+
+<p><a name="bindobj-fn" /></p>
+
+<h3>bind(obj, fn)</h3>
+
+<p>should bind the function to the given object.</p>
+
+<div class="highlight"><pre lang="js">var tobi = { name: 'tobi' };
+
+function name() {
+  return this.name;
+}
+
+var fn = bind(tobi, name);
+fn().should.equal('tobi');
+</pre></div>
+
+<p><a name="bindobj-fn-" /></p>
+
+<h3>bind(obj, fn, ...)</h3>
+
+<p>should curry the remaining arguments.</p>
+
+<div class="highlight"><pre lang="js">function add(a, b) {
+  return a + b;
+}
+
+bind(null, add)(1, 2).should.equal(3);
+bind(null, add, 1)(2).should.equal(3);
+bind(null, add, 1, 2)().should.equal(3);
+</pre></div>
+
+<p><a name="bindobj-name" /></p>
+
+<h3>bind(obj, name)</h3>
+
+<p>should bind the method of the given name.</p>
+
+<div class="highlight"><pre lang="js">var tobi = { name: 'tobi' };
+
+tobi.getName = function() {
+  return this.name;
+};
+
+var fn = bind(tobi, 'getName');
+fn().should.equal('tobi');
+</pre></div>
+
+<h2>License</h2>
+
+<p>MIT</p>

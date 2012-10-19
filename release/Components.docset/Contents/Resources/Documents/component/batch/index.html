@@ -1,0 +1,33 @@
+<h1>batch</h1>
+
+<p>Simple async batch</p>
+
+<h2>Installation</h2>
+
+<div class="highlight"><pre lang="">$ component install component/batch
+</pre></div>
+
+<h2>API</h2>
+
+<div class="highlight"><pre lang="js">var Batch = require('batch')
+  , batch = new Batch;
+
+ids.forEach(function(id){
+  batch.push(function(done){
+    User.get(id, done);
+  });
+});
+
+batch.on('progress', function(e){
+  // result of the ith job
+  console.log(e.percent)
+});
+
+batch.end(function(err, users){
+
+});
+</pre></div>
+
+<h2>License</h2>
+
+<p>MIT</p>

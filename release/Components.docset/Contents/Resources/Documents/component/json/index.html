@@ -1,0 +1,23 @@
+<h1>json</h1>
+
+<p>JSON parser / stringifier.</p>
+
+<h2>Installation</h2>
+
+<pre><code>$ component install component/json
+</code></pre>
+
+<h2>Example</h2>
+
+<div class="highlight"><pre lang="js">var json = require('json');
+json.parse('{"foo":"bar"}');
+// => { foo: 'bar' }
+</pre></div>
+
+<h2>Fallback</h2>
+
+<p>If you're working with browsers that do not provide a native <code>JSON</code>,<br />  then you should install <a href="https://github.com/component/json-fallback">json-fallback</a><br />  and this module will export that instead.</p>
+
+<h1>License</h1>
+
+<p>MIT</p>

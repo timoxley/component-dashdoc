@@ -1,0 +1,29 @@
+<h1>color-parser</h1>
+
+<p>CSS color string parser</p>
+
+<h2>Installation</h2>
+
+<pre><code>$ component install component/color-parser
+</code></pre>
+
+<h3>Example</h3>
+
+<div class="highlight"><pre lang="js">var parse = require('color-parser');
+
+parse('#fc0')
+// => { r: 255, g: 204, b: 0, a: 1 }
+
+parse('#ffcc00')
+// => { r: 255, g: 204, b: 0, a: 1 }
+
+parse('rgb(255, 204, 0)')
+// => { r: 255, g: 204, b: 0, a: 1 }
+
+parse('rgba(255, 204, 0, 1)')
+// => { r: 255, g: 204, b: 0, a: 1 }
+</pre></div>
+
+<h1>License</h1>
+
+<p>MIT</p>

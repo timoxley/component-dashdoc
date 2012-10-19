@@ -1,0 +1,60 @@
+<h1>Emitter</h1>
+
+<p>Event emitter component.</p>
+
+<h2>Installation</h2>
+
+<div class="highlight"><pre lang="">$ component install component/emitter
+</pre></div>
+
+<h2>API</h2>
+
+<h3>Emitter(obj)</h3>
+
+<p>The <code>Emitter</code> may also be used as a mixin. For example<br />  a "plain" object may become an emitter, or you may<br />  extend an existing prototype.</p>
+
+<p>As an <code>Emitter</code> instance:</p>
+
+<div class="highlight"><pre lang="js">var Emitter = require('emitter');
+var emitter = new Emitter;
+emitter.emit('something');
+</pre></div>
+
+<p>As a mixin:</p>
+
+<div class="highlight"><pre lang="js">var Emitter = require('emitter');
+var user = { name: 'tobi' };
+Emitter(user);
+
+user.emit('im a user');
+</pre></div>
+
+<p>As a prototype mixin:</p>
+
+<div class="highlight"><pre lang="js">var Emitter = require('emitter');
+Emitter(User.prototype);
+</pre></div>
+
+<h3>Emitter#on(event, fn)</h3>
+
+<p>Register an <code>event</code> handler <code>fn</code>.</p>
+
+<h3>Emitter#once(event, fn)</h3>
+
+<p>Register a single-shot <code>event</code> handler <code>fn</code>,<br />  removed immediately after it is invoked the<br />  first time.</p>
+
+<h3>Emitter#off(event, fn)</h3>
+
+<p>Remove <code>event</code> handler <code>fn</code>, or pass only the <code>event</code><br />  name to remove all handlers for <code>event</code>.</p>
+
+<h3>Emitter#emit(event, ...)</h3>
+
+<p>Emit an <code>event</code> with variable option args.</p>
+
+<h3>Emitter#listeners(event)</h3>
+
+<p>Return an array of callbacks, or an empty array.</p>
+
+<h3>Emitter#hasListeners(event)</h3>
+
+<p>Check if this emitter has <code>event</code> handlers.</p>

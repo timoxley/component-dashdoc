@@ -1,0 +1,72 @@
+<h1>toObject</h1>
+
+<p>toObject array utility. Creats an object with the given array.</p>
+
+<h2>Installation</h2>
+
+<pre><code>$ component install retrofox/to-object
+</code></pre>
+
+<h2>API</h2>
+
+<h3>toObject(array)</h3>
+
+<p>Returns an <code>object</code></p>
+
+<div class="highlight"><pre lang="js">var toObject = require('to-object');
+
+var heroes = [
+  {
+    first: 'Manuel',
+    last: 'Belgrano'
+  },
+   {
+     first: 'Juan Jose',
+     last: 'San Martin'
+   },
+  {
+    first: 'Hipolito',
+    last: 'Bouchard'
+  },
+  {
+    first: 'Martin Miguel',
+    last: 'de Güemes'
+  }
+];
+
+// returns an object with number key
+var heroesObject = toObject(heroes);
+
+// return an object with first value as key
+var heroesObject = toObject(heroes, 'first');
+
+// return an object with first value as key and remove the key
+var heroesObject = toObject(heroes, 'first', true);
+
+// return an object with first value modified as key
+var heroesObject = toObject(heroes, 'first', function(key){
+  return key.toLowerCase().replace(/\s/i, '_');
+});
+</pre></div>
+
+<h2>Running tests</h2>
+
+<p>Make sure dependencies are installed:</p>
+
+<div class="highlight"><pre lang="">$ npm install
+</pre></div>
+
+<p>Then run:</p>
+
+<div class="highlight"><pre lang="">$ make test
+</pre></div>
+
+<h1>License</h1>
+
+<p>(The MIT License)<br />Copyright(c) 2012 Damian Suarez <a href="&#x6D;&#x61;&#105;&#x6C;t&#x6F;:&#114;&#x64;&#x73;u&#97;r&#101;&#122;&#64;&#x67;&#x6D;&#x61;&#105;&#x6C;&#x2E;&#99;&#111;&#109;">&#114;&#x64;&#x73;u&#97;r&#101;&#122;&#64;&#x67;&#x6D;&#x61;&#105;&#x6C;&#x2E;&#99;&#111;&#109;</a></p>
+
+<p>Permission is hereby granted, free of charge, to any person obtaining<br />a copy of this software and associated documentation files (the<br />'Software'), to deal in the Software without restriction, including<br />without limitation the rights to use, copy, modify, merge, publish,<br />distribute, sublicense, and/or sell copies of the Software, and to<br />permit persons to whom the Software is furnished to do so, subject to<br />the following conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be<br />included in all copies or substantial portions of the Software.</p>
+
+<p>THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,<br />EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF<br />MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.<br />IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY<br />CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,<br />TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE<br />SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>

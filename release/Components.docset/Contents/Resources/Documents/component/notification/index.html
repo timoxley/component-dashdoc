@@ -1,0 +1,83 @@
+<h1>Notification</h1>
+
+<p>Notification component with a clean slate to build off of,<br />  style and position them however you like.</p>
+
+<p><img src="http://f.cl.ly/items/143P3r3X1E1m0Y0a2E2l/Screen%20Shot%202012-07-26%20at%203.16.11%20PM.png" alt="js growl component" title="" /></p>
+
+<p>These don't <em>have</em> to look like growl style notifications, use<br />  your trusty friend CSS.</p>
+
+<h2>Installation</h2>
+
+<div class="highlight"><pre lang="">$ npm install notification-component
+</pre></div>
+
+<h2>Features</h2>
+
+<ul>
+<li>events for composition</li>
+<li>structural CSS letting you decide on style</li>
+<li>transient notifications</li>
+<li>transient closable notifications</li>
+<li>sticky (implicitly closable) notifications</li>
+<li>notification classes (info, warn, error)</li>
+<li>fluent API</li>
+</ul>
+
+<h2>Events</h2>
+
+<ul>
+<li><code>close</code> the notification is closed via the X</li>
+<li><code>click</code> the notification is clicked</li>
+</ul>
+
+<h2>API</h2>
+
+<h3>notify(msg)</h3>
+
+<p>Notify with the given <code>msg</code> and no title. The<br />  notification will hide after 4 seconds by default.</p>
+
+<h3>notify(title, msg)</h3>
+
+<p>Notify with the given <code>msg</code> and <code>title</code>. The<br />  notification will hide after 4 seconds by default.</p>
+
+<h3>notify.info(title, [msg])</h3>
+
+<p>Same as <code>notify()</code></p>
+
+<h3>notify.warn(title, [msg])</h3>
+
+<p>Same as <code>notify()</code> with a <code>warn</code> class for styling.</p>
+
+<h3>notify.error(title, [msg])</h3>
+
+<p>Same as <code>notify()</code> with a <code>error</code> class for styling.</p>
+
+<h3>Notification#sticky()</h3>
+
+<p>Make the notification sticky, aka it will not close<br />  automatically, and it will automatically be <code>.closable()</code>.</p>
+
+<h3>Notification#show()</h3>
+
+<p>Show the notification.</p>
+
+<h3>Notification#hide()</h3>
+
+<p>Show the notification.</p>
+
+<h3>Notification#closable()</h3>
+
+<p>Mark the notification as closable, adding an "X" so the user<br />  may explicitly close it.</p>
+
+<h3>Notification#effect(name)</h3>
+
+<p>One of the following effects, or define your own with class <code>name</code>:</p>
+
+<ul>
+<li><code>slide</code></li>
+<li><code>fade</code></li>
+<li><code>scale</code></li>
+</ul>
+
+<h2>License</h2>
+
+<p>MIT</p>

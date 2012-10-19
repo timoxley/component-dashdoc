@@ -1,0 +1,31 @@
+<h1>type</h1>
+
+<p>Type assertions aka less-broken <code>typeof</code>.</p>
+
+<h2>Example</h2>
+
+<div class="highlight"><pre lang="js">var type = require('type');
+
+var obj = new Date;
+if (type(obj) == 'date') ...
+</pre></div>
+
+<h2>API</h2>
+
+<div class="highlight"><pre lang="js">type(new Date) == 'date'
+type({}) == 'object'
+type(null) == 'null'
+type(undefined) == 'undefined'
+type("hey") == 'string'
+type(true) == 'boolean'
+type(false) == 'boolean'
+type(12) == 'number'
+type(type) == 'function'
+type(/asdf/) == 'regexp'
+type((function(){ return arguments })()) == 'arguments'
+type([]) == 'array'
+</pre></div>
+
+<h2>License</h2>
+
+<p>MIT</p>

@@ -1,0 +1,82 @@
+<h1>File</h1>
+
+<p>File component wrapping the native <code>File</code> and <code>FileReader</code> objects<br />  with a higher level API.</p>
+
+<h2>Installation</h2>
+
+<div class="highlight"><pre lang="">$ npm install file-component
+</pre></div>
+
+<h2>Events</h2>
+
+<h3>Reader</h3>
+
+<ul>
+<li><code>error</code> an error occurred</li>
+<li><code>progress</code> in progress (<code>e.percent</code> etc)</li>
+<li><code>end</code> read is complete</li>
+</ul>
+
+<h2>Example</h2>
+
+<div class="highlight"><pre lang="js">var file = require('file');
+var input = document.querySelector('input');
+
+input.onchange = function(){
+  var img = file(input.files[0]);
+
+  if (!img.is('image/*')) {
+    alert('Images only!');
+    return;
+  }
+
+  var reader = img.toDataURL(function(err, str){
+    if (err) throw err;
+    var img = document.createElement('img');
+    img.src = str;
+    img.height = 300;
+    document.body.appendChild(img);
+  });
+
+  reader.on('progress', function(e){
+    console.log(e.percent);
+  });
+};
+</pre></div>
+
+<h2>API</h2>
+
+<h3>file(file)</h3>
+
+<p>Wraps a <code>File</code> object:</p>
+
+<div class="highlight"><pre lang="js">var file = require('file');
+file(input.files[0]);
+</pre></div>
+
+<h3>File#is(type)</h3>
+
+<p>Returns a boolean if the file's mime type matches <code>type</code>:</p>
+
+<div class="highlight"><pre lang="js">var file = require('file');
+file(input.files[0]);
+file.is('image/*');
+file.is('image/jpeg');
+file.is('*/json');
+</pre></div>
+
+<h3>File#toArrayBuffer(fn)</h3>
+
+<p>Convert to an <code>ArrayBuffer</code> and invoke <code>fn(err, result)</code>,<br />  returns a <code>Reader</code>.</p>
+
+<h3>File#toText(fn)</h3>
+
+<p>Convert to text and invoke <code>fn(err, result)</code>,<br />  returns a <code>Reader</code>.</p>
+
+<h3>File#toDataURL(fn)</h3>
+
+<p>Convert to a data uri string and invoke <code>fn(err, result)</code>,<br />  returns a <code>Reader</code>.</p>
+
+<h2>License</h2>
+
+<p>MIT</p>

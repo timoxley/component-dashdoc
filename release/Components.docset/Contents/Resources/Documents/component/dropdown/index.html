@@ -1,0 +1,108 @@
+<h1>Dropdown</h1>
+
+<p>Dropdown component with structural styling.</p>
+
+<p>!<a href="http://f.cl.ly/items/010I1g3E2I3j2j2E3j0F/Screen%20Shot%202012-08-10%20at%2011.40.20%20AM.png">js dropdown<br />  component</a></p>
+
+<h2>Installation</h2>
+
+<div class="highlight"><pre lang="">$ npm install dropdown-component
+</pre></div>
+
+<h2>Features</h2>
+
+<p>It inherits all properties of <a href="https://github.com/component/menu">Menu component</a></p>
+
+<ul>
+<li>events for composition</li>
+<li>structural CSS letting you decide on style</li>
+<li>fluent API</li>
+<li>arrow key navigation</li>
+</ul>
+
+<h2>Events</h2>
+
+<p>It inherits all events of <a href="https://github.com/component/menu">Menu component</a>. It<br />  not added anymore.</p>
+
+<h2>Dependencies</h2>
+
+<ul>
+<li>menu-component</li>
+</ul>
+
+<h2>Example</h2>
+
+<div class="highlight"><pre lang="js">var Dropdown = require('dropdown');
+
+var dropdown = new Dropdown('.fruits-dropdown');
+
+dropdown
+.add('Banana')
+.add('Apple', function(){ console.log('Apple selected'); })
+.add('Lemon', function(){ console.log('Lemon'); })
+.add('Remove "Apple"', function(){
+  dropdown.remove('Lemon');
+})
+.focus('Apple');
+
+</pre></div>
+
+<h2>API</h2>
+
+<h3>Dropdown(ref, options)</h3>
+
+<p>Create a new <code>Dropdown</code> associated to <code>ref</code> element. Also support the follow<br />  options:</p>
+
+<ul>
+<li>menu: {Boolean} value that defines if dropdown support menu behaviur.</li>
+<li>items: {Array} of initial items.</li>
+<li>select: {String} defines the focused item</li>
+<li>classname: {String} defines additional class(es) for the menu container</li>
+<li>selectable: {Boolean} defines if dropdown is selectable (default true)</li>
+</ul>
+
+<div class="highlight"><pre lang="js">var Dropdown = require('dropdown');
+var dropdown = Dropdown('.dropdown-link', {
+    menu: true
+  , items: [
+        ['apple', '<em>Apple</em>', funcrion (){ console.log('It\'s an Apple!') }]
+      , ['orange', '<strong style="color: #f86">orange</strong>']
+      , ['banana', '<strong>Banana</strong>']
+      , ['strawberry', function() {
+            console.log('remove the orange');
+            dropdown.remove('orange');
+          }
+        ]
+    ]
+  , select: 'banana'
+});
+</pre></div>
+
+<h3>Inherits methods:</h3>
+
+<h3>Dropdown#add([slug], text, [fn])</h3>
+
+<h3>Dropdown#remove(slug)</h3>
+
+<h3>Dropdown#has(slug)</h3>
+
+<h3>Dropdown#show()</h3>
+
+<h3>Dropdown#hide()</h3>
+
+<h3>Dropdown#focus(slug):</h3>
+
+<p>Focus dropdown with the item given.</p>
+
+<div class="highlight"><pre lang="js">  dropdown.focus('banana');
+</pre></div>
+
+<h2>License</h2>
+
+<p>(The MIT License)<br />  Copyright(c) 2012 Damian Suarez <a href="&#x6D;&#97;&#x69;&#x6C;&#116;&#111;:&#114;&#100;&#x73;&#x75;&#x61;&#x72;&#101;&#x7A;&#64;g&#x6D;&#97;&#105;&#x6C;&#x2E;&#x63;&#111;&#109;">&#114;&#100;&#x73;&#x75;&#x61;&#x72;&#101;&#x7A;&#64;g&#x6D;&#97;&#105;&#x6C;&#x2E;&#x63;&#111;&#109;</a></p>
+
+<p>Permission is hereby granted, free of charge, to any person obtaining<br />  a copy of this software and associated documentation files (the<br />  'Software'), to deal in the Software without restriction, including<br />  without limitation the rights to use, copy, modify, merge, publish,<br />  distribute, sublicense, and/or sell copies of the Software, and to<br />  permit persons to whom the Software is furnished to do so, subject to<br />  the following conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be<br />  included in all copies or substantial portions of the Software.</p>
+
+<p>THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,<br />  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF<br />  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.<br />  IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY<br />  CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,<br />  TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE<br />  SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>

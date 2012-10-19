@@ -1,0 +1,36 @@
+<h1>event</h1>
+
+<p>Element event binding component.</p>
+
+<h2>Installation</h2>
+
+<pre><code>$ component install component/event
+</code></pre>
+
+<h2>Example</h2>
+
+<div class="highlight"><pre lang="js">var events = require('event');
+var a = document.querySelector('a');
+
+function onclick(e) {
+  e.preventDefault();
+  console.log(e.target);
+  events.unbind(a, 'click', onclick);
+}
+
+events.bind(a, 'click', onclick);
+</pre></div>
+
+<h2>API</h2>
+
+<h3>.bind(el, type, callback, [capture])</h3>
+
+<p>Bind to <code>el</code>'s event <code>type</code> with <code>callback</code>.</p>
+
+<h3>.unbind(el, type, callback, [capture])</h3>
+
+<p>Unbind <code>el</code>'s event <code>type</code> <code>callback</code>.</p>
+
+<h2>License</h2>
+
+<p>MIT</p>

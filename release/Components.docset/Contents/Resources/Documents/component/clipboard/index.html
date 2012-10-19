@@ -1,0 +1,72 @@
+<h1>Clipboard</h1>
+
+<p>Clipboard library.</p>
+
+<h2>Installation</h2>
+
+<div class="highlight"><pre lang="">$ component install component/clipboard
+</pre></div>
+
+<h2>Example</h2>
+
+<div class="highlight"><pre lang="js">var Clipboard = require('clipboard');
+
+var clip = new Clipboard(window);
+
+clip.on('paste', function(e){
+  // file
+  if (e.file) {
+    console.log('paste file "%s"', e.file.name);
+    e.file.toDataURL(function(err, url){
+      var img = new Image;
+      img.src = url;
+      document.body.appendChild(img);
+    });
+    return;
+  }
+
+  if (e.html) {
+    console.log('html "%s"', e.html);
+  }
+
+  if (e.plain) {
+    console.log('plain "%s"', e.plain);
+  }
+});
+
+clip.on('cut', function(){
+  console.log('cut');
+});
+
+clip.on('copy', function(e){
+  console.log('copy');
+});
+</pre></div>
+
+<h2>API</h2>
+
+<h3>Files</h3>
+
+<p>Currently only a single file is exposed as <code>e.file</code>.</p>
+
+<h2>Strings</h2>
+
+<p>String pastes are assigned to <code>e</code> using their associated MIME subtype. For example<br />  a "text/plain" representation as <code>e.plain</code>, "text/html" as <code>e.html</code> etc.</p>
+
+<h3>Clipboard#bind()</h3>
+
+<p>Bind event handlers. This is done for you in the constructor.</p>
+
+<h3>Clipboard#unbind()</h3>
+
+<p>Unbind event handlers.</p>
+
+<h2>Links</h2>
+
+<ul>
+<li>w3c <a href="http://www.w3.org/TR/clipboard-apis/">clipboard apis</a></li>
+</ul>
+
+<h2>License</h2>
+
+<p>MIT</p>

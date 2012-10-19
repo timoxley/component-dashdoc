@@ -1,0 +1,55 @@
+<h1>url</h1>
+
+<p>url parser.</p>
+
+<h2>Installation</h2>
+
+<pre><code>$ component install component/url
+</code></pre>
+
+<h2>Example</h2>
+
+<div class="highlight"><pre lang="js">var url = require('url');
+url.parse('<a href='http://example.com:3000/store/shoes?sort=desc'>http://example.com:3000/store/shoes?sort=desc</a>');
+</pre></div>
+
+<p>yields:</p>
+
+<div class="highlight"><pre lang="js">{
+  hash: ""
+  host: "example.com:3000"
+  port: 3000,
+  hostname: "example.com"
+  href: "<a href='http://example.com:3000/store/shoes?sort=desc'>http://example.com:3000/store/shoes?sort=desc</a>"
+  pathname: "/store/shoes"
+  protocol: "http:"
+  query: "sort=desc"
+  search: "?sort=desc"
+}
+</pre></div>
+
+<h2>API</h2>
+
+<h3>url.parse(string)</h3>
+
+<p>Parse the given url <code>string</code>.</p>
+
+<h3>url.isAbsolute(string)</h3>
+
+<p>Check if the given url <code>string</code> is absolute (has a scheme specified).</p>
+
+<h3>url.isRelative(string)</h3>
+
+<p>Check if the given url <code>string</code> is relative.</p>
+
+<h3>url.isCrossDomain(string)</h3>
+
+<p>Check if the given url <code>string</code> is cross-domain.</p>
+
+<h2>Note</h2>
+
+<p>This url "parser" uses an <strong>A</strong> tag, this means that when<br />  a relative url is given, such as "/foo", it becomes relative<br />  to the current domain / path, because the browser resolves it<br />  as it normally would.</p>
+
+<h2>License</h2>
+
+<p>MIT</p>

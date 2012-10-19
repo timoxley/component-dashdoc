@@ -1,0 +1,48 @@
+<h1>upload</h1>
+
+<p>file upload and progress api</p>
+
+<h2>Installation</h2>
+
+<pre><code>$ component install component/upload
+</code></pre>
+
+<h2>Events</h2>
+
+<ul>
+<li><code>error</code> an error occurred</li>
+<li><code>abort</code> upload was aborted</li>
+<li><code>progress</code> (e) upload in progress (<code>e.percent</code>, <code>e.totalSize</code> etc)</li>
+<li><code>end</code> upload is complete</li>
+</ul>
+
+<h2>API</h2>
+
+<h3>Upload(file)</h3>
+
+<p>Initialize an <code>Upload</code> with the given <code>file</code>, where <code>file</code><br />  is a <code>File</code> object, for example from a <code>input.files[0]</code> <code>FileList</code>.</p>
+
+<div class="highlight"><pre lang="js">var upload = new Upload(file);
+var upload = Upload(file);
+</pre></div>
+
+<h3>Upload#to(path)</h3>
+
+<p><strong>POST</strong> the multipart upload to <code>path</code>.</p>
+
+<div class="highlight"><pre lang="js">upload.to('/upload');
+upload.on('progress', reportProgress);
+upload.on('end', done);
+</pre></div>
+
+<h2>Running tests</h2>
+
+<p>Run the Express test server:</p>
+
+<div class="highlight"><pre lang="">$ npm install
+$ make test
+</pre></div>
+
+<h1>License</h1>
+
+<p>MIT</p>

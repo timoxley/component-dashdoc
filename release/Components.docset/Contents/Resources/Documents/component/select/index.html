@@ -1,0 +1,23 @@
+<h1>select</h1>
+
+<p>Select utility</p>
+
+<h2>Installation</h2>
+
+<pre><code>$ component install component/select
+</code></pre>
+
+<h2>API</h2>
+
+<h3>select(array, fn)</h3>
+
+<p>Filter <code>array</code> returning a new array:</p>
+
+<div class="highlight"><pre lang="js">users = select(users, function(user){
+  return user.age > 20;
+});
+</pre></div>
+
+<h1>License</h1>
+
+<p>MIT</p>

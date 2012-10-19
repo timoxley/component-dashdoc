@@ -1,0 +1,47 @@
+<h1>editable</h1>
+
+<p>Inline editing inspired by jEditable</p>
+
+<p>To provide the actual editing functionality you'll want one of the editor components.</p>
+
+<h2>Editor Components</h2>
+
+<p>Completed:</p>
+
+<p>None yet...watch this space</p>
+
+<p>In Development</p>
+
+<ul>
+<li>Text</li>
+<li>Number</li>
+<li>Checkbox</li>
+<li>Date</li>
+<li>Currency</li>
+</ul>
+
+<h2>API</h2>
+
+<p>This module provides an api for the other modules to use.  It is intended to provide neat wrappers for the shared functionality between all these other renderers.</p>
+
+<h3>Events</h3>
+
+<p>The module exports an <a href="https://github.com/component/emitter">event emitter</a>.  Editor Components should always emmit events on this so that they can be handled easilly at a universal level.</p>
+
+<h3>editable.forEach(elements, fn)</h3>
+
+<p>Equivalent to <code>Array#forEach</code> but works on sudo-arrays like NodeList and also treats non-arrays as single element arrays and performs <code>document.querySelectorAll</code> on strings.  This lets you easilly make functions that can be called with one or many elements equivalently.</p>
+
+<h3>editable.click(elements, fn)</h3>
+
+<p>Handle click for one or many elements (anything accepted by <code>forEach</code>), and call the function with the element and the MouseEvent.</p>
+
+<h3>editable.blur(elements, fn)</h3>
+
+<p>Handle the blur event for one or many elements (anything accepted by <code>forEach</code>), and call the function with the element.</p>
+
+<h3>editable.attribute(element, name, [value])</h3>
+
+<p>If a value is provided, this sets the data attribute on the element.  If no value is provided then this searches the tree upwards for the provided data attribute.  This is useful for setting a record-id at the top level, but each individual field-name on the individual nodes.</p>
+
+<p>Attributes should be provided without the <code>data-</code> prefix.</p>

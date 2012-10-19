@@ -1,0 +1,64 @@
+<h1>Calendar</h1>
+
+<p>Calendar UI component designed for use as a date-picker,<br />  full-sized calendar or anything in-between.</p>
+
+<p><img src="http://f.cl.ly/items/2u3w1D421W0C370Z3G1U/Screen%20Shot%202012-10-11%20at%2014.32.41.png" alt="javascript calendar component" title="" /></p>
+
+<h2>Installation</h2>
+
+<pre><code>$ component install component/calendar
+</code></pre>
+
+<h2>Example</h2>
+
+<div class="highlight"><pre lang="js">var Calendar = require('calendar');
+var cal = new Calendar;
+cal.el.appendTo('body');
+</pre></div>
+
+<h2>Events</h2>
+
+<ul>
+<li><code>view change</code> (date, action) when the viewed month/year is changed without modification of the selected date. This can be done either by next/prev buttons or dropdown menu. The action will be "prev", "next", "month" or "year" depending on what action caused the view to change.</li>
+<li><code>change</code> (date) when the selected date is modified</li>
+</ul>
+
+<h2>API</h2>
+
+<h3>new Calendar(date)</h3>
+
+<p>Initialize a new <code>Calendar</code> with the given <code>date</code> shown,<br />  defaulting to now.</p>
+
+<h3>Calendar#select(date)</h3>
+
+<p>Select the given <code>date</code> (<code>Date</code> object).</p>
+
+<h3>Calendar#show(date)</h3>
+
+<p>Show the given <code>date</code>. This does <em>not</em> select the given date,<br />  it simply ensures that it is visible in the current view.</p>
+
+<h3>Calendar#showMonthSelect()</h3>
+
+<p>Add month selection input.</p>
+
+<h3>Calendar#showYearSelect([from], [to])</h3>
+
+<p>Add year selection input, with optional range specified by <code>from</code> and <code>to</code>,<br />  which default to the current year -10 / +10.</p>
+
+<h3>Calendar#prev()</h3>
+
+<p>Show the previous view (month).</p>
+
+<h3>Calendar#next()</h3>
+
+<p>Show the next view (month).</p>
+
+<h2>Themes</h2>
+
+<p><a href="https://github.com/component/aurora-calendar">Aurora</a>:</p>
+
+<p><img src="https://a248.e.akamai.net/camo.github.com/2ca4c0ffd16267155335b2d9285c1923fa90e6d3/687474703a2f2f662e636c2e6c792f6974656d732f3034334e31723065314c313330793136325232662f53637265656e25323053686f74253230323031322d30392d31372532306174253230392e31372e3332253230504d2e706e67" alt="" title="" /></p>
+
+<h1>License</h1>
+
+<p>MIT</p>

@@ -1,0 +1,43 @@
+<h1>Style</h1>
+
+<p>Style Canvas renders using CSS.</p>
+
+<h2>Installation</h2>
+
+<div class="highlight"><pre lang="">$ component install component/style
+</pre></div>
+
+<h2>Example</h2>
+
+<div class="highlight"><pre lang="css">body {
+  font-size: 18px;
+}
+.progress {
+  background: #fff;
+}
+.progress .percentage {
+  color: #ddd;
+}
+</pre></div>
+
+<div class="highlight"><pre lang="js">style('.progress', 'background-color');
+// => 'rgb(255, 255, 255)'
+
+style('.progress .percentage', 'color');
+// => 'rgb(221, 221, 221)'
+
+style('.progress .percent', 'font-size');
+// => '18px'
+</pre></div>
+
+<h2>About</h2>
+
+<p>This component exists so that you can influence aspects of your<br />  Canvas renders using CSS, where style decisions belong. For details<br />  view this <a href="http://tjholowaychuk.com/post/6339741902/styling-canvas-drawings-with-css">blog post</a>.</p>
+
+<h2>Performance</h2>
+
+<p>Generating and computing styles for ~2000 unique selectors in chrome<br />  takes ~300ms, so be careful if you plan on using this for many <em>unique</em> selectors. Values<br />  are otherwise cached in an object and can easily operate above 300,000 ops/s.</p>
+
+<h2>License</h2>
+
+<p>MIT</p>

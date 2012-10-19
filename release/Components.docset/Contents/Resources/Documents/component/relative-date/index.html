@@ -1,0 +1,51 @@
+<h1>relative-date</h1>
+
+<p>Relative dates in words</p>
+
+<h2>Installation</h2>
+
+<pre><code>$ component install component/relative-date
+</code></pre>
+
+<h2>Example</h2>
+
+<div class="highlight"><pre lang="js">var date = new Date(Date.now() - 60000);
+console.log(relative(date) + ' ago');
+// => "one minute ago"
+
+var date = new Date(Date.now() + 5 * 60000);
+console.log(relative(date) + ' from now');
+// => "5 minutes from now"
+</pre></div>
+
+<h2>API</h2>
+
+<h3>relative(date)</h3>
+
+<p>Return the <code>date</code> in words relative to <code>Date.now()</code>:</p>
+
+<div class="highlight"><pre lang="js">var relative = require('relative-date');
+var date = new Date(Date.now() + 2000);
+
+var str = relative(date) + ' ago';
+// => "2 seconds ago"
+</pre></div>
+
+<p>An empty string <code>""</code> is returned when the difference<br />  is below one second. You may use this to default<br />  the string as shown here:</p>
+
+<div class="highlight"><pre lang="js">var str = relative(new Date) || 'just now';
+// => "just now"
+
+var str = relative(new Date);
+if (str) str = 'assignment due in ' + str;
+else str = 'assignment due';
+// => "assignment due"
+</pre></div>
+
+<h3>relative(date, other)</h3>
+
+<p>Same as above, relative to <code>other</code> instead of <code>Date.now()</code>.</p>
+
+<h1>License</h1>
+
+<p>MIT</p>

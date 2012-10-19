@@ -1,0 +1,82 @@
+<h1>Dialog</h1>
+
+<p>Dialog component with structural styling to give you a clean slate.</p>
+
+<p><img src="http://f.cl.ly/items/0r140j3W323T3c3i2H3a/Screen%20Shot%202012-07-26%20at%203.11.20%20PM.png" alt="js dialog component" title="" /></p>
+
+<h2>Installation</h2>
+
+<div class="highlight"><pre lang="">$ npm install dialog-component
+</pre></div>
+
+<h2>Features</h2>
+
+<ul>
+<li>events for composition</li>
+<li>structural CSS letting you decide on style</li>
+<li>overlay support</li>
+<li>modal overlay support</li>
+<li>escapable (esc key support)</li>
+<li>fluent API</li>
+</ul>
+
+<h2>Events</h2>
+
+<ul>
+<li><code>show</code> the dialog is shown</li>
+<li><code>hide</code> the dialog is hidden</li>
+<li><code>escape</code> the dialog was closed via the escape key</li>
+<li><code>close</code> the dialog was closed via the close button</li>
+</ul>
+
+<h2>API</h2>
+
+<h3>dialog(msg)</h3>
+
+<p>Display a dialog with a <code>msg</code> only.</p>
+
+<h3>dialog(title, msg)</h3>
+
+<p>Display a dialog with <code>title</code> and <code>msg</code>.</p>
+
+<h3>Dialog#closable()</h3>
+
+<p>Make the dialog closable, this adds a ×<br />  that users make click to forcefully close<br />  the dialog.</p>
+
+<h3>Dialog#effect(name)</h3>
+
+<p>Assign the effect name, driven by CSS transitions.<br />  Out of the box the following are available:</p>
+
+<ul>
+<li><code>slide</code></li>
+<li><code>fade</code></li>
+<li><code>scale</code></li>
+</ul>
+
+<h3>Dialog#overlay()</h3>
+
+<p>Add a clickable overlay, which closes the dialog.</p>
+
+<h3>Dialog#modal()</h3>
+
+<p>Add a non-clickable overlay making it modal.</p>
+
+<h3>Dialog#escapable()</h3>
+
+<p>This is <strong>private</strong> as it is implied by other options.<br />  If no overlay is used, or the overlay is non-modal<br />  then a user may close the dialog by pressing the escape key.</p>
+
+<h3>Dialog#show()</h3>
+
+<p>Show the dialog.</p>
+
+<h3>Dialog#hide([ms])</h3>
+
+<p>Hide the dialog immediately or wait <code>ms</code>.</p>
+
+<h3>Dialog#addClass(name)</h3>
+
+<p>Add class <code>name</code>, useful for styling dialogs differently.</p>
+
+<h2>License</h2>
+
+<p>MIT</p>

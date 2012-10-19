@@ -1,0 +1,38 @@
+<h1>History</h1>
+
+<p>Keep track of and cycle through capped history (chat messages, REPL command-lines etc).</p>
+
+<h2>Installation</h2>
+
+<div class="highlight"><pre lang="">$ component install component/history
+</pre></div>
+
+<h2>API</h2>
+
+<h3>History(vals)</h3>
+
+<p>Initialize with an array of <code>vals</code>.</p>
+
+<h3>History#add(val)</h3>
+
+<p>Add a value, for example a chat message or REPL command line.<br />  This method resets the history index, meaning the next call<br />  to <code>.back()</code> will be this latest value.</p>
+
+<h3>History#prev()</h3>
+
+<p>Cycle backwards through history, returning a value added by <code>.add()</code>.</p>
+
+<h3>History#next()</h3>
+
+<p>Cycle forwards through history, returning a value added by <code>.add()</code>.</p>
+
+<h3>History#max(n)</h3>
+
+<p>The maximum number of entries defaulting to <code>1000</code>.</p>
+
+<h3>History#reset()</h3>
+
+<p>Reset the index to the latest value.</p>
+
+<h2>License</h2>
+
+<p>MIT</p>

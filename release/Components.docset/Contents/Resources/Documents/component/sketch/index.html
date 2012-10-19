@@ -1,0 +1,48 @@
+<h1>Sketch</h1>
+
+<p>Turn a canvas into a sketch pad.</p>
+
+<p><img src="http://f.cl.ly/items/3a1a0h2X472Y0S3f2A2u/Screen%20Shot%202012-08-31%20at%209.08.47%20AM.png" alt="js canvas sketch" title="" /></p>
+
+<h2>Installation</h2>
+
+<div class="highlight"><pre lang="">$ component install component/sketch
+</pre></div>
+
+<h2>API</h2>
+
+<h3>sketch(canvas)</h3>
+
+<p>Turn the given <code>canvas</code> into a sketch pad.</p>
+
+<div class="highlight"><pre lang="js">var sketch = require('sketch');
+sketch(canvas);
+</pre></div>
+
+<h3>Sketch#add(object)</h3>
+
+<p>Add drawable <code>object</code> that <em>must</em> provide a <code>.draw(ctx)</code> method.</p>
+
+<h3>Sketch#size(n)</h3>
+
+<p>Set pen size.</p>
+
+<h3>Sketch#color(string)</h3>
+
+<p>Set pen color.</p>
+
+<h3>Sketch#opacity(n)</h3>
+
+<p>Set pen opacity.</p>
+
+<h3>Sketch#clear()</h3>
+
+<p>Clear the objects and re-draw.</p>
+
+<h3>Sketch#reset()</h3>
+
+<p>Reset the sketch defaults and clear the canvas.</p>
+
+<h2>License</h2>
+
+<p>MIT</p>

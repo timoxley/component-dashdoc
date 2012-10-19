@@ -1,0 +1,56 @@
+<h1>more</h1>
+
+<p>Expand and collapse lists.</p>
+
+<p><img src="http://f.cl.ly/items/1l1B2I2H3x2h1b1C2E2K/Screen%20Shot%202012-09-11%20at%2011.47.46%20AM.png" alt="" title="" /></p>
+
+<h2>Installation</h2>
+
+<pre><code>$ component install component/more
+</code></pre>
+
+<h2>Example</h2>
+
+<div class="highlight"><pre lang="js">var more = require('more');
+var list = document.querySelector('ul');
+
+more(list)
+  .max(5)
+  .more('Show more')
+  .less('Show less')
+  .render();
+</pre></div>
+
+<h2>API</h2>
+
+<h3>More#max(n)</h3>
+
+<p>Change max number of list items shown when collapsed, defaults to <code>5</code>.</p>
+
+<h3>More#more(label)</h3>
+
+<p>Change <code>label</code> from default of "More".</p>
+
+<h3>More#less(label)</h3>
+
+<p>Change <code>label</code> from default of "Less".</p>
+
+<h3>More#render()</h3>
+
+<p>Render the list, adds the appropriate more / less link<br />  depending on the state.</p>
+
+<h3>More#expand()</h3>
+
+<p>Expand the list and re-render.</p>
+
+<h3>More#collapse()</h3>
+
+<p>Collapse the list and re-render.</p>
+
+<h3>More#state</h3>
+
+<p>String representing the state. Either "expanded", or "collapsed".</p>
+
+<h1>License</h1>
+
+<p>MIT</p>

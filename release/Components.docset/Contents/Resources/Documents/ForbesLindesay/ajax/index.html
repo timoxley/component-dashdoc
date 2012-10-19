@@ -1,0 +1,38 @@
+<h1>ajax</h1>
+
+<p>Standalone AJAX library inspired by jQuery/zepto</p>
+
+<h2>Installation</h2>
+
+<p>You can use <a href="https://github.com/component/component">component</a>:</p>
+
+<div class="highlight"><pre lang="">component-install ForbesLindesay/ajax
+</pre></div>
+
+<p>Then load using:</p>
+
+<div class="highlight"><pre lang="JavaScript">var ajax = require('ajax');
+</pre></div>
+
+<p>Or load using a script tag (the file is available in downloads)</p>
+
+<div class="highlight"><pre lang="html">
+<script src="ajax.min.js"></script>
+
+</pre></div>
+
+<p>Then just refer to it in your script as <code>ajax</code></p>
+
+<h2>API</h2>
+
+<h3>ajax(url, settings)</h3>
+
+<p><strong>url</strong> A string containing the URL to which the request is sent.<br /><strong>settings</strong> A set of key/value pairs that configure the Ajax request. All settings are optional. A default can be set for any option with <code>ajax.settings</code>. See ajax(settings) below for a complete list of all settings.</p>
+
+<h3>ajax(settings)</h3>
+
+<p><strong>settings</strong> A set of key/value pairs that configure the Ajax request. All settings are optional. A default can be set for any option with <code>ajax.settings</code>.</p>
+
+<p>For a list of available settings see:</p>
+
+<p><a href='http://api.jquery.com/jQuery.ajax/'>http://api.jquery.com/jQuery.ajax/</a></p>

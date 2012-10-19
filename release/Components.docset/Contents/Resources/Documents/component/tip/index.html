@@ -1,0 +1,81 @@
+<h1>Tip</h1>
+
+<p>Tip component. Inspired by <a href="https://github.com/jaz303/tipsy">tipsy</a> without the weird jQuery<br />  API.</p>
+
+<p><img src="http://f.cl.ly/items/2H1D232Y0g1T3g1G0l3s/Screen%20Shot%202012-08-02%20at%202.31.50%20PM.png" alt="js tip component" title="" /><br />  <img src="http://f.cl.ly/items/2h1F2B1P1C3M0g0a0M0n/Screen%20Shot%202012-08-02%20at%203.34.06%20PM.png" alt="js tip with markup" title="" /></p>
+
+<p><img src="http://f.cl.ly/items/1I2V2o0q3M2p1E2H183w/Screen%20Shot%202012-08-02%20at%206.48.28%20PM.png" alt="js maru" title="" /></p>
+
+<h2>Installation</h2>
+
+<div class="highlight"><pre lang="">$ npm install tip-component
+</pre></div>
+
+<h2>Features</h2>
+
+<ul>
+<li>events for composition</li>
+<li>"auto" positioning on window resize / scroll</li>
+<li>fluent API</li>
+</ul>
+
+<h2>Events</h2>
+
+<ul>
+<li><code>show</code> the tip is shown</li>
+<li><code>hide</code> the tip is hidden</li>
+</ul>
+
+<h2>API</h2>
+
+<h3>Tip(el, [options])</h3>
+
+<p>Attach a <code>Tip</code> to an element, and display the <code>title</code><br />  attribute's contents on hover. Optionally apply a hide <code>delay</code><br />  in milliseconds.</p>
+
+<div class="highlight"><pre lang="js">var tip = require('tip');
+tip('a[title]', { delay: 300 });
+</pre></div>
+
+<h3>new Tip(content)</h3>
+
+<p>Create a new tip with <code>content</code> being<br />  either a string, html, element, etc.</p>
+
+<div class="highlight"><pre lang="js">var Tip = require('tip');
+var tip = new Tip('Hello!');
+tip.show('#mylink');
+</pre></div>
+
+<h3>Tip#position(type)</h3>
+
+<ul>
+<li><code>north</code></li>
+<li><code>north east</code></li>
+<li><code>north west</code></li>
+<li><code>south</code></li>
+<li><code>south east</code></li>
+<li><code>south west</code></li>
+<li><code>east</code></li>
+<li><code>west</code></li>
+</ul>
+
+<h3>Tip#show(el)</h3>
+
+<p>Show the tip attached to <code>el</code>, where <code>el</code><br />  may be a selector or element.</p>
+
+<h3>Tip#hide([ms])</h3>
+
+<p>Hide the tip immediately or wait <code>ms</code>.</p>
+
+<h3>Tip#effect(name)</h3>
+
+<p>Use effect <code>name</code>. Default with <code>Tip.effect = 'fade'</code> for example.</p>
+
+<h3>Themes</h3>
+
+<ul>
+<li><a href="https://github.com/component/aurora-tip">Aurora</a></li>
+</ul>
+
+<h2>License</h2>
+
+<p>MIT</p>

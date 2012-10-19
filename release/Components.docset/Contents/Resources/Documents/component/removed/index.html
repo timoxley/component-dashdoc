@@ -1,0 +1,30 @@
+<h1>removed</h1>
+
+<p>Invoke a callback when a DOM element is removed.</p>
+
+<h2>Installation</h2>
+
+<pre><code>$ component install component/removed
+</code></pre>
+
+<h2>Example</h2>
+
+<div class="highlight"><pre lang="js">var removed = require('removed');
+removed(el, function(){
+  console.log('element was removed!');
+});
+</pre></div>
+
+<h2>API</h2>
+
+<h3>removed(el, fn)</h3>
+
+<p>Invokes <code>fn</code> when <code>el</code> is removed from the DOM.</p>
+
+<h3>.interval</h3>
+
+<p>The <code>setInterval</code> fallback uses <code>removed.interval</code>, defaulting to 200ms.</p>
+
+<h1>License</h1>
+
+<p>MIT</p>

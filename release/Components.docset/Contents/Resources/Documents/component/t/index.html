@@ -1,0 +1,51 @@
+<h1>t</h1>
+
+<p>tiny translation helper.</p>
+
+<h2>Installation</h2>
+
+<pre><code>$ component install component/t
+</code></pre>
+
+<h2>API</h2>
+
+<h3>t(string, [object])</h3>
+
+<p>Return a translatable <code>string</code>, with optional<br />  substitutions keyed in <code>object</code>.</p>
+
+<div class="highlight"><pre lang="js">var t = require('t');
+
+t('Hello');
+// => "Hello"
+
+t('Hello {name}', { name: 'Tobi' });
+// => "Hello Tobi"
+</pre></div>
+
+<h3>t.lang()</h3>
+
+<p>Get the current language code, for example "en".</p>
+
+<h3>t.lang(code)</h3>
+
+<p>Set language <code>code</code>.</p>
+
+<h3>t.CODE = object</h3>
+
+<p>Define translations, for example:</p>
+
+<div class="highlight"><pre lang="js">t.es = {
+  'Hello {name}': 'Hola {name}'
+};
+
+t('Hello {name}', { name: 'Tobi' });
+// => "Hello Tobi"
+
+t.lang('es');
+t('Hello {name}', { name: 'Tobi' }).should.equal('Hola Tobi');
+// => "Hola Tobi"
+</pre></div>
+
+<h1>License</h1>
+
+<p>MIT</p>

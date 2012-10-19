@@ -1,0 +1,247 @@
+<p><a href="http://travis-ci.org/componitable/format-number"><img src="https://secure.travis-ci.org/componitable/format-number.png" alt="Build Status" title="" /></a></p>
+
+<h1>format-number</h1>
+
+<p><a name="defaults" /></p>
+
+<h2>defaults</h2>
+
+<p><a name="defaults-512" /></p>
+
+<h3>512</h3>
+
+<p>returns 512.</p>
+
+<div class="highlight"><pre lang="js">expect(format('512')).to.be('512');
+</pre></div>
+
+<p><a name="defaults-6300" /></p>
+
+<h3>6300</h3>
+
+<p>returns 6,300.</p>
+
+<div class="highlight"><pre lang="js">expect(format('6300')).to.be('6,300');
+</pre></div>
+
+<p><a name="defaults-76300" /></p>
+
+<h3>76300</h3>
+
+<p>returns 76,300.</p>
+
+<div class="highlight"><pre lang="js">expect(format('76300')).to.be('76,300');
+</pre></div>
+
+<p><a name="defaults-976300" /></p>
+
+<h3>976300</h3>
+
+<p>returns 976,300.</p>
+
+<div class="highlight"><pre lang="js">expect(format('976300')).to.be('976,300');
+</pre></div>
+
+<p><a name="defaults-1976300" /></p>
+
+<h3>1976300</h3>
+
+<p>returns 1,976,300.</p>
+
+<div class="highlight"><pre lang="js">expect(format('1976300')).to.be('1,976,300');
+</pre></div>
+
+<p><a name="defaults-5643" /></p>
+
+<h3>56.43</h3>
+
+<p>returns 56.43.</p>
+
+<div class="highlight"><pre lang="js">expect(format('56.43')).to.be('56.43');
+</pre></div>
+
+<p><a name="padright2" /></p>
+
+<h2>padRight=2</h2>
+
+<p><a name="padright2-512" /></p>
+
+<h3>512</h3>
+
+<p>returns 512.00.</p>
+
+<div class="highlight"><pre lang="js">expect(format('512')).to.be('512.00');
+</pre></div>
+
+<p><a name="padright2-5124" /></p>
+
+<h3>512.4</h3>
+
+<p>returns 512.40.</p>
+
+<div class="highlight"><pre lang="js">expect(format('512.4')).to.be('512.40');
+</pre></div>
+
+<p><a name="padright2-51243" /></p>
+
+<h3>512.43</h3>
+
+<p>returns 512.43.</p>
+
+<div class="highlight"><pre lang="js">expect(format('512.43')).to.be('512.43');
+</pre></div>
+
+<p><a name="padright2-512435" /></p>
+
+<h3>512.435</h3>
+
+<p>returns 512.435.</p>
+
+<div class="highlight"><pre lang="js">expect(format('512.435')).to.be('512.435');
+</pre></div>
+
+<p><a name="truncate2" /></p>
+
+<h2>truncate=2</h2>
+
+<p><a name="truncate2-512" /></p>
+
+<h3>512</h3>
+
+<p>returns 512.</p>
+
+<div class="highlight"><pre lang="js">expect(format('512')).to.be('512');
+</pre></div>
+
+<p><a name="truncate2-5124" /></p>
+
+<h3>512.4</h3>
+
+<p>returns 512.4.</p>
+
+<div class="highlight"><pre lang="js">expect(format('512.4')).to.be('512.4');
+</pre></div>
+
+<p><a name="truncate2-51243" /></p>
+
+<h3>512.43</h3>
+
+<p>returns 512.43.</p>
+
+<div class="highlight"><pre lang="js">expect(format('512.43')).to.be('512.43');
+</pre></div>
+
+<p><a name="truncate2-512435" /></p>
+
+<h3>512.435</h3>
+
+<p>returns 512.43.</p>
+
+<div class="highlight"><pre lang="js">expect(format('512.435')).to.be('512.43');
+</pre></div>
+
+<p><a name="prefix" /></p>
+
+<h2>prefix=£</h2>
+
+<p><a name="prefix-512" /></p>
+
+<h3>512</h3>
+
+<p>returns £512.</p>
+
+<div class="highlight"><pre lang="js">expect(format('512')).to.be('£512');
+</pre></div>
+
+<p><a name="prefix--512" /></p>
+
+<h3>-512</h3>
+
+<p>returns -£512.</p>
+
+<div class="highlight"><pre lang="js">expect(format('-512')).to.be('-£512');
+</pre></div>
+
+<p><a name="prefix-with-includeunits-as-false" /></p>
+
+<h3>with includeUnits as false</h3>
+
+<p><a name="prefix-with-includeunits-as-false-512" /></p>
+
+<h4>512</h4>
+
+<p>returns 512.</p>
+
+<div class="highlight"><pre lang="js">expect(format('512', false)).to.be('512');
+</pre></div>
+
+<p><a name="prefix-with-includeunits-as-false--512" /></p>
+
+<h4>-512</h4>
+
+<p>returns -512.</p>
+
+<div class="highlight"><pre lang="js">expect(format('-512', false)).to.be('-512');
+</pre></div>
+
+<p><a name="prefix-prefixsuffix" /></p>
+
+<h3><code>prefix.suffix</code></h3>
+
+<p>equals "£".</p>
+
+<div class="highlight"><pre lang="js">expect(format.prefix).to.be('£');
+</pre></div>
+
+<p><a name="suffix-items" /></p>
+
+<h2>suffix=" items"</h2>
+
+<p><a name="suffix-items-512" /></p>
+
+<h3>512</h3>
+
+<p>returns 512 items.</p>
+
+<div class="highlight"><pre lang="js">expect(format('512')).to.be('512 items');
+</pre></div>
+
+<p><a name="suffix-items--512" /></p>
+
+<h3>-512</h3>
+
+<p>returns -512 items.</p>
+
+<div class="highlight"><pre lang="js">expect(format('-512')).to.be('-512 items');
+</pre></div>
+
+<p><a name="suffix-items-with-includeunits-as-false" /></p>
+
+<h3>with includeUnits as false</h3>
+
+<p><a name="suffix-items-with-includeunits-as-false-512" /></p>
+
+<h4>512</h4>
+
+<p>returns 512.</p>
+
+<div class="highlight"><pre lang="js">expect(format('512', false)).to.be('512');
+</pre></div>
+
+<p><a name="suffix-items-with-includeunits-as-false--512" /></p>
+
+<h4>-512</h4>
+
+<p>returns -512.</p>
+
+<div class="highlight"><pre lang="js">expect(format('-512', false)).to.be('-512');
+</pre></div>
+
+<p><a name="suffix-items-formatsuffix" /></p>
+
+<h3><code>format.suffix</code></h3>
+
+<p>equals " items".</p>
+
+<div class="highlight"><pre lang="js">expect(format.suffix).to.be(' items');
+</pre></div>

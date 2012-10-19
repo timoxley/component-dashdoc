@@ -1,0 +1,115 @@
+<h1>SuperAgent</h1>
+
+<p>SuperAgent is a small progressive <strong>client-side</strong> HTTP request library, and <strong>Node.js</strong> module with the same API, sporting many high-level HTTP client features. View the <a href="http://visionmedia.github.com/superagent/">docs</a>.</p>
+
+<p><img src="http://f.cl.ly/items/3d282n3A0h0Z0K2w0q2a/Screenshot.png" alt="super agent" title="" /></p>
+
+<h2>Motivation</h2>
+
+<p>This library spawned from my frustration with jQuery's weak &amp; inconsistent Ajax support. jQuery's API while having recently added some promise-like support, is largely static, forcing you to build up big objects containing all the header fields and options, not to mention most of the options are awkwardly named "type" instead of "method", etc. Onto examples!</p>
+
+<p>The following is what you might typically do for a simple <strong>GET</strong> with jQuery:</p>
+
+<div class="highlight"><pre lang="js">$.get('/user/1', function(data, textStatus, xhr){
+
+});
+</pre></div>
+
+<p>great, it's ok, but it's kinda lame having 3 arguments just to access something on the <code>xhr</code>. Our equivalent would be:</p>
+
+<div class="highlight"><pre lang="js">request.get('/user/1', function(res){
+
+});
+</pre></div>
+
+<p>the response object is an instanceof <code>request.Response</code>, encapsulating all of this information instead of throwing a bunch of arguments at you. For example we can check <code>res.status</code>, <code>res.header</code> for header fields, <code>res.text</code>, <code>res.body</code> etc.</p>
+
+<p>An example of a JSON POST with jQuery typically might use <code>$.post()</code>, however once you need to start defining header fields you have to then re-write it using <code>$.ajax()</code>... so that might look like:</p>
+
+<div class="highlight"><pre lang="js">$.ajax({
+  url: '/api/pet',
+  type: 'POST',
+  data: { name: 'Manny', species: 'cat' },
+  headers: { 'X-API-Key': 'foobar' }
+}).success(function(res){
+
+}).error(function(){
+
+});
+</pre></div>
+
+<p>Not only is it ugly it's pretty opinionated, jQuery likes to special-case {4,5}xx, for example you cannot (easily at least) receive a parsed JSON response for say "400 Bad Request". This same request would look like this:</p>
+
+<div class="highlight"><pre lang="js">request
+  .post('/api/pet')
+  .send({ name: 'Manny', species: 'cat' })
+  .set('X-API-Key', 'foobar')
+  .set('Accept', 'application/json')
+  .end(function(res){
+
+  });
+</pre></div>
+
+<p>building on the existing API internally we also provide something similar to <code>$.post()</code> for those times in life where your interactions are very basic:</p>
+
+<div class="highlight"><pre lang="js">request.post('/api/pet', cat, function(res){
+
+});
+</pre></div>
+
+<h2>Running node tests</h2>
+
+<p>Install dependencies:</p>
+
+<pre><code> $ npm install -d
+</code></pre>
+
+<p>Run em!</p>
+
+<pre><code>$ make test
+</code></pre>
+
+<h2>Running browser tests</h2>
+
+<p>Install the test server deps (nodejs / express):</p>
+
+<pre><code>$ npm install -d
+</code></pre>
+
+<p>Start the test server:</p>
+
+<pre><code>$ make test-server
+</code></pre>
+
+<p>Visit <code>localhost:3000/</code> in the browser.</p>
+
+<h2>Persisting an agent (with cookies, ie sessions)</h2>
+
+<div class="highlight"><pre lang="js">var request = require('superagent');
+var user1 = request.agent();
+user1
+  .post('<a href='http://localhost:4000/signin'>http://localhost:4000/signin</a>')
+  .send({ user: '<a href='mailto:hunter@hunterloftis.com'>hunter@hunterloftis.com</a>', password: 'password' })
+  .end(function(err, res) {
+    // user1 will manage its own cookies
+    // res.redirects contains an Array of redirects
+  });
+</pre></div>
+
+<p>Examples:<br />- <a href="superagent/blob/master/test/node/agency.js">agency tests</a><br />- <a href="https://github.com/hunterloftis/component-test/blob/master/lib/users/test/controller.test.js">express demo app</a></p>
+
+<h2>Wiki</h2>
+
+<p>For superagent extensions such as couchdb and oauth visit the <a href="https://github.com/visionmedia/superagent/wiki">wiki</a>.</p>
+
+<h2>License</h2>
+
+<p>(The MIT License)</p>
+
+<p>Copyright (c) 2011 TJ Holowaychuk &lt;<a href='mailto:tj@vision-media.ca'>tj@vision-media.ca</a>&gt;</p>
+
+<p>Permission is hereby granted, free of charge, to any person obtaining<br />a copy of this software and associated documentation files (the<br />'Software'), to deal in the Software without restriction, including<br />without limitation the rights to use, copy, modify, merge, publish,<br />distribute, sublicense, and/or sell copies of the Software, and to<br />permit persons to whom the Software is furnished to do so, subject to<br />the following conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be<br />included in all copies or substantial portions of the Software.</p>
+
+<p>THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,<br />EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF<br />MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.<br />IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY<br />CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,<br />TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE<br />SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
