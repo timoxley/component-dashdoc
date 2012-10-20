@@ -8,7 +8,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "node -e \"require('./index').build()\""
   },
   "repository": "",
   "author": "Tim Oxley",
