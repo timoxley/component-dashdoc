@@ -21,6 +21,7 @@
     "async": "~0.1.22",
     "mkdirp": "~0.3.4",
     "superagent": "~0.9.6",
-    "wrench": "~1.3.9"
+    "wrench": "~1.3.9",
+    "markitup": "0.0.7"
   }
 }
