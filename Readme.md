@@ -1,5 +1,7 @@
-
 # component-dashdoc
 
-  Documentation for published components.
+  Dash documentation for published components.
+
+![http://i.imgur.com/YHuCl.png](http://i.imgur.com/YHuCl.png)
+
 
