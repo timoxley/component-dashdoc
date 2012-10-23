@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>component/humanize-number</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>humanize-number</h1>
+
+<p>Humanize a number <code>1000000.99</code> -> <code>1,000,000.99</code></p>
+
+<h2>Installation</h2>
+
+<pre><code>$ component install component/humanize-number
+</code></pre>
+
+<h2>Example</h2>
+
+<div class="highlight"><pre lang="js">var humanize = require('humanize-number');
+
+humanize(1000);
+// => '1,000'
+
+humanize(1000.55, { delimiter: '.', separator: ',' });
+// => '1.000,55'
+</pre></div>
+
+<h2>License</h2>
+
+<p>MIT</p>
+</article>
+</body>
+</html>

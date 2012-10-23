@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>paulmillr/es6-shim</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>ES6 Shim</h1>
+
+<p>Provides compatibility shims so that legacy JavaScript engines behave as<br />closely as possible to ECMAScript 6 (Harmony).</p>
+
+<p>Project targets engines that support ES5 (Firefox, Chrome, Safari, Opera). With<br /><a href="https://github.com/kriskowal/es5-shim">ES5-shim</a> it could also work in older<br />browsers.</p>
+
+<h2>Installation</h2>
+
+<pre><code>npm install es6-shim
+</code></pre>
+
+<p>Or just include es6-shim before your scripts if you want to use it in browser.</p>
+
+<h2>Safe shims</h2>
+
+<ul>
+<li>Maps &amp; Sets</li>
+<li>String.prototype.repeat, String.prototype.startsWith,
+String.prototype.endsWith, String.prototype.contains</li>
+<li>Array.from, Array.of</li>
+<li>Number.MAX_INTEGER, Number.EPSILON, Number.parseInt, Number.parseFloat,
+Number.isNaN, Number.toInteger, Number.isInteger, Number.isFinite</li>
+<li>Object.getOwnPropertyDescriptors, Object.getPropertyDescriptor,
+Object.getPropertyNames, Object.is, Object.isnt</li>
+<li>Math.sign, Math.log10, Math.log2, Math.log1p, Math.expm1, Math.cosh,
+Math.sinh, Math.tanh, Math.acosh, Math.asinh, Math.atanh, Math.hypot,
+Math.trunc (accuracy is 1e-11).</li>
+</ul>
+
+<h2>WeakMap shim</h2>
+
+<p>It is not possible to implement WeakMap in pure javascript.<br /><a href="https://github.com/WebReflection/es6-collections">es6-collections</a><br />implementation doesn't held values strongly which is critical<br />for the collection. es6-shim decided to not include incorrect shim.</p>
+
+<p>WeakMap has very unusual use-case so you probably won't need it at all (<br />use simple <code>Map</code> instead).</p>
+
+<h2>IE8 support</h2>
+
+<p>There are some shims that do not work in IE8, because it is simply not<br />possible to implement them properly:</p>
+
+<ul>
+<li>Object.getOwnPropertyDescriptors, Object.getPropertyDescriptor, Object.getPropertyNames</li>
+</ul>
+
+<h2>Getting started</h2>
+
+<div class="highlight"><pre lang="javascript">'abc'.startsWith('a') // true
+'abc'.endsWith('a') // false
+Object.is(NaN, NaN) // Fixes ===. 0 isnt -0, NaN is NaN
+'123'.repeat(2)     // '123123'
+'john alice'.contains('john') // true
+Number.isNaN('123') // false. isNaN('123') will give true.
+Number.toInteger(2.4) // 2. converts values to IEEE754 double precision integers
+// Tests if value is a number, finite,
+// >= -9007199254740992 && <= 9007199254740992 and floor(value) === value
+Number.isInteger(2.4) // false.
+Number.isFinite('asd') // false. Global isFinite() will give true.
+Math.sign(400) // 1, 0 or -1 depending on sign. In this case 1.
+
+// Replacement for `{}` key-value storage.
+// Keys can be anything.
+var map = new Map()
+map.set('John', 25)
+map.set('Alice', 400)
+map.set(['meh'], 555)
+map.get(['meh']) // undefined because you need to use exactly the same object.
+map.delete('Alice')
+
+// Useful for storing unique items.
+var set = new Set()
+set.add(1)
+set.add(5)
+set.has(1)
+set.has(4)  // => false
+set.delete(5)
+</pre></div>
+
+<p>Other stuff:</p>
+
+<ul>
+<li><a href="http://wiki.ecmascript.org/doku.php?id=harmony:specification_drafts">ECMAScript 6 drafts</a></li>
+<li><a href="http://wiki.ecmascript.org/doku.php?id=harmony:harmony">Harmony proposals</a></li>
+</ul>
+
+<h2>License</h2>
+
+<p>The project was initially based on <a href="https://github.com/rauschma/es6-shim">es6-shim by Axel Rauschmayer</a>.</p>
+
+<p>The MIT License (MIT)</p>
+
+<p>Copyright (c) 2012 Paul Miller (<a href='http://paulmillr.com'>http://paulmillr.com</a>)</p>
+
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy of<br />this software and associated documentation files (the "Software"), to deal in<br />the Software without restriction, including without limitation the rights to<br />use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies<br />of the Software, and to permit persons to whom the Software is furnished to do<br />so, subject to the following conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be included in all<br />copies or substantial portions of the Software.</p>
+
+<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR<br />IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,<br />FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE<br />AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER<br />LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,<br />OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE<br />SOFTWARE.</p>
+</article>
+</body>
+</html>

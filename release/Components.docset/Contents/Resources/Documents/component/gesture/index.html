@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>component/gesture</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>Gesture</h1>
+
+<p>Emitter wrapper and a little sugar on top of <a href="https://github.com/eightmedia/hammer.js">Hammer.js</a>.</p>
+
+<h2>Installation</h2>
+
+<div class="highlight"><pre lang="">$ component install component/gesture
+</pre></div>
+
+<h2>Events</h2>
+
+<ul>
+<li><code>drag start</code></li>
+<li><code>drag</code></li>
+<li><code>drag end</code></li>
+<li><code>tap</code></li>
+<li><code>double tap</code></li>
+<li><code>hold</code></li>
+<li><code>release</code></li>
+<li><code>transform start</code></li>
+<li><code>transform</code></li>
+<li><code>transform end</code></li>
+<li><code>swipe</code></li>
+<li><code>swipe left</code></li>
+<li><code>swipe right</code></li>
+<li><code>swipe up</code></li>
+<li><code>swipe down</code></li>
+</ul>
+
+<h2>API</h2>
+
+<h3>gesture(el)</h3>
+
+<p>Bind gestures to the given <code>el</code> and returns a <code>Gesture</code>.</p>
+
+<div class="highlight"><pre lang="js">var gesture = require('gesture');
+var img = document.getElementById('maru');
+
+var maru = gesture(img);
+
+maru.on('transform', function(e){
+  var r = e.rotation.toFixed(2);
+  var s = e.scale.toFixed(2);
+  img.style['-webkit-transform'] = 'rotate(' + r + 'deg) scale(' + s + ')';
+});
+
+setTimeout(function(){
+  maru.unbind();
+}, 5000);
+</pre></div>
+
+<h3>Gesture#unbind()</h3>
+
+<p>Unbind event handlers.</p>
+
+<h2>License</h2>
+
+<p>MIT</p>
+</article>
+</body>
+</html>

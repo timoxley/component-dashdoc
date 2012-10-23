@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>timoxley/diff</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>diff</h1>
+
+<p><a href="http://travis-ci.org/timoxley/jsdiff">![Build<br />Status](<a href='https://secure.travis-ci.org/timoxley/jsdiff.png'>https://secure.travis-ci.org/timoxley/jsdiff.png</a>)</a></p>
+
+<p>A text differencing component.</p>
+
+<p>Based on the algorithm proposed in<br /><a href="http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.4.6927">"An O(ND) Difference Algorithm and its Variations" (Myers, 1986)</a>.</p>
+
+<h2>Installation</h2>
+
+<pre><code>component install timoxley/diff
+</code></pre>
+
+<h2>API</h2>
+
+<ul>
+<li><p>diff.diffChars(oldStr, newStr)<br />Diffs two blocks of text, comparing character by character.</p>
+
+<p>Returns a list of change objects (See below).</p></li>
+<li><p>diff.diffWords(oldStr, newStr)<br />Diffs two blocks of text, comparing word by word.</p>
+
+<p>Returns a list of change objects (See below).</p></li>
+<li><p>diff.diffLines(oldStr, newStr)<br />Diffs two blocks of text, comparing line by line.</p>
+
+<p>Returns a list of change objects (See below).</p></li>
+<li><p>diff.diffCss(oldStr, newStr)<br />Diffs two blocks of text, comparing CSS tokens.</p>
+
+<p>Returns a list of change objects (See below).</p></li>
+<li><p>diff.createPatch(fileName, oldStr, newStr, oldHeader, newHeader)<br />Creates a unified diff patch.</p>
+
+<p>Parameters:</p>
+
+<ul><li>fileName : String to be output in the filename sections of the patch</li>
+<li>oldStr : Original string value</li>
+<li>newStr : New string value</li>
+<li>oldHeader : Additional information to include in the old file header</li>
+<li>newHeader : Additional information to include in thew new file header</li></ul></li>
+<li><p>JsDiff.applyPatch(oldStr, diffStr)<br />Applies a unified diff patch.</p>
+
+<p>Return a string containing new version of provided data.</p></li>
+<li><p>convertChangesToXML(changes)<br />Converts a list of changes to a serialized XML format</p></li>
+</ul>
+
+<h3>Change Objects</h3>
+
+<p>Many of the methods above return change objects. These objects are consist of the following fields:</p>
+
+<ul>
+<li>value: Text content</li>
+<li>added: True if the value was inserted into the new string</li>
+<li>removed: True of the value was removed from the old string</li>
+</ul>
+
+<p>Note that some cases may omit a particular flag field. Comparison on the flag fields should always be done in a truthy or falsy manner.</p>
+
+<h2>Credits</h2>
+
+<p>Original JSDiff: <a href="https://github.com/kpdecker/jsdiff">Kevin Decker</a><br />applyPatch Implementation: <a href="https://github.com/vprimachenko/jsdiff">vprimachenko</a></p>
+
+<h2>License</h2>
+
+<p>Software License Agreement (BSD License)</p>
+
+<p>Copyright (c) 2009-2011, Kevin Decker <a href='mailto:kpdecker@gmail.com'>kpdecker@gmail.com</a></p>
+
+<p>All rights reserved.</p>
+
+<p>Redistribution and use of this software in source and binary forms, with or without modification,<br />are permitted provided that the following conditions are met:</p>
+
+<ul>
+<li><p>Redistributions of source code must retain the above<br />copyright notice, this list of conditions and the<br />following disclaimer.</p></li>
+<li><p>Redistributions in binary form must reproduce the above<br />copyright notice, this list of conditions and the<br />following disclaimer in the documentation and/or other<br />materials provided with the distribution.</p></li>
+<li><p>Neither the name of Kevin Decker nor the names of its<br />contributors may be used to endorse or promote products<br />derived from this software without specific prior<br />written permission.</p></li>
+</ul>
+
+<p>THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR<br />IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND<br />FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR<br />CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL<br />DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,<br />DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER<br />IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT<br />OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
+</article>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>component/zest</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>Zest</h1>
+
+<p><strong>zest.js</strong> is a fast, lightweight, and extensible CSS selector engine.</p>
+
+<p>Zest was designed to be very concise while still supporting CSS3/CSS4<br />selectors and remaining fast.</p>
+
+<h2>Usage</h2>
+
+<div class="highlight"><pre lang=" js">zest('section! > div[title="hello" i] > :local-link /href/ h1');
+</pre></div>
+
+<h2>Benchmarks</h2>
+
+<p>Each selector run 1000 times on Google Chrome 13 beta (ms):</p>
+
+<pre><code>benchmarking: `header &gt; h1` 1000 times.
+zest: 13
+sizzle: 24
+native: 13
+benchmarking: `body &gt; header &gt; h1` 1000 times.
+zest: 16
+sizzle: 26
+native: 13
+benchmarking: `html a` 1000 times.
+zest: 45
+sizzle: 55
+native: 12
+benchmarking: `:first-child` 1000 times.
+zest: 44
+sizzle: 68
+native: 11
+benchmarking: `:only-child` 1000 times.
+zest: 49
+sizzle: 66
+native: 12
+benchmarking: `:not(a)` 1000 times.
+zest: 51
+sizzle: 125
+native: 12
+benchmarking: `h1 + time:last-child` 1000 times.
+zest: 15
+sizzle: 32
+native: 13
+benchmarking: `h1 + time[datetime]:last-child` 1000 times.
+zest: 21
+sizzle: 45
+native: 14
+benchmarking: `header &gt; h1, :not(a)` 1000 times.
+zest: 72
+sizzle: 212
+native: 17
+benchmarking: `a[rel~="section"]` 1000 times.
+zest: 41
+sizzle: 54
+native: 11
+benchmarking: `a, h1` 1000 times.
+zest: 25
+sizzle: 55
+native: 11
+benchmarking: `:nth-child(2n+1)` 1000 times.
+zest: 82
+sizzle: 97
+native: 13
+</code></pre>
+
+<p><strong>NOTE:</strong> If you want to run these benchmarks yourself make sure to turn off<br />Sizzle's (and Zest's) <code>document.querySelectorAll</code> delegation mechanism,<br />otherwise you will be benchmarking against <code>document.querySelectorAll</code>.</p>
+
+<p>Zest will cache compiled selectors if it can't delegate to<br /><code>document.querySelectorAll</code>, <code>document.getElementById</code>, or<br /><code>document.getElementsByClassName</code> (depending). <strong>The benchmark tests you see<br />above were performed with the caching mechanism disabled. If caching were<br />enabled, Zest would be faster than the native <code>document.querySelectorAll</code>.</strong></p>
+
+<h2>Install</h2>
+
+<div class="highlight"><pre lang=" bash">$ npm install zest.js
+</pre></div>
+
+<h2>Notes</h2>
+
+<p>Zest currently includes support for ender.js, Prototype, and jQuery.</p>
+
+<p><strong>Unsupported Selectors:</strong> <code>:hover</code>, <code>:active</code>, <code>:link</code>, <code>:visited</code>, all pseudo<br />elements, and namespaces.</p>
+
+<p><code>:link</code>, <code>:visited</code>, and pseudo elements are unsupported for obvious reasons<br />(they don't work). <code>:hover</code> and <code>:active</code> aren't supported because they examine<br />a dynamic state, you should be binding to events for this (<code>:focus</code> is<br />supported, but there is no fallback for legacy browsers).</p>
+
+<h2>Extension</h2>
+
+<p>Zest doesn't support (m)any non-standard selectors, but it is possible to add<br />your own.</p>
+
+<h3>Adding a simple selector</h3>
+
+<p>Adding simple selectors is fairly straight forward. Only the addition of pseudo<br />classes and attribute operators is possible. (Adding your own "style" of<br />selector would require changes to the core logic.)</p>
+
+<p>Here is an example of a custom <code>:name</code> selector which will match for an<br />element's <code>name</code> attribute: e.g. <code>h1:name(foo)</code>. Effectively an alias<br />for <code>h1[name=foo]</code>.</p>
+
+<div class="highlight"><pre lang=" js">// if there was a parameter,
+// it gets closured as `param`
+zest.selectors[':name'] = function(param) {
+  return function(el) {
+    if (el.name === param) return true;
+  };
+};
+</pre></div>
+
+<p><strong>NOTE</strong>: if you're pseudo-class does not take a parameter, there will be no<br />closure.</p>
+
+<h3>Adding an attribute operator</h3>
+
+<div class="highlight"><pre lang=" js">// `attr` is the attribute
+// `val` is the value to match
+zest.operators['!='] = function(attr, val) {
+  return attr !== val;
+};
+</pre></div>
+
+<h3>Adding a combinator</h3>
+
+<p>Adding a combinator is a bit trickier. It may seem confusing at first because<br />the logic is upside-down. Zest interprets selectors from right to left.</p>
+
+<p>Here is an example how a parent combinator could be implemented:</p>
+
+<div class="highlight"><pre lang=" js">zest.combinators['<'] = function(test) {
+  return function(el) { // `el` is the current element
+    el = el.firstChild;
+    while (el) {
+      // return the relevant element
+      // if it passed the test
+      if (el.nodeType === 1 && test(el)) {
+        return el;
+      }
+      el = el.nextSibling;
+    }
+  };
+};
+</pre></div>
+
+<p>The <code>test</code> function tests whatever simple selectors it needs to look for, but<br />it isn't important what it does. The most important part is that you return<br />the relevant element once it's found.</p>
+
+<h2>License</h2>
+
+<p>(c) Copyright 2011-2012, Christopher Jeffrey (MIT Licensed).<br />See LICENSE for more info.</p>
+</article>
+</body>
+</html>

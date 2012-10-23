@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>juliangruber/events</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>events</h1>
+
+<p>Node's events module in the browser.</p>
+
+<p>This is a wrapper around <a href="https://github.com/component/emitter">component/emitter</a> that is api-compatible with node's events module.</p>
+
+<p><a href="http://nodejs.org/api/events.html">Events Node.js v0.8.11 Manual &amp; Documentation</a></p>
+
+<h2>Installation</h2>
+
+<p>Install with <a href="https://github.com/component/component">component(1)</a></p>
+
+<div class="highlight"><pre lang="bash">$ npm install juliangruber/events
+</pre></div>
+
+<p>or</p>
+
+<div class="highlight"><pre lang="bash">$ npm install events-component
+</pre></div>
+
+<h2>Usage example</h2>
+
+<div class="highlight"><pre lang="javascript">var EventEmitter = require('events').EventEmitter;
+var ee = new EventEmitter();
+
+ee.on('foo', function(data) {
+  console.log('foo received', data);
+})
+
+ee.emit('foo', 'bar');
+// -> 'foo received bar'
+</pre></div>
+
+<h2>License</h2>
+
+<p>(MIT)</p>
+
+<p>Copyright (c) 2012 Julian Gruber &lt;<a href='mailto:julian@juliangruber.com'>julian@juliangruber.com</a>&gt;</p>
+
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
+
+<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
+</article>
+</body>
+</html>

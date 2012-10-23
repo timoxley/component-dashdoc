@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>juliangruber/streamback</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>streamback</h1>
+
+<p>Turn repeatedly called callbacks into streams. Pass a streamback!</p>
+
+<h2>Installation</h2>
+
+<div class="highlight"><pre lang="bash">$ component install juliangruber/streamback
+
+
+<h1>or</h1>
+
+$ npm install streamback
+</pre></div>
+
+<h2>Usage</h2>
+
+<div class="highlight"><pre lang="javascript">var Streamback = require('streamback');
+
+var articleStream = Streamback();
+api.subscribe('article', articleStream.feed()); // gets called on every new article
+
+articleStream.pipe(process.stdout);
+</pre></div>
+
+<h2>Api</h2>
+
+<h3>Streamback()</h3>
+
+<p>Returns a <code>streamback</code> stream.</p>
+
+<h3>Streamback#feed()</h3>
+
+<p>Returns a function to be passed as callback. If multiple arguments are passed to this, they are combined to an array.</p>
+
+<h3>Streamback#stop(), Streamback#start()</h3>
+
+<p>When stopped, passed in data is dropped.</p>
+
+<h3>Streamback#pause(), Streamback#resume()</h3>
+
+<p>Work as expected. Thanks, <a href="https://github.com/dominictarr/pause-stream">pause-stream</a> :)</p>
+
+<h2>Tests</h2>
+
+<div class="highlight"><pre lang="bash">$ npm install
+$ npm test
+</pre></div>
+
+<h2>License</h2>
+
+<p>(MIT)</p>
+
+<p>Copyright (c) 2012 &lt;<a href='mailto:julian@juliangruber.com'>julian@juliangruber.com</a>&gt;</p>
+
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
+
+<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
+</article>
+</body>
+</html>

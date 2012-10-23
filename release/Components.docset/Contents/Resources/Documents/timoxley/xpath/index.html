@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>timoxley/xpath</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>xpath</h1>
+
+<p>XPath utilities extracted from <a href="http://code.google.com/p/fbug/source/browse/branches/firebug1.6/content/<a href='http://github.com/firebug/lib.js/issues/#issue/1294'>firebug/lib.js#1294</a>">Firebug</a>.</p>
+
+<h2>Installation</h2>
+
+<div class="highlight"><pre lang="js">$ component install timoxley/xpath
+</pre></div>
+
+<h2>Example</h2>
+
+<p>Given this html:</p>
+
+<div class="highlight"><pre lang="html"><html>
+<body>
+  <div>
+  </div>
+
+<p><div><br />    <ul><br />      <li></li><br />      <li id="someItem"></li><br />    </ul><br />  </div><br /></body><br /></html><br /></pre></div></p>
+
+<p>Get the xpath of <code>#someItem</code>;</p>
+
+<div class="highlight"><pre lang="js">var xpath = require('xpath')
+xPath.getElementTreeXPath(document.getElementById('someItem'), true) // => "/html[1]/body[1]/div[2]/ul[1]/li[2]"
+// Note: boolean second parameter to `getElementTreeXPath` ensures
+element indices are stored in the xpath.
+
+</pre></div>
+
+<h2>API</h2>
+
+<ul>
+<li>getElementXPath</li>
+<li>getElementTreeXPath</li>
+<li>getElementCSSPath</li>
+<li>cssToXPath</li>
+<li>getElementsBySelector</li>
+<li>getElementsByXPath</li>
+<li>getRuleMatchingElements</li>
+<li>getElementCSSSelector</li>
+</ul>
+
+<h2>Credit</h2>
+
+<p><a href="http://code.google.com/p/fbug/source/browse/branches/firebug1.6/content/<a href='http://github.com/firebug/lib.js/issues/#issue/1294'>firebug/lib.js#1294</a>">Firebug Team</a></p>
+</article>
+</body>
+</html>

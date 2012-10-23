@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>colinf/datepicker</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>datepicker</h1>
+
+<p>a datepicker component</p>
+
+<p><img src="http://f.cl.ly/items/3e340Z1U0W2Y2o2i0R23/Screen%20Shot%202012-10-09%20at%2021.37.53.png" alt="datepicker component" title="" /></p>
+
+<h2>installation</h2>
+
+<div class="highlight"><pre lang="">$ component install colinf/datepicker
+</pre></div>
+
+<p>You can find out more about using and installing components <a href="https://github.com/component/component">here</a>.</p>
+
+<p>(A Makefile is provided if you want to install the datepicker for dev/test)</p>
+
+<h2>Based on Popover / Tip</h2>
+
+<p>Datepicker is based on the Popover and Tip components. It therefore also provides the same features as those components.</p>
+
+<h2>Example</h2>
+
+<div class="highlight"><pre lang="js">var Datepicker = require('datepicker');
+
+var datepicker = new Datepicker;
+datepicker
+  .inputFields({
+    '#dt-dd': 'DD',
+    '#dt-mm': 'MM',
+    '#dt-yyyy': 'YYYY'})
+  .attach('#dt-dd')
+  .trigger('#pickLink1');
+</pre></div>
+
+<h2>API</h2>
+
+<h3>new Datepicker([date], [title], [options])</h3>
+
+<p>Creates a new datepicker for the given date and title. All of the arguments are optional.</p>
+
+<p>If used the date argument must be a Javascript Date object. If there is no date argument, the datepicker defaults to today’s date.</p>
+
+<p>If used the title should be a string. If there is a title argument, then the datepicker is displayed with a title (see Popover for further details).</p>
+
+<p>The options argument is optional. When passed it must be an object and can contains the following keys:</p>
+
+<ul>
+<li>displayInitial: boolean indicating whether the input fields should be populated with the initial date value.</li>
+</ul>
+
+<h3>Datepicker#attach(el)</h3>
+
+<p>Chainable. Defines the element to which the datepicker should be attached i.e. the Tip arrow will originate from this element.</p>
+
+<p>If you do not specifically define an element using attach, then the datepicker will attach to the element defined in trigger(). So if the el in attach(el) and trigger(el) are the same it's easiest to just use trigger().</p>
+
+<h3>Datepicker#select(date)</h3>
+
+<p>Selects the given date.</p>
+
+<h3>Datepicker#inputFields(fields)</h3>
+
+<p>Chainable. The fields argument defines the input field or fields used for entering/displaying the date. Fields should be an object with each key being the element which identifies an input field and the value being the date format for that field or part field.</p>
+
+<p>So to define a single input field:</p>
+
+<div class="highlight"><pre lang="js">datepicker.inputFields({
+    '#the-date': 'DD/MM/YYYY'
+});
+</pre></div>
+
+<p>Or if you want to break the date entry into separate fields:</p>
+
+<div class="highlight"><pre lang="js">datepicker.inputFields({
+   '#dt-dd': 'DD',
+   '#dt-mm': 'MM',
+   '#dt-yyyy': 'YYYY'
+});
+</pre></div>
+
+<p>The date formats supported are defined <a href="http://momentjs.com/docs/#/parsing/string-format/">at this link</a>.</p>
+
+<h3>Datepicker#trigger(el)</h3>
+
+<p>Chainable. Defines an element which when clicked will cause the datepicker to show.</p>
+
+<h3>Datepicker#monthMenu()</h3>
+
+<p>Chainable. Displays a dropdown menu of months in the header of the datepicker for quick navigation.</p>
+
+<h3>Datepicker#yearMenu([from], [to])</h3>
+
+<p>Chainable. Displays a dropdown menu of months in the header of the datepicker for quick navigation.</p>
+
+<p><code>From</code> specifies the first year shown in the dropdown and <code>to</code> the last year. This means that if <code>to</code> is less than <code>from</code>, the years will be listed in descending order.</p>
+
+<p>If <code>from</code>/<code>to</code> are both not specified the dropdown defaults to -/+ 10 years from the calendar's date.</p>
+
+<p>If only <code>from</code> specified it defaults <code>to</code> +20 years from that year.</p>
+
+<h3>Datepicker#date()</h3>
+
+<p>Returns the current date selected in the datepicker as a Javascript Date object.</p>
+
+<h3>Datepicker#inputValid()</h3>
+
+<p>Returns a boolean indicating whether the date which has been entered is a valid date.</p>
+
+<p>The Datepicker#date() method is very flexible and will return a date by overflowing when possible. So an invalid entry such as 33/10/2012 (dd/mm/yyyy format) overflows and returns 02/11/2012. However the inputValid() method will return false to allow validation if desired.</p>
+
+<p>Also see the API documentation for <a href="https://github.com/component/popover">component/popover</a> and <a href="https://github.com/component/tip">component/tip</a>.</p>
+</article>
+</body>
+</html>

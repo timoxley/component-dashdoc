@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>timoxley/keycode</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>keycode</h1>
+
+<p>Simple map of keyboard codes.</p>
+
+<h2>Installation</h2>
+
+<div class="highlight"><pre lang="">$ component install timoxley/keycode
+</pre></div>
+
+<h2>Example</h2>
+
+<div class="highlight"><pre lang="js">var keycode = require('keycode');
+document.addEventListener('keydown', function(e) {
+  console.log("You pressed", keycode(e.keyCode))
+})
+
+</pre></div>
+
+<h2>API</h2>
+
+<p>The <code>keycode</code> method responds differently depending on whether you're<br />looking up a keycode or a keyname.</p>
+
+<h3>keycode(keycode:Number)</h3>
+
+<p>Returns name for given numeric keycode.</p>
+
+<div class="highlight"><pre lang="js">  console.log(keycode(13)) // => 'Enter'
+</pre></div>
+
+<h3>keycode(name:String)</h3>
+
+<p>Returns numeric keycode for given key name.</p>
+
+<div class="highlight"><pre lang="js">  console.log(keycode('Enter')) // => 13
+</pre></div>
+
+<p>KeyCode and KeyName maps are available directly as <code>keycode.keyCodes</code> and<br /><code>keycode.keyNames</code> respectively.</p>
+
+<div class="highlight"><pre lang="js">
+  console.log(keycode.keyCodes[13]) // => 'Enter'
+  console.log(keycode.keyNames['Enter']) // => 13
+
+</pre></div>
+
+<h2>Note: keydown/keyup vs. keypress</h2>
+
+<p><code>keypress</code> event's <code>keyCode</code>/<code>which</code> property is a different format<br />to that of <code>keydown</code> &amp; <code>keyup</code>. Instead of the code of the keyboard event,<br />it's the character's ASCII code. This also means non display characters<br />will not be fired on <code>keypress</code>. <strong>For this reason, you should not use<br /><code>keycode()</code> with <code>keypress</code> events</strong>.</p>
+
+<p>TODO: add logic for extracting values intelligently from a<br /><code>KeyboardEvent</code>.</p>
+
+<div class="highlight"><pre lang="js">
+// Example: Pressing the 'a' key.
+
+document.addEventListener('keydown', function(e) {
+  // e.keyCode is 65
+  console.log("Key Down", keycode(e.keyCode)) // => 'a' Correct
+})
+
+document.addEventListener('keypress', function(e) {
+  // e.keyCode is 97
+  console.log("Key Press ", keycode(e.keyCode)) // => 'Numpad 1'
+Incorrect
+})
+
+</pre></div>
+
+<h2>Credit</h2>
+
+<p>Original code lifted from <a href='http://jsfiddle.net/vWx8V/'>http://jsfiddle.net/vWx8V/</a> via <a href='http://stackoverflow.com/questions/5603195/full-list-of-javascript-keycodes'>http://stackoverflow.com/questions/5603195/full-list-of-javascript-keycodes</a></p>
+
+<h2>License</h2>
+
+<p><a href="http://opensource.org/licenses/mit-license.php">MIT</a></p>
+</article>
+</body>
+</html>

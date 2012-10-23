@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>component/in-groups-of</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>in-groups-of</h1>
+
+<p>Return an array of arrays in groups of N</p>
+
+<h2>Installation</h2>
+
+<div class="highlight"><pre lang="">$ component install component/in-groups-of
+</pre></div>
+
+<h2>Example</h2>
+
+<div class="highlight"><pre lang="js">var nums = [1,2,3,4,5,6,7,8,9,10];
+
+inGroupsOf(nums, 5)
+// => [[1,2,3,4,5], [6,7,8,9,10]]
+
+inGroupsOf(nums, 4)
+// => [[1,2,3,4], [5,6,7,8], [9,10]]
+
+inGroupsOf(nums, 2)
+//=> [[1,2], [3,4], [5,6], [7,8], [9,10]]
+</pre></div>
+
+<h1>License</h1>
+
+<p>MIT</p>
+</article>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>necolas/suit-button</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>SUIT button</h1>
+
+<p>A SUIT component for a UI button template. Includes modifier classes for small,<br />large, and full-width buttons.</p>
+
+<p>Read more about <a href="https://github.com/necolas/suit/">SUIT's design principles</a>.</p>
+
+<h2>Installation</h2>
+
+<ul>
+<li>Download: <a href="https://github.com/necolas/suit-button/zipball/master">zip</a></li>
+<li><a href="https://github.com/twitter/bower/">Bower</a>: <code>bower install suit-button</code></li>
+<li>Git: <code>git clone <a href='https://github.com/necolas/suit-button.git'>https://github.com/necolas/suit-button.git</a></code></li>
+</ul>
+
+<h2>Available classes</h2>
+
+<ul>
+<li><code>btn</code> - The core button component</li>
+<li><code>btn--small</code> - The modifier class for smaller buttons</li>
+<li><code>btn--large</code> - The modifier class for larger buttons</li>
+<li><code>btn--full</code> - The modifier class for full-width buttons</li>
+</ul>
+
+<h2>Usage</h2>
+
+<p>Like all SUIT components, suit-button relies on a base component class that is<br />extended by any number of additional modifier classes.</p>
+
+<div class="highlight"><pre lang=""><button class="btn btn--small" type="submit">Submit</button>
+</pre></div>
+
+<p>The suit-button component is almost entirely structural. You can build your<br />application-specific theme styles upon suit-button in your application-level<br />stylesheets. For example:</p>
+
+<div class="highlight"><pre lang="">@import "components/vendor/suit-button/button.css"
+
+/**
+ * components/app/button/button.css
+ */
+
+.btn {
+    border-color: #d9d9d9 #d9d9d9 #ccc;
+    border-radius: 2px;
+    color: #444;
+    background-color: #eee;
+}
+
+.btn:hover,
+.btn:focus,
+.btn:active,
+.btn.is-pressed {
+    border-color: #c6c6c6 #c6c6c6 #bbb;
+    color: #222;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    background-color: #f5f5f5;
+}
+
+.btn:focus {
+    border-color: #069;
+    outline: 0;
+}
+
+.btn:active,
+.btn.is-pressed {
+    box-shadow: inset 0 1px 2px rgba(0,0,0, 0.2);
+    background-color: #ccc;
+}
+</pre></div>
+
+<p>You can also create your own application-level modifiers. This is an example of<br />a "primary button" style build upon the suit-button component.</p>
+
+<div class="highlight"><pre lang="">/**
+ * Modifier: primary buttons
+ */
+
+.btn--primary {
+    border-color: #057ed0;
+    color: #fff;
+    background-color: #019ad2;
+}
+
+...
+</pre></div>
+
+<h2>Browser support</h2>
+
+<ul>
+<li>Google Chrome (latest)</li>
+<li>Opera (latest)</li>
+<li>Firefox 4+</li>
+<li>Safari 5+</li>
+<li>Internet Explorer 8+</li>
+</ul>
+</article>
+</body>
+</html>

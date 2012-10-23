@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>component/keyname</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>keyname</h1>
+
+<p>Keyboard event key name utility</p>
+
+<h2>Installation</h2>
+
+<pre><code>$ component install component/keyname
+</code></pre>
+
+<h2>API</h2>
+
+<div class="highlight"><pre lang="js">var keyname = require('keyname');
+
+keyname(27);
+// => "esc"
+
+keyname(23123123);
+// => undefined
+</pre></div>
+
+<h2>Keys</h2>
+
+<p>The following are supported:</p>
+
+<ul>
+<li>backspace</li>
+<li>tab</li>
+<li>enter</li>
+<li>shift</li>
+<li>ctrl</li>
+<li>alt</li>
+<li>capslock</li>
+<li>esc</li>
+<li>space</li>
+<li>pageup</li>
+<li>pagedown</li>
+<li>end</li>
+<li>home</li>
+<li>left</li>
+<li>up</li>
+<li>right</li>
+<li>down</li>
+<li>ins</li>
+<li>del</li>
+<li>meta</li>
+</ul>
+
+<h2>License</h2>
+
+<p>MIT</p>
+</article>
+</body>
+</html>

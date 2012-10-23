@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>adamsanderson/trigger-event</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>trigger-event</h1>
+
+<p>Trigger native DOM events.  This is primarily useful for testing, or for <br />triggering common DOM events such as the <code>change</code> event for custom components. </p>
+
+<h2>Installation</h2>
+
+<pre><code>component install adamsanderson/inline-edit
+</code></pre>
+
+<p>See <a href="https://github.com/component/component#component">component</a> for more information.</p>
+
+<h2>API</h2>
+
+<h3>trigger(el, name, options)</h3>
+
+<p>Triggers the <code>name</code> event on <code>el</code>.  Options may be passed in to customize the event.</p>
+
+<p>HTMLEvents support the following options:</p>
+
+<pre><code>bubbles
+cancelable
+</code></pre>
+
+<p>MouseEvents support the following options:</p>
+
+<pre><code>bubbles
+cancelable
+detail (number of clicks)
+screenX / screenY
+clientX / clientY
+ctrlKey
+altKey
+shiftKey
+metaKey
+button (mouse button)
+</code></pre>
+
+<p>See the <a href="http://www.w3.org/TR/DOM-Level-2-Events/events.html">W3C Event Spec</a> for more details.</p>
+
+<p>Where sensible, sane defaults will be filled in.  See the list of event<br />types for supported events.</p>
+
+<h2>Attribution</h2>
+
+<p>This is loosely based on <a href="https://github.com/kangax">kangax</a>'s <a href="https://github.com/kangax/protolicious/blob/master/event.simulate.js">event.simulate.js</a>.</p>
+
+<h2>License</h2>
+
+<p>MIT</p>
+
+<hr />
+
+<p>Adam Sanderson - <a href='http://monkeyandcrow.com'>http://monkeyandcrow.com</a></p>
+</article>
+</body>
+</html>

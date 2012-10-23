@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>component/sum</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>sum</h1>
+
+<p>Sum utility</p>
+
+<h2>Installation</h2>
+
+<pre><code>$ component install component/sum
+</code></pre>
+
+<h2>API</h2>
+
+<h3>sum(array, [fn|string])</h3>
+
+<p>Sum an array of numbers:</p>
+
+<div class="highlight"><pre lang="js">sum([1,2,3,4,5]);
+</pre></div>
+
+<p>Sum properties with callback:</p>
+
+<div class="highlight"><pre lang="js">var sum = sum(users, function(user){
+  return user.age;
+});
+</pre></div>
+
+<h3>map(array, string)</h3>
+
+<p>Sum properties in <code>string</code>:</p>
+
+<div class="highlight"><pre lang="js">sum(users, 'age');
+sum(repos, 'stats.watchers');
+</pre></div>
+
+<h1>License</h1>
+
+<p>MIT</p>
+</article>
+</body>
+</html>

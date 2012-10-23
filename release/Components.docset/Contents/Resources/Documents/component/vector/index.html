@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>component/vector</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>vector</h1>
+
+<p><code>Vector</code> object for canvas etc.</p>
+
+<h2>Installation</h2>
+
+<div class="highlight"><pre lang="">$ component install component/vector
+</pre></div>
+
+<h2>Example</h2>
+
+<div class="highlight"><pre lang="js">var Vector = require('vector');
+var a = new Vector(5, 5);
+var b = new Vector(10, 10);
+a.distance(b);
+</pre></div>
+
+<p>or without <code>new</code>:</p>
+
+<div class="highlight"><pre lang="js">var vec = require('vector');
+var a = vec(5, 5);
+var b = vec(10, 10);
+a.distance(b);
+</pre></div>
+
+<h2>API</h2>
+
+<h3>Vector(x, y)</h3>
+
+<p>Initialize a new <code>Vector</code> with x / y.</p>
+
+<h3>Vector#negate()</h3>
+
+<p>Return a negated vector.</p>
+
+<h3>Vector#add(v:Vector)</h3>
+
+<p>Add x / y.</p>
+
+<h3>Vector#sub(v:Vector)</h3>
+
+<p>Sub x / y.</p>
+
+<h3>Vector#mul(v:Vector)</h3>
+
+<p>Multiply x / y.</p>
+
+<h3>Vector#div(v:Vector)</h3>
+
+<p>Divide x / y.</p>
+
+<h3>Vector#equals(v:Vector)</h3>
+
+<p>Check if these vectors are the same.</p>
+
+<h3>Vector#clone()</h3>
+
+<p>Return a clone of this vector.</p>
+
+<h3>Vector#angle()</h3>
+
+<p>Return angle in radians.</p>
+
+<h3>Vector#degrees()</h3>
+
+<p>Return angle in degrees.</p>
+
+<h3>Vector#distance(v:Vector)</h3>
+
+<p>Return the distance between vectors.</p>
+
+<h3>Vector#interpolated(v:Vector, s:Number)</h3>
+
+<p>Return the linear interpolation between vectors given a step point.</p>
+
+<h3>Vector#middle(v:Vector)</h3>
+
+<p>Return the middle position between vectors.</p>
+
+<h3>Vector#toString()</h3>
+
+<p>Return "(x, y)" string representation.</p>
+
+<h2>License</h2>
+
+<p>MIT</p>
+</article>
+</body>
+</html>

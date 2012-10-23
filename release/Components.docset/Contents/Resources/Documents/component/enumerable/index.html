@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>component/enumerable</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>Enumerable</h1>
+
+<p>Enumerable mixin.</p>
+
+<p>TODO... finish me</p>
+
+<div class="highlight"><pre lang="js">users
+  .map('friends')
+  .select(function(u){ return u.age > 20 })
+  .map('name.first')
+  .grep(/^T/)
+</pre></div>
+
+<h2>Installation</h2>
+
+<pre><code>$ component install component/enumerable
+</code></pre>
+
+<h2>API</h2>
+
+<h3>mixin()</h3>
+
+<p>Mixin to <code>obj</code>.</p>
+
+<pre><code> var Enumerable = require('enumerable');
+ Enumerable(Something.Enumerabletype);
+</code></pre>
+
+<h3>Enumerable#each(fn:Function)</h3>
+
+<p>Iterate each value and invoke <code>fn(val, i)</code>.</p>
+
+<pre><code> users.each(function(val, i){
+
+ })
+</code></pre>
+
+<h3>Enumerable#map(fn:Function)</h3>
+
+<p>Map each return value from <code>fn(val, i)</code>.</p>
+
+<p>Passing a callback function:</p>
+
+<pre><code> users.map(function(user){
+   return user.name.first
+ })
+</code></pre>
+
+<p>Passing a property string:</p>
+
+<pre><code> users.map('name.first')
+</code></pre>
+
+<h3>Enumerable#select(fn:Function)</h3>
+
+<p>Select all values that return a truthy value of <code>fn(val, i)</code>.</p>
+
+<pre><code> users.select(function(user){
+   return user.age &gt; 20
+ })
+</code></pre>
+
+<h3>Enumerable#reject(fn:Function)</h3>
+
+<p>Reject all values that return a truthy value of <code>fn(val, i)</code>.</p>
+
+<p>Rejecting using a callback:</p>
+
+<pre><code> users.reject(function(user){
+   return user.age &lt; 20
+ })
+</code></pre>
+
+<p>Rejecting values via <code>==</code>:</p>
+
+<pre><code> data.reject(null)
+ users.reject(tobi)
+</code></pre>
+
+<h3>Enumerable#compact()</h3>
+
+<p>Reject <code>null</code> and <code>undefined</code>.</p>
+
+<pre><code> [1, null, 5, undefined].compact()
+ // =&gt; [1,5]
+</code></pre>
+
+<h3>Enumerable#find(fn:Function)</h3>
+
+<p>Return the first value when <code>fn(val, i)</code> is truthy,<br />  otherwise return <code>undefined</code>.</p>
+
+<pre><code> users.find(function(user){
+   return user.role == 'admin'
+ })
+</code></pre>
+
+<h3>Enumerable#findLast(fn:Function)</h3>
+
+<p>Return the last value when <code>fn(val, i)</code> is truthy,<br />  otherwise return <code>undefined</code>.</p>
+
+<pre><code> users.findLast(function(user){
+   return user.role == 'admin'
+ })
+</code></pre>
+
+<h3>Enumerable#any(fn:Function)</h3>
+
+<p>Assert that at least one invocation of <code>fn(val, i)</code> is truthy.</p>
+
+<p>For example checking to see if any pets are ferrets</p>
+
+<pre><code> pets.any(function(pet){
+   return pet.species == 'ferret'
+ })
+</code></pre>
+
+<h3>Enumerable#count(fn:Function)</h3>
+
+<p>Count the number of times <code>fn(val, i)</code> returns true.</p>
+
+<pre><code> var n = pets.count(function(pet){
+   return pet.species == 'ferret'
+ })
+</code></pre>
+
+<h3>Enumerable#indexOf(obj:Mixed)</h3>
+
+<p>Determine the indexof <code>obj</code> or return <code>-1</code>.</p>
+
+<h3>Enumerable#grep(re:RegExp)</h3>
+
+<p>Grep values using the given <code>re</code>.</p>
+
+<pre><code> users.map('name').grep(/^tobi/i)
+</code></pre>
+
+<h3>Enumerable#reduce(fn:Function, [val]:Mixed)</h3>
+
+<p>Reduce with <code>fn(accumulator, val, i)</code> using<br />  optional <code>init</code> value defaulting to the first<br />  enumerable value.</p>
+
+<h3>Enumerable#max(fn:Function|String)</h3>
+
+<p>Determine the max value.</p>
+
+<p>With a callback function:</p>
+
+<pre><code> pets.max(function(pet){
+   return pet.age
+ })
+</code></pre>
+
+<p>With property strings:</p>
+
+<pre><code> pets.max('age')
+</code></pre>
+
+<p>With immediate values::</p>
+
+<pre><code> nums.max()
+</code></pre>
+
+<h3>Enumerable#sum(fn:Function|String)</h3>
+
+<p>Determine the sum.</p>
+
+<p>With a callback function:</p>
+
+<pre><code> pets.sum(function(pet){
+   return pet.age
+ })
+</code></pre>
+
+<p>With property strings:</p>
+
+<pre><code> pets.sum('age')
+</code></pre>
+
+<p>With immediate values:</p>
+
+<pre><code> nums.sum()
+</code></pre>
+
+<h3>Enumerable#first([n]:Number|Function)</h3>
+
+<p>Return the first value, or first <code>n</code> values.</p>
+
+<h3>Enumerable#last([n]:Number|Function)</h3>
+
+<p>Return the last value, or last <code>n</code> values.</p>
+
+<h3>Enumerable#inGroupsOf(n:Number)</h3>
+
+<p>Return values in groups of <code>n</code>.</p>
+
+<h3>Enumerable#at(i:Number)</h3>
+
+<p>Return the value at the given index.</p>
+
+<h3>Enumerable#value()</h3>
+
+<p>Return the enumerable value.</p>
+
+<h2>License</h2>
+
+<p>MIT</p>
+</article>
+</body>
+</html>

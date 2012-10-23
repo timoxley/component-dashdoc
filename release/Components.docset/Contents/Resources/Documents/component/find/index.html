@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>component/find</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>find</h1>
+
+<p>Find the first matching value in an array.</p>
+
+<h2>Installation</h2>
+
+<pre><code>$ component install component/find
+</code></pre>
+
+<h2>API</h2>
+
+<h3>find(array, fn)</h3>
+
+<p>Find with a function:</p>
+
+<div class="highlight"><pre lang="js">var tobi = find(users, function(u){ return u.name == 'Tobi' });
+</pre></div>
+
+<h3>find(array, string)</h3>
+
+<p>Find with property strings:</p>
+
+<div class="highlight"><pre lang="js">find(users, 'admin');
+</pre></div>
+
+<h3>find(array, object)</h3>
+
+<p>Find with object value matching:</p>
+
+<div class="highlight"><pre lang="js">var users = [];
+users.push({ name: 'Tobi', age: 2, species: 'ferret' });
+users.push({ name: 'Jane', age: 6, species: 'ferret' });
+users.push({ name: 'Luna', age: 2, species: 'cat' });
+
+find(users, { name: 'Jane', age: 6 });
+// => { name: 'Jane', age: 6, species: 'ferret' }
+
+find(users, { name: 'Jane', age: 1 });
+// => undefined
+</pre></div>
+
+<h1>License</h1>
+
+<p>MIT</p>
+</article>
+</body>
+</html>

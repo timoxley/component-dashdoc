@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>component/raf</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>raf</h1>
+
+<p>request animation frame</p>
+
+<h2>Installation</h2>
+
+<pre><code>$ component install component/raf
+</code></pre>
+
+<h2>Example</h2>
+
+<div class="highlight"><pre lang="js">var x = 0;
+var y = 50;
+var canvas = document.querySelector('canvas');
+var ctx = canvas.getContext('2d');
+var raf = require('raf');
+
+function animate() {
+  raf(animate);
+  draw();
+}
+
+var prev = Date.now();
+function draw() {
+  var curr = Date.now();
+  var diff = curr - prev;
+  var p = diff / 16;
+  ctx.clearRect(0, 0, 900, 300);
+  ctx.beginPath();
+  ctx.globalAlpha = .5;
+  ctx.arc(x, y, 10, 0, Math.PI * 2, false);
+  ctx.fill();
+  x += 2;
+  y += Math.sin(x/20) * 5;
+  prev = curr;
+}
+
+animate();
+</pre></div>
+
+<h2>License</h2>
+
+<p>MIT</p>
+</article>
+</body>
+</html>

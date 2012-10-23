@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>component/directionality</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>directionality</h1>
+
+<p>Determines the writing system's <br />  <a href="http://en.wikipedia.org/wiki/Writing_system#Directionality">directionality</a> based on characters tests.</p>
+
+<h2>Installation</h2>
+
+<div class="highlight"><pre lang="">$ component install component/directionality
+</pre></div>
+
+<h2>Example</h2>
+
+<div class="highlight"><pre lang="js">var dir = require('directionality');
+dir('الولايات المتحدة الأمريكية'); // 'rtl'
+dir('Hello world'); // 'ltr'
+</pre></div>
+
+<h2>Methodology</h2>
+
+<p>The decision is made based on the first character of the input string,<br />testing for a range of unicode characters that belong to rtl or ltr<br />languages (see API to learn how to access the regular expressions).</p>
+
+<h2>API</h2>
+
+<h3>directionality(str)</h3>
+
+<p>Returns <code>'rtl'</code> for right-to-left text, and <code>'ltr'</code> for<br />  left-to-right text.</p>
+
+<h3>directionality.regex.ltr</h3>
+
+<p>Access the regular expression of ltr characters.</p>
+
+<h3>directionality.regex.rtl</h3>
+
+<p>Access the regular expression of rtl characters.</p>
+
+<h2>License</h2>
+
+<p>MIT</p>
+</article>
+</body>
+</html>

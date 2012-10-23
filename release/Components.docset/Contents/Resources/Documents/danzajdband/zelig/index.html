@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>danzajdband/zelig</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>zelig</h1>
+
+<p>Classic convolution filters on top of component/convolve</p>
+
+<h2>Available filters</h2>
+
+<h3>Zelig#blur()</h3>
+
+<h3>Zelig#edgeDetect()</h3>
+
+<h3>Zelig#emboss()</h3>
+
+<h3>Zelig#laplace()</h3>
+
+<h3>Zelig#gaussianBlur()</h3>
+
+<h3>Zelig#motionBlur()</h3>
+
+<h3>Zelig#sharpen()</h3>
+
+<h2>Example</h2>
+
+<div class="highlight"><pre lang="js">var zelig = require('zelig');
+var canvas = document.querySelector('canvas');
+var ctx = canvas.getContext('2d');
+
+var img = new Image;
+img.onload = draw;
+img.src = 'maru.jpg';
+
+function draw() {
+  canvas.width = img.width;
+  canvas.height = img.height;
+  ctx.drawImage(img, 0, 0);
+  zelig
+    .emboss()
+    .canvas(canvas);
+}
+</pre></div>
+</article>
+</body>
+</html>

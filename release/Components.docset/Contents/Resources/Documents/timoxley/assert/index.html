@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>timoxley/assert</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>assert</h1>
+
+<p>This module is used for writing unit tests for your applications, you can<br />access it with <code>require('assert')</code>.</p>
+
+<p><code>assert</code> module ported from Node.JS for use as a component in the browser.</p>
+
+<h2>Installation</h2>
+
+<div class="highlight"><pre lang="">$ component install timoxley/assert
+</pre></div>
+
+<h2>Example</h2>
+
+<div class="highlight"><pre lang="js">
+var assert = require('assert')
+
+assert(document.contains(document.body)) // => undefined
+assert.strictEqual(Math.sqrt(9), 3) // => undefined
+assert.strictEqual(Math.sqrt(9), '3') // => AssertionError: 3 === "3"
+
+assert.equal([1, 2], [1, 2]) // => AssertionError: [1,2] == [1,2]
+assert.deepEqual([1, 2], [1, 2]) // => undefined
+</pre></div>
+
+<h2>API</h2>
+
+<p>Note: These docs have been adapted from the same markdown that<br />produces the <a href="http://nodejs.org/docs/v0.8.12/api/assert.html#assert_assert">official node assert documentation</a>.</p>
+
+<h3>assert.fail(actual, expected, message, operator)</h3>
+
+<p>Throws an exception that displays the values for <code>actual</code> and <code>expected</code> separated by the provided operator.</p>
+
+<h3>assert(value, message), assert.ok(value, [message])</h3>
+
+<p>Tests if value is truthy, it is equivalent to <code>assert.equal(true, !!value, message);</code></p>
+
+<h3>assert.equal(actual, expected, [message])</h3>
+
+<p>Tests shallow, coercive equality with the equal comparison operator ( <code>==</code> ).</p>
+
+<h3>assert.notEqual(actual, expected, [message])</h3>
+
+<p>Tests shallow, coercive non-equality with the not equal comparison operator ( <code>!=</code> ).</p>
+
+<h3>assert.deepEqual(actual, expected, [message])</h3>
+
+<p>Tests for deep equality.</p>
+
+<h3>assert.notDeepEqual(actual, expected, [message])</h3>
+
+<p>Tests for any deep inequality.</p>
+
+<h3>assert.strictEqual(actual, expected, [message])</h3>
+
+<p>Tests strict equality, as determined by the strict equality operator ( <code>===</code> )</p>
+
+<h3>assert.notStrictEqual(actual, expected, [message])</h3>
+
+<p>Tests strict non-equality, as determined by the strict not equal operator ( <code>!==</code> )</p>
+
+<h3>assert.throws(block, [error], [message])</h3>
+
+<p>Expects <code>block</code> to throw an error. <code>error</code> can be constructor, regexp or <br />validation function.</p>
+
+<p>Validate instanceof using constructor:</p>
+
+<div class="highlight"><pre lang="js">assert.throws(
+  function() {
+    throw new Error("Wrong value");
+  },
+  Error
+);
+</pre></div>
+
+<p>Validate error message using RegExp:</p>
+
+<div class="highlight"><pre lang="js">assert.throws(
+  function() {
+    throw new Error("Wrong value");
+  },
+  /value/
+);
+</pre></div>
+
+<p>Custom error validation:</p>
+
+<div class="highlight"><pre lang="js ">assert.throws(
+  function() {
+    throw new Error("Wrong value");
+  },
+  function(err) {
+    if ( (err instanceof Error) && /value/.test(err) ) {
+      return true;
+    }
+  },
+  "unexpected error"
+);
+</pre></div>
+
+<h3>assert.doesNotThrow(block, [message])</h3>
+
+<p>Expects <code>block</code> not to throw an error, see assert.throws for details.</p>
+
+<h3>assert.ifError(value)</h3>
+
+<p>Tests if value is not a false value, throws if it is a true value. Useful when<br />testing the first argument, <code>error</code> in callbacks.</p>
+
+<h2>Changes from Node's assert</h2>
+
+<p>Removed <code>deepEqual</code> checks for the <code>Buffer</code> type as it's not native in<br />the browser.</p>
+
+<h2>Credit</h2>
+
+<p>Extracted from <a href="https://github.com/joyent/node/blob/e4cef1a0833e6d677298600e205a142d15639bf2/lib/assert.js">joyent/node master<br />branch</a> </p>
+</article>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>juliangruber/min-wait</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>min-wait</h1>
+
+<p>Through stream that buffers input objects for at least <code>x ms</code> until it emits<br />them merged together.</p>
+
+<p>Useful if you let your users filter data results and only want to start an api<br />request when the user hasn't done anything for 500ms.</p>
+
+<p>Objects with multiple keys immediately trigger a flush because such<br />interactions come from code, not people. Try clicking two checkboxes at once ;)</p>
+
+<h2>Usage</h2>
+
+<div class="highlight"><pre lang="javascript">var Wait = require('min-wait');
+
+src.pipe(wait(500)).pipe(dest);
+
+src.emit('data', {one: 'one'});             // has to wait
+src.emit('data', {two: 'two'});             // has to wait
+src.emit('data', {one: 'foo', bar: 'baz'}); // flush
+</pre></div>
+
+<p><code>dest</code> receives:</p>
+
+<div class="highlight"><pre lang="javascript">{
+  one: 'foo',
+  two: 'two',
+  bar: 'baz'
+}
+</pre></div>
+
+<h2>Installation</h2>
+
+<div class="highlight"><pre lang="bash">$ npm install min-wait
+
+
+<h1>or</h1>
+
+$ component install juliangruber/min-wait
+</pre></div>
+
+<h2>API</h2>
+
+<h3>wait(opts)</h3>
+
+<p>Returns a through stream that buffers data for at least <code>opts.ms</code>.</p>
+
+<p>Possible values for <code>opts</code>:</p>
+
+<ul>
+<li><code>ms</code>: Time to wait at minimum</li>
+<li><code>equal</code>: Treat all input equally and also buffer multi-key objects</li>
+</ul>
+
+<p>If <code>opts</code> is a <strong>Number</strong> it is treated as <code>opts.ms</code>.</p>
+
+<h2>License</h2>
+
+<p>(MIT)</p>
+
+<p>Copyright (c) 2012 &lt;<a href='mailto:julian@juliangruber.com'>julian@juliangruber.com</a>&gt;</p>
+
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy of<br />this software and associated documentation files (the "Software"), to deal in <br />the Software without restriction, including without limitation the rights to<br />use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of<br />the Software, and to permit persons to whom the Software is furnished to do so,<br />subject to the following conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be included in all<br />copies or substantial portions of the Software.</p>
+
+<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR <br />IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS<br />FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR<br />COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER<br />IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN<br />CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
+</article>
+</body>
+</html>

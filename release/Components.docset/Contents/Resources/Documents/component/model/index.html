@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>component/model</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>model</h1>
+
+<p>W.I.P minimalistic extensible model component.</p>
+
+<h2>API</h2>
+
+<h3>model(name)</h3>
+
+<p>Create a new model with the given <code>name</code>.</p>
+
+<div class="highlight"><pre lang="js">var model = require('model');
+var User = model('User');
+</pre></div>
+
+<h3>.attr(name, [meta])</h3>
+
+<p>Define an attribute <code>name</code> with optional <code>meta</code> data object.</p>
+
+<div class="highlight"><pre lang="js">var model = require('model');
+
+var Post = model('Post')
+  .attr('id')
+  .attr('title')
+  .attr('body')
+  .attr('created_at')
+  .attr('updated_at')
+</pre></div>
+
+<p>With meta data used by plugins:</p>
+
+<div class="highlight"><pre lang="js">var model = require('model');
+
+var Post = model('Post')
+  .attr('id', { required: true, type: 'number' })
+  .attr('title', { required: true, type: 'string' })
+  .attr('body', { required: true, type: 'string' })
+  .attr('created_at', { type: 'date' })
+  .attr('updated_at', { type: 'date' })
+</pre></div>
+
+<h3>.validate(fn)</h3>
+
+<p>TODO: validation callback docs</p>
+
+<h3>.use(fn)</h3>
+
+<p>TODO: plugin docs</p>
+
+<h3>.url([path])</h3>
+
+<p>Return base url, or url to <code>path</code>.</p>
+
+<div class="highlight"><pre lang="js">User.url()
+// => "/users"
+
+User.url('add')
+// => "/users/add"
+</pre></div>
+
+<h3>#ATTR()</h3>
+
+<p>"Getter" function generated when <code>Model.attr(name)</code> is called.</p>
+
+<div class="highlight"><pre lang="js">var Post = model('Post')
+  .attr('title')
+  .attr('body')
+
+var post = new Post;
+post.title('Ferrets')
+post.body('Make really good pets')
+</pre></div>
+
+<h3>#ATTR(value)</h3>
+
+<p>"Setter" function generated when <code>Model.attr(name)</code> is called.</p>
+
+<div class="highlight"><pre lang="js">var Post = model('Post')
+  .attr('title')
+  .attr('body')
+
+var post = new Post({ title: 'Cats' });
+
+post.title()
+// => "Cats"
+
+post.title('Ferrets')
+post.title()
+// => "Ferrets"
+</pre></div>
+
+<ul>
+<li>Emits "change" event with <code>(name, value, previousValue)</code>.</li>
+<li>Emits "change ATTR" event with <code>(value, previousValue)</code>.</li>
+</ul>
+
+<div class="highlight"><pre lang="js">post.on('change', function(name, val, prev){
+  console.log('changed %s from %s to %s', name, prev, val)
+})
+
+post.on('change title', function(val, prev){
+  console.log('changed title')
+})
+
+</pre></div>
+
+<h3>#isNew()</h3>
+
+<p>Returns <code>true</code> if the model is unsaved.</p>
+
+<h3>#toJSON()</h3>
+
+<p>Return a JSON representation of the model (its attributes).</p>
+
+<h3>#has(attr)</h3>
+
+<p>Check if <code>attr</code> is non-<code>null</code>.</p>
+
+<h3>#get(attr)</h3>
+
+<p>Get <code>attr</code>'s value.</p>
+
+<h3>#set(attrs)</h3>
+
+<p>Set multiple <code>attrs</code>.</p>
+
+<div class="highlight"><pre lang="js">user.set({ name: 'Tobi', age: 2 })
+</pre></div>
+
+<h3>#changed([attr])</h3>
+
+<p>Check if the model is "dirty" and return an object<br />  of changed attributes. Optionally check a specific <code>attr</code><br />  and return a <code>Boolean</code>.</p>
+
+<h3>#error(attr, msg)</h3>
+
+<p>Define error <code>msg</code> for <code>attr</code>.</p>
+
+<h3>#isValid()</h3>
+
+<p>Run validations and check if the model is valid.</p>
+
+<div class="highlight"><pre lang="js">user.isValid()
+// => false
+
+user.errors
+// => [{ attr: ..., message: ... }]
+</pre></div>
+
+<h3>#url([path])</h3>
+
+<p>Return this model's base url or relative to <code>path</code>:</p>
+
+<div class="highlight"><pre lang="js">var user = new User({ id: 5 });
+user.url('edit');
+// => "/users/5/edit"
+</pre></div>
+
+<h3>#save(fn)</h3>
+
+<p>Save or update and invoke the given callback <code>fn(err)</code>.</p>
+
+<div class="highlight"><pre lang="js">var user = new User({ name: 'Tobi' })
+
+user.save(function(err){
+
+})
+</pre></div>
+
+<p>Emits "save" when complete.</p>
+
+<h3>#destroy([fn])</h3>
+
+<p>Destroy and invoke optional <code>fn(err)</code>.</p>
+
+<p>Emits "destroy" when successfully deleted.</p>
+</article>
+</body>
+</html>

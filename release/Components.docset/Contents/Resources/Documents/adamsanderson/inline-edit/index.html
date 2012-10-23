@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>adamsanderson/inline-edit</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>inline-edit</h1>
+
+<p>Make any element editable.  If the element is already an input it will just be styled to blend in with the page, otherwise it will be made editable, and start firing events as if it were an input.</p>
+
+<p>See the <a href="http://adamsanderson.github.com/inline-edit/">demo</a> for a simple example.</p>
+
+<h2>Installation</h2>
+
+<pre><code>component install adamsanderson/inline-edit
+</code></pre>
+
+<p>See <a href="https://github.com/component/component#component">component</a> for more information.</p>
+
+<h2>API</h2>
+
+<h3>inlineEdit(el)</h3>
+
+<p>Make <code>el</code> editable, and provides an interface similar to a normal input.  <code>change</code> events will be triggered if the content changes, and the content can be accessed either with <code>el.value</code> or <code>el.getAttribute('value')</code>.</p>
+
+<p>Unlike a normal input, these elements will not be submitted with a form post.</p>
+
+<h2>Example</h2>
+
+<pre><code>inlineEdit = require('inline-edit');
+var el = document.getElementById('content');
+inlineEdit(el);
+
+el.addEventListener('change', function(event){ 
+  console.log('Element Changed:', event);
+  console.log('New Value:', event.target.value);
+});
+</code></pre>
+
+<h2>License</h2>
+
+<p>MIT</p>
+
+<hr />
+
+<p>Adam Sanderson - <a href='http://monkeyandcrow.com'>http://monkeyandcrow.com</a></p>
+</article>
+</body>
+</html>

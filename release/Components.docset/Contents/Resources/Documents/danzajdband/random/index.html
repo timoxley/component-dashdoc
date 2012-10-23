@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>danzajdband/random</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>random</h1>
+
+<p>Generate random numbers</p>
+
+<h2>Installation</h2>
+
+<pre><code>$ component install danzajdband/random
+</code></pre>
+
+<h2>Usage</h2>
+
+<div class="highlight"><pre lang="js">var rand = require('random');
+
+console.log(rand()); // Returns a Number between 0 and 1.
+console.log(rand(1)); // Returns a Number between 1 and 2.
+console.log(rand(-6, 38)); // Returns a Number between -6 and 38.
+console.log(rand(7, 19, true)); // Returns a Integer between 7 and 38.
+</pre></div>
+
+<h2>API</h2>
+
+<h3>random(min = 0, max = min + 1, truncate)</h3>
+
+<p>Return a random number between <code>min</code> and <code>max</code>. If truncate is set to <code>true</code> return only integer values.</p>
+
+<h2>License</h2>
+
+<p>MIT</p>
+</article>
+</body>
+</html>

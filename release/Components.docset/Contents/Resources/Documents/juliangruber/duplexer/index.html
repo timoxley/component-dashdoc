@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>juliangruber/duplexer</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>duplexer <a href="http://travis-ci.org/Raynos/duplexer"><img src="https://secure.travis-ci.org/Raynos/duplexer.png" alt="build status" title="" /></a></h1>
+
+<p>Creates a duplex stream</p>
+
+<p>Taken from <a href="https://github.com/dominictarr/event-stream#duplex-writestream-readstream">event-stream</a></p>
+
+<h2>duplex (writeStream, readStream)</h2>
+
+<p>Takes a writable stream and a readable stream and makes them appear as a readable writable stream.</p>
+
+<p>It is assumed that the two streams are connected to each other in some way.</p>
+
+<h2>Example</h2>
+
+<pre><code>var grep = cp.exec('grep Stream')
+
+duplex(grep.stdin, grep.stdout)
+</code></pre>
+
+<h2>Installation</h2>
+
+<p><code>npm install duplexer</code></p>
+
+<p><code>component install juliangruber/duplexer</code></p>
+
+<h2>Tests</h2>
+
+<p><code>make test</code></p>
+
+<h2>Contributors</h2>
+
+<ul>
+<li>Dominictarr</li>
+<li>Raynos</li>
+</ul>
+
+<h2>MIT Licenced</h2>
+</article>
+</body>
+</html>

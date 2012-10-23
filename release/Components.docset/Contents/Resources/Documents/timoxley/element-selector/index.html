@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>timoxley/element-selector</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>Element Selector</h1>
+
+<p>Select DOM elements with the mouse.</p>
+
+<h2>Installation</h2>
+
+<div class="highlight"><pre lang="">$ component install timoxley/element-selector
+</pre></div>
+
+<h2>Example</h2>
+
+<div class="highlight"><pre lang="js">var ElementSelector = require('element-selector');
+var elementSelector = ElementSelector();
+
+</pre></div>
+
+<h2>Options</h2>
+
+<ul>
+<li><a href="#selector">selector</a></li>
+<li><a href="#selectEvent">selectEvent</a></li>
+<li><a href="#selectedClass">selectedClass</a></li>
+<li><a href="#highlightedClass">highlightedClass</a></li>
+<li><a href="#useDefaultStyles">useStyluseDefaultStylese</a></li>
+</ul>
+
+<p><a name="selector" /></p>
+
+<h3>selector</h3>
+
+<p>Only trigger select/highlight events on elements matching this selector.<br />Defaults to <code>body *</code>.</p>
+
+<div class="highlight"><pre lang="js">// Only trigger on paragraphs inside #content
+var elementSelector = ElementSelector({
+  selector: "#content p"
+})
+</pre></div>
+
+<p><a name="selectEvent" /></p>
+
+<h3>selectEvent</h3>
+
+<p>Mouse event to trigger selection. Must be one of <code>click</code>, <code>dblclick</code>,<br /><code>mouseup</code> or <code>mousedown</code>. Defaults to <code>click</code></p>
+
+<div class="highlight"><pre lang="js">// Trigger on 'mousedown' instead of 'click'
+var elementSelector = ElementSelector({
+  selectEvent: "mousedown"
+})
+</pre></div>
+
+<p><a name="selectedClass" /></p>
+
+<h3>selectedClass</h3>
+
+<div class="highlight"><pre lang="js">// elements will get class "editable" when they are highlighted 
+var elementSelector = ElementSelector({
+  highlightedClass: "editable"
+})
+</pre></div>
+
+<p><a name="highlightedClass" /></p>
+
+<h3>highlightedClass</h3>
+
+<div class="highlight"><pre lang="js">// elements will get class "glow" when they are highlighted
+var elementSelector = ElementSelector({
+  highlightedClass: "glow"
+})
+</pre></div>
+
+<p><a name="useDefaultStyles" /></p>
+
+<h3>useDefaultStyles</h3>
+
+<p>Disable this if you wish to disable the default styles.<br />Adds <code>element-selector</code> class to <code>document.body</code> if <code>true</code>.<br />Defaults to <code>true</code>.</p>
+
+<div class="highlight"><pre lang="js">// Disable default styles so you can
+// use custom .selected and .highlighted css.
+var elementSelector = ElementSelector({
+  useDefaultStyles: false
+})
+</pre></div>
+
+<h2>Events</h2>
+
+<p>Events are fired whenever an element's selected or highlighted status<br />changes. Two arguments are passed to the callback: the element that was highlighted<br />or selected, and the original mouse event that triggered the action (if<br />it exists). The second event argument is supplied if you wish to<br />prevent default actions or otherwise query the triggering event.</p>
+
+<p>Events will be one of the following:</p>
+
+<ul>
+<li>select</li>
+<li>deselect</li>
+<li>highlight</li>
+<li>dehighlight</li>
+</ul>
+
+<p>ElementSelector's event API is inherited from<br /><a href="https://github.com/component/emitter">component/emitter</a>.</p>
+
+<h3>Example</h3>
+
+<div class="highlight"><pre lang="js">
+elementSelector.on('select', function(el, event) {
+  event.preventDefault()
+  console.log('element selected', el)
+})
+
+elementSelector.once('dehighlight', function(el) {
+  console.log('element dehighlighted', el)
+})
+
+</pre></div>
+
+<h2>API</h2>
+
+<ul>
+<li><a href="#disable">disable</a></li>
+<li><a href="#enable">enable</a></li>
+</ul>
+
+<p><a name="disable" /></p>
+
+<h3>disable()</h3>
+
+<p>Disables the elementSelector instance. No more events will be fired, other<br />than those to deselect/dehighlight the currently selected/highlighted<br />elements.</p>
+
+<div class="highlight"><pre lang="">  elementSelector.disable()
+</pre></div>
+
+<p><a name="enable" /></p>
+
+<h3>enable()</h3>
+
+<p>Reenables a elementSelector instance.</p>
+
+<div class="highlight"><pre lang="">  elementSelector.enable()
+</pre></div>
+
+<h2>Compatibility</h2>
+
+<p>Only tested in Chrome. Pull request welcome if you get it working in IE.</p>
+
+<h2>License</h2>
+
+<p><a href="http://opensource.org/licenses/mit-license.php">MIT</a></p>
+</article>
+</body>
+</html>

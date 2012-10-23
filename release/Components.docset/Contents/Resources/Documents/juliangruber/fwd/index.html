@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>juliangruber/fwd</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>fwd</h1>
+
+<p>Forward one <code>(emitter|stream)</code>'s events to another -> connect parts of your application whose interface you have no control over.</p>
+
+<p>This is compatible both with the node-core EventEmitter and with <a href="https://github.com/component/emitter">component/emitter</a>.</p>
+
+<h2>Installation</h2>
+
+<div class="highlight"><pre lang="bash">$ component install juliangruber/fwd
+$ npm install fwd
+</pre></div>
+
+<h2>Usage</h2>
+
+<h3>EventEmitter → EventEmitter</h3>
+
+<div class="highlight"><pre lang="javascript">var fwd = require('fwd');
+var Stream = require('stream');
+var EventEmitter = require('events').EventEmitter;
+// or: var EventEmitter = require('emitter')
+
+var src = new EventEmitter();
+var dest = new EventEmitter();
+
+fwd(src, dest);
+
+dest.on('event', function() {
+  // success
+});
+
+src.emit('event');
+</pre></div>
+
+<h3>Stream → EventEmitter</h3>
+
+<div class="highlight"><pre lang="javascript">var src = new Stream();
+src.readable = true;
+var dest = new EventEmitter();
+
+fwd(src, dest, {'data': 'entry'});
+</pre></div>
+
+<h3>EventEmitter → Stream</h3>
+
+<div class="highlight"><pre lang="javascript">var src = new EventEmitter();
+var dest = new Stream();
+dest.writable = true;
+
+fwd(src, dest, 'entry');
+fwd(src, dest, {'wrong': JSON.stringify});
+</pre></div>
+
+<h3>Stream → Stream</h3>
+
+<div class="highlight"><pre lang="javascript">var src = new Stream();
+src.readable = true;
+var dest = new Stream();
+dest.writable = true;
+
+fwd(src, dest, function(data) {
+  return data*2;
+});
+</pre></div>
+
+<h3>Rules</h3>
+
+<p>You can rewrite data on-the-fly:</p>
+
+<div class="highlight"><pre lang="javascript">var src = new EventEmitter();
+var dest = new EventEmitter();
+
+fwd(src, dest, '*');                                // the same as with no 3rd argument
+fwd(src, dest, ['event1', 'event2'])                // only forward event1 and event2
+fwd(src, dest, [{'event1': 'entry'}, '*'])          // forward event1 as entry and everything else
+fwd(src, dest, [{'event1': function(data) {         // forward event1 with it's data doubled 
+  return data*2;
+}}]);
+fwd(src, dest, [{'event1': function(event, data) {  // also rewrite the event name
+  return {
+    event: 'event-foo',
+    data : data*2
+  }
+}}]);
+fwd(src, dest, function(event, data) {              // forward and rewrite everything
+  return {                                          // the same as: {'*': function(){ ... }}
+    event: 'my-'+event,
+    data : JSON.stringify(data)
+  }
+});
+</pre></div>
+
+<h2>API</h2>
+
+<h3>fwd(src, dest)</h3>
+
+<p>Forward all events from <code>src</code> to <code>dest</code>.</p>
+
+<h3>fwd(src, dest, event=string)</h3>
+
+<p>Forward only <code>event</code>.</p>
+
+<h3>fwd(src, dest, events=[string,..])</h3>
+
+<p>Forward only <code>events</code>.</p>
+
+<h3>fwd(src, dest, mapping={from: to})</h3>
+
+<p>Rewrite names and fwd only that. <code>mapping</code> can be in an array to do multiple rewrites at one.</p>
+
+<h3>fwd(src, dest, fn=function)</h3>
+
+<p>Apply <code>fn</code> to</p>
+
+<ul>
+<li><code>(data)</code> and return modified <code>data</code></li>
+<li><code>(event, data)</code> and return <code>{event:'event', data:'data'}</code></li>
+</ul>
+
+<p><code>fn</code> can also appear inside mappings.</p>
+
+<h3>stop()</h3>
+
+<p><code>stop</code> is returned by every <code>fwd</code>-call, so you can stop forwarding. Use this as stream-unpipe which isn't in the stream class yet.</p>
+
+<h2>Tests</h2>
+
+<div class="highlight"><pre lang="bash">$ git clone <a href='https://github.com/juliangruber/fwd.git'>https://github.com/juliangruber/fwd.git</a> && cd fwd
+$ npm install
+$ mocha
+</pre></div>
+
+<h2>License</h2>
+
+<p>Copyright (c) 2012 Julian Gruber &lt;<a href='mailto:julian@juliangruber.com'>julian@juliangruber.com</a>&gt;</p>
+
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
+
+<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
+</article>
+</body>
+</html>

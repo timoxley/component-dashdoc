@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>component/delegate</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>delegate</h1>
+
+<p>Low-level event delegation component.</p>
+
+<h2>Installation</h2>
+
+<pre><code>$ component install component/delegate
+</code></pre>
+
+<h2>Example</h2>
+
+<div class="highlight"><pre lang="js">var delegate = require('delegate');
+var ul = document.querySelector('ul');
+var n = 0;
+
+var fn = delegate.bind(ul, 'li a', 'click', function(e){
+  console.log(e.target);
+  if (++n == 3) {
+    console.log('unbind');
+    delegate.unbind(ul, 'click', fn, false);
+  }
+}, false);
+</pre></div>
+
+<h2>API</h2>
+
+<h3>.bind(el, selector, type, callback, [capture])</h3>
+
+<p>Bind and return a callback which may be passed to <code>.unbind()</code>.</p>
+
+<h3>.unbind(el, type, callback, [capture])</h3>
+
+<p>Unbind.</p>
+
+<h2>License</h2>
+
+<p>MIT</p>
+</article>
+</body>
+</html>

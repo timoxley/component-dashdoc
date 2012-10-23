@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>juliangruber/through</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>through</h1>
+
+<p><a href="http://travis-ci.org/dominictarr/through"><img src="https://secure.travis-ci.org/dominictarr/through.png" alt="build status" title="" /></a></p>
+
+<p>Easy way to create a <code>Stream</code> that is both <code>readable</code> and <code>writable</code>. Pass in optional <code>write</code> and <code>end</code> methods. <code>through</code> takes care of pause/resume logic.<br />Use <code>this.pause()</code> and <code>this.resume()</code> to manage flow.<br />Check <code>this.paused</code> to see current flow state. (write always returns <code>!this.paused</code>)</p>
+
+<p>this function is the basis for most of the syncronous streams in <a href="http://github.com/dominictarr/event-stream">event-stream</a>.</p>
+
+<div class="highlight"><pre lang=" js">var through = require('through')
+
+through(function write(data) {
+    this.emit('data', data)
+    //this.pause() 
+  },
+  function end () { //optional
+    this.emit('end')
+  })
+
+</pre></div>
+
+<p>or, with buffering on pause, use <code>this.queue(data)</code>,<br />data <em>cannot</em> be <code>null</code>. <code>this.queue(null)</code> will emit 'end'<br />when it gets to the <code>null</code> element.</p>
+
+<div class="highlight"><pre lang=" js">var through = require('through')
+
+through(function write(data) {
+    this.queue(data)
+    //this.pause() 
+  },
+  function end () { //optional
+    this.queue(null)
+  })
+
+</pre></div>
+
+<h2>License</h2>
+
+<p>MIT / Apache2</p>
+</article>
+</body>
+</html>

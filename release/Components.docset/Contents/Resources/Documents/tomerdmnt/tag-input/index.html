@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>tomerdmnt/tag-input</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>tag-input</h1>
+
+<p>A <a href="http://github.com/component/component">component</a> that turns a text input element into a pretty tags input.<br />  Enables you to work with any MVC framework using simple events or you can get the tags from the inner model.</p>
+
+<p><img src="https://raw.github.com/tomerdmnt/tag-input/master/screenshot.jpg" alt="Tags Input" title="" /></p>
+
+<h2>Install</h2>
+
+<p><div class="highlight"><pre lang="">    component install tomerdmnt/tag-input<br />  </pre></div></p>
+
+<h2>Example</h2>
+
+<p><div class="highlight"><pre lang=" javascript">    var TagInput = require('tag-input');</p>
+
+<pre><code>var taginput = TagInput(document.getElementById('tags'))
+
+taginput.on('add', function (tag) {
+  console.log(tag + ' added')
+  console.log(taginput.tags())
+})
+
+taginput.on('remove', function (tag) {
+  console.log(tag + ' removed')
+  console.log(taginput.tags())
+})
+</code></pre>
+
+<p></pre></div></p>
+
+<h2>Notes about style</h2>
+
+<p>The pseudo input style is very basic, so you can adjust its looks to your site, You can extend it by adding to taginputContainer class.</p>
+
+<h2>api</h2>
+
+<h3>TagInput(input)</h3>
+
+<p>binds to a text input element</p>
+
+<h3>addtag(tag)</h3>
+
+<p>adds a tag to the tag input from js</p>
+
+<h3>removetag(tag)</h3>
+
+<p>removes a tag from the tag input from js</p>
+
+<h3>event: 'add'</h3>
+
+<p>Called when a tag is added</p>
+
+<h3>event: 'removed'</h3>
+
+<p>Called when a tag is removed`</p>
+</article>
+</body>
+</html>

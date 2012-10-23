@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>tomerdmnt/carousel</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>Carousel</h1>
+
+<p>Simple carousel <a href="http://github.com/component/component">component</a>.<br />  Check out <a href="http://github.com/tomerdmnt/carousel-slide">tomerdmnt/carousel-slide</a> for the same thing with slide transition.</p>
+
+<p><div class="highlight"><pre lang="html">    <div id="myCarousel"><br />      <div>1</div><br />      <div>2</div><br />      <div>3</div><br />    </div><br />  </pre></div></p>
+
+<p><div class="highlight"><pre lang="js">    var Carousel = require('carousel');<br />    var c = Carousel(document.getElementById('myCarousel');</p>
+
+<pre><code>// show next item
+c.next();
+
+// show previous item
+c.prev();
+</code></pre>
+
+<p></pre></div></p>
+
+<h2>Installation</h2>
+
+<pre><code>$ component install tomerdmnt/carousel
+</code></pre>
+
+<h2>API</h2>
+
+<h3>(el)</h3>
+
+<p>Binds to the container element of the carousel.</p>
+
+<h3>next()</h3>
+
+<p>Show the next item. if there is none returns null.</p>
+
+<h3>prev()</h3>
+
+<p>Show the previous item. if there is none returns null.</p>
+
+<h2>License</h2>
+
+<p>MIT</p>
+</article>
+</body>
+</html>

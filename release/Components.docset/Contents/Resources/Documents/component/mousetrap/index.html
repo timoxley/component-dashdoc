@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>component/mousetrap</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>Mousetrap</h1>
+
+<p>Mousetrap is a simple library for handling keyboard shortcuts in Javascript.</p>
+
+<p>It is around <strong>1.6kb</strong> minified and gzipped and <strong>3kb</strong> minified, has no external dependencies, and has been tested in the following browsers:</p>
+
+<ul>
+<li>Internet Explorer 6+</li>
+<li>Safari</li>
+<li>Firefox</li>
+<li>Chrome</li>
+</ul>
+
+<p>It has support for <code>keypress</code>, <code>keydown</code>, and <code>keyup</code> events on specific keys, keyboard combinations, or key sequences.</p>
+
+<p>If you would like to donate to help support Mousetrap development use <a href="https://www.gittip.com/ccampbell">Gittip</a>.</p>
+
+<h2>Getting started</h2>
+
+<ol>
+<li><p>Include mousetrap on your page before the closing <code>&lt;/body&gt;</code> tag</p>
+
+<div class="highlight"><pre lang="html"><script src="/path/to/mousetrap.min.js"></script>
+</pre></div></li>
+<li><p>Add some keyboard events to listen for</p>
+
+<div class="highlight"><pre lang="html"><script>
+    // single keys
+    Mousetrap.bind('4', function() { console.log('4'); });
+    Mousetrap.bind("?", function() { console.log('show shortcuts!'); });
+    Mousetrap.bind('esc', function() { console.log('escape'); }, 'keyup');
+
+
+<pre><code>// combinations
+Mousetrap.bind('command+shift+K', function() { console.log('command shift k'); });
+
+
+// map multiple combinations to the same callback
+Mousetrap.bind(['command+k', 'ctrl+k'], function() {
+    console.log('command k or control k');
+
+
+<pre><code>// return false to prevent default browser behavior
+// and stop event from bubbling
+return false;
+</code></pre>
+
+});
+
+
+// gmail style sequences
+Mousetrap.bind('g i', function() { console.log('go to inbox'); });
+Mousetrap.bind('* a', function() { console.log('select all'); });
+
+
+// konami code!
+Mousetrap.bind('up up down down left right left right b a enter', function() {
+    console.log('konami code');
+});
+</code></pre>
+
+</script>
+</pre></div></li>
+</ol>
+
+<h2>Why Mousetrap?</h2>
+
+<p>There are a number of other similar libraries out there so what makes this one different?</p>
+
+<ul>
+<li>There are no external dependencies, no framework is required</li>
+<li>You are not limited to <code>keydown</code> events (You can specify <code>keypress</code>, <code>keydown</code>, or <code>keyup</code> or let Mousetrap choose for you).</li>
+<li>You can bind key events directly to special keys such as <code>?</code> or <code>*</code> without having to specify <code>shift+/</code> or <code>shift+8</code> which are not consistent across all keyboards</li>
+<li>It works with international keyboard layouts</li>
+<li>You can bind Gmail like key sequences in addition to regular keys and key combinations</li>
+<li>You can programatically trigger key events with the <code>trigger()</code> method</li>
+<li>It works with the numeric keypad on your keyboard</li>
+<li>The code is well documented/commented</li>
+</ul>
+
+<h2>Documentation</h2>
+
+<p>Full documentation can be found at <a href='http://craig.is/killing/mice'>http://craig.is/killing/mice</a></p>
+</article>
+</body>
+</html>

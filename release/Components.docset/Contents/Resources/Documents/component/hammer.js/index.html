@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>component/hammer.js</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>Hammer.js</h1>
+
+<h2>A javascript library for multi-touch gestures</h2>
+
+<blockquote>
+  <p>I told you, homeboy /<br />You <em>CAN</em> touch this /<br />Yeah, that's how we living and you know /<br />You <em>CAN</em> touch this</p>
+</blockquote>
+
+<p>Hammer.js is a javascript library that can be used to control gestures on touch devices. It supports the following gestures:</p>
+
+<ul>
+<li>Tap</li>
+<li>Double tap</li>
+<li>Hold</li>
+<li>Drag</li>
+<li>Swipe</li>
+<li>Transform (pinch)</li>
+</ul>
+
+<h2>Demo's</h2>
+
+<blockquote>
+  <p>While it's rollin', hold on /<br />Pump a little bit and let 'em know it's goin' on /<br />Like that, like that</p>
+</blockquote>
+
+<p>We've created some demo's to show you the immense power of hammer.js:</p>
+
+<h3>Basic demo</h3>
+
+<p>A simple demo that demonstrates that hammer.js works and is able to recognize gestures. We output the gestures that are recognized. <a href="http://eightmedia.github.com/hammer.js/demo/">Check it out</a></p>
+
+<h3>Slideshow</h3>
+
+<p>A slideshow that uses hammer.js to switch slides. Note that the drag event in the slideshow is non-blocking for the scrolling of the page. <a href="http://eightmedia.github.com/hammer.js/slideshow/">Check it out</a></p>
+
+<h3>Scroll content</h3>
+
+<p>A touch-scrollable div. <a href="http://eightmedia.github.com/hammer.js/scroll/">Check it out</a></p>
+
+<h3>Drag</h3>
+
+<p>Move boxes around. <a href="http://eightmedia.github.com/hammer.js/drag/">Check it out</a></p>
+
+<h3>Color traces</h3>
+
+<p>We use hammer.js to generate beautiful traces with colorful balls. Balls! <a href="http://eightmedia.github.com/hammer.js/draw/">Check it out</a></p>
+
+<h3>Pinch to zoom</h3>
+
+<p>We use hammer.js to zoom in and out on an image by pinching. <a href="http://eightmedia.github.com/hammer.js/zoom/">Check it out</a><br />Also take a look at the demo of Maros Hluska <a href="http://eightmedia.github.com/hammer.js/zoom/index2.html">Check it out</a></p>
+
+<h3>Momentum</h3>
+
+<p>Simulate the drag/throw experience on iOS/Android. <a href="http://eightmedia.github.com/hammer.js/momentum/">Try it</a></p>
+
+<h3>Sites using Hammer.js</h3>
+
+<p><a href="http://www.eight.nl">Eight Media</a></p>
+
+<p>Want to add your site? Contact me at <a href="http://www.twitter.com/jorikdelaporik">Twitter</a></p>
+
+<h2>Documentation</h2>
+
+<blockquote>
+  <p>So wave your hands in the air /<br />Bust a few moves /<br />Run your fingers through your hair</p>
+</blockquote>
+
+<p>A step by step guide on how to use hammer.js:</p>
+
+<ul>
+<li><a href="https://github.com/EightMedia/hammer.js/zipball/master">Download the hammer javascript</a> or clone the latest version from our github repository:</li>
+</ul>
+
+<p><div class="highlight"><pre lang="$ git clone <a href='mailto:git@github.com'>git@github.com</a>:eightmedia/hammer.js.git```"></p>
+
+<ul>
+<li>Import jquery and import hammer.js in your project:</li>
+</ul>
+
+<p></pre></div><script src="http://eightmedia.github.com/hammer.js/hammer.js"></script><div class="highlight"><pre lang=""></p>
+
+<ul>
+<li>Hammertime! Bind hammer to a container element:</li>
+</ul>
+
+<p></pre></div>var hammer = new Hammer(document.getElementById("container"));<div class="highlight"><pre lang=""><br />Now, on every gesture that is performed on the container element, you'll receive a callback object with information on the gesture.</p>
+
+<pre><code>hammer.ondragstart = function(ev) { };
+hammer.ondrag = function(ev) { };
+hammer.ondragend = function(ev) { };
+hammer.onswipe = function(ev) { };
+
+hammer.ontap = function(ev) { };
+hammer.ondoubletap = function(ev) { };
+hammer.onhold = function(ev) { };
+
+hammer.ontransformstart = function(ev) { };
+hammer.ontransform = function(ev) { };
+hammer.ontransformend = function(ev) { };
+
+hammer.onrelease = function(ev) { };
+</code></pre>
+
+<p>A jQuery plugin is also available and can be found in this repos.</p>
+
+<p></pre></div><script src="http://eightmedia.github.com/hammer.js/jquery.hammer.js"></script>```</p>
+
+<pre><code>$("#element")
+   .hammer({
+        // options...
+   })
+   .bind("tap", function(ev) {
+        console.log(ev);
+   });
+</code></pre>
+
+<p><a href="https://twitter.com/remotesynth">Brian Rinaldi</a> has written a blogpost about Hammer.js, it explains things a bit more and has a nice looking demo. <a href="http://www.remotesynthesis.com/post.cfm/add-gesture-support-to-your-web-application-via-hammer-js">Read it here.</a></p>
+
+<h3>The Hammer callback objects:</h3>
+
+<p>All gestures return:</p>
+
+<ul>
+<li>originalEvent: The original DOM event.</li>
+<li>position: An object with the x and y position of the gesture (e.g. the position of a tap and the center position of a transform).</li>
+<li>touches: An array of touches, containing an object with the x and the y position for every finger.</li>
+</ul>
+
+<p>Besides these, the Transform gesture returns:</p>
+
+<ul>
+<li>scale: The distance between two fingers since the start of an event as a multiplier of the initial distance. The initial value is 1.0. If less than 1.0 the gesture is pinch close to zoom out. If greater than 1.0 the gesture is pinch open to zoom in.</li>
+<li>rotation: A delta rotation since the start of an event in degrees where clockwise is positive and counter-clockwise is negative. The initial value is 0.0.</li>
+</ul>
+
+<p>The Drag and Swipe gesture also returns:</p>
+
+<ul>
+<li>angle: The angle of the drag movement, where right is 0 degrees, left is -180 degrees, up is -90 degrees and down is 90 degrees. <a href="http://paperjs.org/tutorials/geometry/vector-geometry/resources/Angles.gif">This picture makes this approach somewhat clearer</a></li>
+<li>direction: Based on the angle, we return a simplified direction, which can be either up, right, down or left.</li>
+<li>distance: The distance of the drag in pixels.</li>
+<li>distanceX: The distance on the X axis of the drag in pixels.</li>
+<li>distanceY: The distance on the Y axis of the drag in pixels.</li>
+</ul>
+
+<p>In addition to this the Transform and Drag gestures return start and end events.</p>
+
+<h3>Defaults</h3>
+
+<p>|                    | default |                           |<br />|:-----------------------------------|:--------------------------|-----------------|<br />| prevent_default    | false         | when true all default browser actions are blocked. For instance if you want to drag vertically, try setting this to true. |<br />| css_hacks          | true          | css userSelect, touchCallout, userDrag, tapHighlightColor are added |<br />| drag               | true          |                           |<br />| drag_vertical      | true          |                           |<br />| drag_horizontal    | true          |                           |<br />| drag_min_distance  | 20            | pixels                    |<br />| swipe              | true          |                           |<br />| swipe_time         | 200           | max ms of movement        |<br />| swipe_min_distance | 20            | minimal movement          |<br />| transform          | true          |                           |<br />| scale_treshold     | 0.1           | how much scaling needs to be done before firing the transform event | <br /><br />| rotation_treshold  | 15            | degrees before firing the transform event | <br />| tap                | true          |                           |<br />| tap_double         | true          |                           |<br />| tap_max_interval   | 300           | ms                          |<br />| tap_double_distance:| 20           | pixels, distance between taps  |<br />| hold               | true          |                           |<br />| hold_timeout       | 500           | ms                          |</p>
+
+<h3>Compatibility</h3>
+
+<p>|                                   | Tap | Double Tap | Hold | Drag | Transform |<br />|:----------------------------------|:----|:-----------|:-----|:-----|:----------|<br />| <strong>Windows</strong>                                                                    |<br />| Internet Explorer 8               | X   | X          | X    | X    |           |<br />| Internet Explorer 9               | X   | X          | X    | X    |           |<br />|                                                                                |<br />| <strong>OSX</strong>                                                                        |<br />| Firefox 11                        | X   | X          | X    | X    |           |<br />| Opera 11                          | X   | X          | X    | X    |           |<br />| Chrome 16                         | X   | X          | X    | X    |           |<br />| Safari 5                          | X   | X          | X    | X    |           |<br />|                                                                                |<br />| <strong>iOS</strong>                                                                        |<br />| iPad iOS 5                        | X   | X          | X    | X    | X         |<br />| iPhone iOS 5                      | X   | X          | X    | X    | X         |<br />|                                                                                |<br />| <strong>Android 4</strong>                                                                  |<br />| Default browser                   | X   | X          | X    | X    | X         |<br />|                                                                                |<br />| <strong>Android 3</strong>                                                                  |<br />| Default browser                   | X   | X          | X    | X    | X         |<br />|                                                                                |<br />| <strong>Android 2</strong>                                                                  |<br />| Default browser                   | X   | X          | X    | X    |           |<br />| Firefox 10                        | X   | X          | X    | X    |           |<br />| Opera Mobile 12                   | X   | X          | X    | X    |           |<br />| Opera Mini 6.5                    | X   |            |      |      |           |<br />| Opera Mini 7.0                    | X   |            |      |      |           |<br />|                                                                                |<br />| <strong>Others</strong>                                                                     |<br />| Windows Phone 7.5                 | X   |            |      |      |           |<br />| Kindle Fire                       | X   | X          | X    | X    | X         |<br />| Nokia N900 - Firefox 1.1          | X   |            |      |      |           |</p>
+
+<p>On a desktop browser the mouse can be used to simulate touch events with one finger.<br />On Android 2 (and 3?) doesn't support multi-touch events, so there's no transform callback on these Android versions.<br />Firefox 1.1 (Nokia N900) and Windows Phone 7.5 doesnt support touch events, and mouse events are badly supported.</p>
+
+<p>Not all gestures are supported on every device. This matrix shows the support we have tested. This is ofcourse far from extensive.<br />If you've tested hammer.js on a different device, please let us know.</p>
+
+<h2>Further notes</h2>
+
+<p>Created by <a href="http://twitter.com/jorikdelaporik">Jorik Tangelder</a> and developed further by everyone at <a href="http://www.eight.nl/">Eight Media</a> in Arnhem, the Netherlands.</p>
+
+<p>Add your feature suggestions and bug reports on <a href="http://github.com/eightmedia/hammer.js/issues">Github</a>.</p>
+
+<p>We recommend listening to <a href="http://soundcloud.com/eightmedia/hammerhammerhammer">this loop</a> while using hammer.js.</p>
+</article>
+</body>
+</html>

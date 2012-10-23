@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>timoxley/backbone-view</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>backbone-view</h1>
+
+<p>Backbone View <a href="https://github.com/component/component/wiki/Components">Component</a></p>
+
+<h2>Installation</h2>
+
+<pre><code>$ component install timoxley/backbone-view
+</code></pre>
+
+<h2>Example</h2>
+
+<div class="highlight"><pre lang="js">
+var BackboneView = require('backbone-view')
+
+var DocumentRow = BackboneView.extend({
+  tagName: "li",
+  className: "document-row",
+  events: {
+    "click .icon":          "open",
+    "click .button.edit":   "openEditDialog",
+    "click .button.delete": "destroy"
+  },
+  render: function() {
+    ...
+  }
+});
+
+</pre></div>
+
+<h2>API</h2>
+
+<p>See documentation for <a href="http://backbonejs.org/#View">Backbone.View</a></p>
+
+<h2>Roadmap</h2>
+
+<p>Currently, this component depends on <a href="https://github.com/component/jquery">component/jquery</a>,<br /><a href="https://github.com/component/underscore">component/underscore</a><br /> and<br /><a href="https://github.com/timoxley/backbone-events">timoxley/backbone-events</a>. In future I<br />would like to phase out fat dependencies like these for more focussed components<br />such as <a href="https://github.com/component/dom">component/dom</a>,<br /><a href="https://github.com/component/inherit">component/inherit</a> and<br /><a href="https://github.com/component/emitter">component/emitter</a>.</p>
+
+<h2>License</h2>
+
+<p><a href="https://github.com/timoxley/backbone-view/blob/master/LICENSE">MIT</a></p>
+</article>
+</body>
+</html>
