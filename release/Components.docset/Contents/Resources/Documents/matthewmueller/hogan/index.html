@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>matthewmueller/hogan</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>hogan</h1>
+
+<p>hogan.js as a component.</p>
+
+<h2>Installation</h2>
+
+<pre><code>$ component install matthewmueller/hogan
+</code></pre>
+
+<h2>Example</h2>
+
+<div class="highlight"><pre lang="js">var hogan = require('hogan'),
+    obj = { name : 'matt', age : 23 }
+    str = 'hi my name is {{name}}, I am {{age}} years old.';
+
+// Compile the function
+var tpl = hogan.compile(str);
+tpl(obj); // => hi my name is matt, I am 23 years old.'
+
+// Or.. compile and render immediately
+hogan(str, obj);
+
+</pre></div>
+
+<h2>API</h2>
+
+<h3>hogan(str, [obj], [opts])</h3>
+
+<p>Compile and render <code>str</code> given the context <code>obj</code>. Use <code>opts</code> to pass options directly into the hogan compiler.</p>
+
+<h3>hogan#compile(str, [opts])</h3>
+
+<p>Compile a mustache <code>str</code>. Optional <code>opts</code> to pass optiosn directly to the hogan compiler. Return a template function which you can invoke.</p>
+
+<div class="highlight"><pre lang="js">var tpl = hogan.compile('Hello from {{location}}!');
+tpl('Kyoto, Japan'); // Hello from Kyoto, Japan!
+</pre></div>
+
+<h2>License</h2>
+
+<p>MIT</p>
+</article>
+</body>
+</html>

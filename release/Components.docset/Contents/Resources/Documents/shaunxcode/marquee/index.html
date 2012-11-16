@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>shaunxcode/marquee</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>marquee</h1>
+
+<p>marquee selection component. </p>
+
+<h2>Arity</h2>
+
+<div class="highlight"><pre lang="">marquee(
+    surface [selector for element where selection takes palce], 
+    selectable [selector for selectable items], 
+    selectedClass [class to apply to items as they are selected])
+</pre></div>
+
+<h2>Using</h2>
+
+<div class="highlight"><pre lang="">var marquee = require("marquee");
+marquee("body", "> .widget", "lit")
+    .on("itemsSelected", function(items) {
+        console.log(items);
+});
+</pre></div>
+
+<p>emits "itemsSelected" event with jquery object containing selected items. </p>
+</article>
+</body>
+</html>

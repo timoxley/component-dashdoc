@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>ForbesLindesay/promises-a</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<p><a href="http://travis-ci.org/ForbesLindesay/promises-a"><img src="https://secure.travis-ci.org/ForbesLindesay/promises-a.png" alt="Build Status" title="" /></a></p>
+
+<h1>promises-a</h1>
+
+<p>A bare bones implementation of Promises/A intended to pass all <a href="https://github.com/domenic/promise-tests">promise-tests</a> while being as small as possible.</p>
+
+<p>This is intended to serve as a base for you to build your own promises libraries, which would typically be expected to provide all sorts of useful helpers. Promises created by this library (or any library based off of this) should be compatable with such helpers, but helpers won't ever be included in this library.</p>
+
+<h2>Installation</h2>
+
+<p>Client:</p>
+
+<pre><code>$ component install ForbesLindesay/promises-a
+</code></pre>
+
+<p>Server:</p>
+
+<pre><code>$ npm install promises-a
+</code></pre>
+
+<p>Alternatively you can download it from the <a href="https://github.com/ForbesLindesay/promises-a/downloads">downloads area</a> and reference it with a script tag:</p>
+
+<div class="highlight"><pre lang="html">
+<script src="promises.min.js"></script>
+
+</pre></div>
+
+<p>then just refer to it as the global: <code>promises</code></p>
+
+<h2>Usage</h2>
+
+<p>Here is an example of how to create a promises function to wrap a low level api, and provide a timeout</p>
+
+<div class="highlight"><pre lang="javascript">var promise = require('promises-a');
+function loadDataAsync(id, timeout) {
+  timeout = timeout == null ? 500 : timeout;
+  var def = promise();
+
+  callLowLevelAPI(id, function (err, res) {
+    if (err) return def.reject(err);
+    def.resolve(res);
+  });
+
+  if (timeout) {
+    setTimeout(function () {
+      def.reject(new Error('Operation Timed Out (' + timeout + 'ms)'));
+    }, timeout);
+  }
+
+  return def.promise;
+}
+</pre></div>
+
+<p>Because the promise can only be resolved once, the rejection will be ignored if the operation is successful within the timeout.  A timeout of 0 will also be treated as infinite.</p>
+
+<h2>API</h2>
+
+<h3>promise()</h3>
+
+<p>Return a new <code>deferred</code>.</p>
+
+<h3>deferred</h3>
+
+<h4>deferred#promise</h4>
+
+<p>Get the promise represented by the deferred.  This is just an object with a function called then.</p>
+
+<h4>deferred#fulfill(value)</h4>
+
+<p>Put the promise in a resolved state and fulfill it with the value provided.</p>
+
+<h4>deferred#reject(error)</h4>
+
+<p>Put the promise in a resolved state and reject it with the error provided.</p>
+
+<h3>promise</h3>
+
+<h4>promise#then(callback, errback, progback)</h4>
+
+<p>You can call then with three optional args.  The callback is called when the promise is fulfilled, the errback is called when the promise is rejected.  At the moment, progback is ignored.  Calls to then can be chained, and you can return a promise from the callback, which will be resolved before being passed to the chained then.</p>
+
+<h2>License</h2>
+
+<p>MIT</p>
+</article>
+</body>
+</html>

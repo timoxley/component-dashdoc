@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>timoxley/get</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>get</h1>
+
+<p>Create functions for use with functional methods like  <code>map</code>, <code>reduce</code>,<br /><code>filter</code>, etc. that get object properties without need of anonymous wrappers.</p>
+
+<h2>Installation</h2>
+
+<h3>Browser</h3>
+
+<pre><code>$ component install timoxley/get
+</code></pre>
+
+<p>See <a href="https://github.com/component/component/">Components</a></p>
+
+<h3>Node</h3>
+
+<pre><code>$ npm install timoxley-get
+</code></pre>
+
+<p><em>Sorry for namespaced package, all good names taken.</em></p>
+
+<h2>Examples</h2>
+
+<h3>Before:</h3>
+
+<p>Horrible anonymous wrapper is required to map the <code>length</code> property.</p>
+
+<div class="highlight"><pre lang="js">['apple', 'banana', 'pineapple'].map(function(str) {
+ return str.length
+})
+// => [5, 6, 9]
+</pre></div>
+
+<h3>After</h3>
+
+<p>Wow. Much cleaner.</p>
+
+<div class="highlight"><pre lang="js">['apple', 'banana', 'pineapple'].map(get('length'))
+// => [5, 6, 9]
+</pre></div>
+
+<h3>Use <code>get</code> to evaluate methods</h3>
+
+<div class="highlight"><pre lang="js">// Calls the 'italics' method on each supplied item
+['apple', 'banana', 'pineapple'].map(get('italics'))
+// => ['<i>apple</i>', '<i>banana</i>', '<i>pineapple</i>']
+</pre></div>
+
+<h3>Use <code>get</code> to evaluate methods, passing in arguments</h3>
+
+<div class="highlight"><pre lang="js">// Calls the 'substr' method, passing in arguments
+['apple', 'banana', 'pineapple'].map(get('substr', 0, 1))
+// => ['a', 'b', 'p']
+</pre></div>
+
+<h2>Convoluted Description:</h2>
+
+<p>Takes a property name, <code>prop</code> along with any number of additional<br />arguments, and returns a function, that takes an object of any type, and<br />returns the value of <code>prop</code> on that object. If <code>prop</code> is a method, the<br />returned value with be the result of evaluating that method, passing in<br />the the additional arguments.</p>
+
+<p>Turns out this is hard to describe.</p>
+
+<h2>License</h2>
+
+<p>MIT</p>
+</article>
+</body>
+</html>

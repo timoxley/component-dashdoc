@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>btknorr/bootbox</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>Bootbox - Twitter Bootstrap powered alert, confirm and flexible dialog boxes</h1>
+
+<p>Please see <a href='http://paynedigital.com/bootbox'>http://paynedigital.com/bootbox</a> for full usage instructions, or head over to <a href='http://bootboxjs.com'>http://bootboxjs.com</a> for<br />a demo page (<a href="https://github.com/makeusabrew/bootbox/tree/gh-pages">please feel free to improve it!</a>)</p>
+
+<h2>Contact</h2>
+
+<p>The easiest thing is to <a href="http://twitter.com/makeusabrew">find me on twitter</a>: <a href="http://twitter.com/makeusabrew">@makeusabrew</a></p>
+
+<h2>Submitting Pull Requests</h2>
+
+<ul>
+<li>Please ensure that the test suite passes before submitting a PR</li>
+<li>If you've added new functionality, <strong>please</strong> include tests which validate its behaviour</li>
+</ul>
+
+<h2>Running Tests</h2>
+
+<ul>
+<li>Tests live in tests/test.*.js and are run using <a href="http://visionmedia.github.com/mocha/">Mocha</a> - to run simply open tests/index.html in your browser.</li>
+<li>Alternatively, tests can be run headlessly using <a href="http://metaskills.net/mocha-phantomjs/">mocha-phantomjs</a>:
+<code>
+phantomjs tests/vendor/mocha-phantomjs/lib/mocha-phantomjs.coffee tests/index.html
+</code></li>
+</ul>
+
+<h2>Versioning</h2>
+
+<p><a href="http://semver.org/">SemVer</a> has now been adopted as of 1.0.0</p>
+
+<h2>Latest Release: 2.4.2</h2>
+
+<ul>
+<li>revert <code>backdrop</code> default value to 'static' instead of <code>true</code> to prevent background clicks dismissing dialogs (GH-55)</li>
+</ul>
+
+<h3>2.4.1</h3>
+
+<ul>
+<li>fix <code>backdrop</code> when supplied as an argument to <code>bootbox.dialog</code></li>
+<li>fix incorrect README version</li>
+</ul>
+
+<h3>2.4.0</h3>
+
+<ul>
+<li>add <code>bootbox.backdrop(bool)</code> method (@gucki)</li>
+<li>add default parameter option to <code>bootbox.prompt</code> (@pzgz)</li>
+</ul>
+
+<h3>2.3.3</h3>
+
+<ul>
+<li>add inline <code>overflow: hidden</code> CSS property (GH-46)</li>
+<li>move license info to separate hosted file to reduce file size</li>
+</ul>
+
+<h3>2.3.2</h3>
+
+<ul>
+<li>Change button href attributes to <code>javascript:;</code> (@joshnesbitt)</li>
+<li>Explicitly <code>window.jQuery</code> through to <code>Bootbox</code> object (@nuegon)</li>
+</ul>
+
+<h3>2.3.1</h3>
+
+<ul>
+<li>Ensure bootbox.prompt() gives focus to input, disable input autocomplete</li>
+</ul>
+
+<h3>2.3.0</h3>
+
+<ul>
+<li>Added bootbox.prompt() to mimic native prompt() method</li>
+<li>Added Russian locale (#27)</li>
+</ul>
+
+<h3>2.2.0</h3>
+
+<ul>
+<li>Allowed button callbacks to explicitly return false to prevent dialog from closing (thanks @benoit-ponsero)</li>
+<li>Added version number to header comments (#26)</li>
+</ul>
+
+<h3>2.1.2</h3>
+
+<ul>
+<li>Added close button to re-scoped click handler (thanks @SeanMcGee and @kentbrew)</li>
+</ul>
+
+<h3>2.1.1</h3>
+
+<ul>
+<li>Fixed incorrect button click handler selector (thanks FGRibreau)</li>
+</ul>
+
+<h3>2.1.0</h3>
+
+<ul>
+<li>Added support for Bootstrap's Glyphicons via the <code>icon</code> option</li>
+<li>Added inline license information into bootbox.js and bootbox.min.js</li>
+<li>Tidied up source a little</li>
+</ul>
+
+<h3>2.0.1</h3>
+
+<ul>
+<li>Removed dummy Google Closure Compiler method from minified library (thanks j0k3r!)</li>
+</ul>
+
+<h3>2.0.0</h3>
+
+<ul>
+<li>Updated Bootstrap dependency from 1.4 to 2.0</li>
+<li>Class definitions now require <code>btn-</code> prefix as per Bootstrap 2.0</li>
+<li>Added Brazilian locale</li>
+<li>Added <code>animate</code> dialog option</li>
+<li>Added <code>bootbox.animate(bool)</code> option to set default animation preference</li>
+<li>Animated dialogs now rely on <code>bootstrap-transitions.js</code> as required by Bootstrap 2.0</li>
+</ul>
+
+<h3>1.1.2</h3>
+
+<ul>
+<li>Added licensing information to README</li>
+</ul>
+
+<h4>1.1.1</h4>
+
+<ul>
+<li>Updated german locale</li>
+</ul>
+
+<h4>1.1.0</h4>
+
+<ul>
+<li>Secondary option of two-button dialog no longer has 'danger' class</li>
+<li>New bootbox.modal() method for generic non-dialog popups</li>
+<li>Allow jQuery objects to be passed as main dialog argument</li>
+</ul>
+
+<h2>License</h2>
+
+<p>(The MIT License)</p>
+
+<p>Copyright (C) 2011-2012 by Nick Payne <a href="&#x6D;&#97;&#x69;&#x6C;t&#111;:&#110;&#105;&#99;&#x6B;&#64;ku&#x72;&#97;&#105;&#46;&#99;&#111;.&#x75;&#107;">&#110;&#105;&#99;&#x6B;&#64;ku&#x72;&#97;&#105;&#46;&#99;&#111;.&#x75;&#107;</a> </p>
+
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy<br />of this software and associated documentation files (the "Software"), to deal<br />in the Software without restriction, including without limitation the rights<br />to use, copy, modify, merge, publish, distribute, sublicense, and/or sell<br />copies of the Software, and to permit persons to whom the Software is<br />furnished to do so, subject to the following conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be included in<br />all copies or substantial portions of the Software.</p>
+
+<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR<br />IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,<br />FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE<br />AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER<br />LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,<br />OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN<br />THE SOFTWARE</p>
+</article>
+</body>
+</html>

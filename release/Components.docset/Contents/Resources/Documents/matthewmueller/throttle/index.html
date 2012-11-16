@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>matthewmueller/throttle</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>throttle</h1>
+
+<p>Underscore's <a href="http://underscorejs.org/#throttle">throttle</a> as a component.</p>
+
+<p>Useful for rate-limiting events that occur faster than you can keep up with.</p>
+
+<h2>Installation</h2>
+
+<pre><code>$ component install matthewmueller/throttle
+</code></pre>
+
+<h2>Example</h2>
+
+<div class="highlight"><pre lang="js">var throttle = require('throttle');
+
+window.onscroll = throttle(scroll, 100);
+
+function scroll() {
+  console.log('y', window.scrollY);
+}
+</pre></div>
+
+<h2>API</h2>
+
+<h3>throttle(fn, wait)</h3>
+
+<p>Creates and returns a new, throttled version of the passed function, that, when invoked repeatedly, will only actually call the original function at most once per every wait milliseconds.</p>
+
+<h2>License</h2>
+
+<p>MIT</p>
+</article>
+</body>
+</html>

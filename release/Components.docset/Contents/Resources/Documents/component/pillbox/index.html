@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>component/pillbox</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>Pillbox</h1>
+
+<p>Pillbox input component, a fork of <a href="https://github.com/tomerdmnt/tag-input">tomerdmnt/tag-input</a>.</p>
+
+<p><img src="http://f.cl.ly/items/0S262y000s1y441m0Z1l/Screen%20Shot%202012-10-12%20at%205.25.16%20PM.png" alt="Tags Input" title="" /></p>
+
+<h2>Install</h2>
+
+<div class="highlight"><pre lang="">$ component install component/pillbox
+</pre></div>
+
+<h2>Example</h2>
+
+<div class="highlight"><pre lang=" javascript">var Pillbox = require('pillbox');
+
+var input = TagInput(document.getElementById('tags'))
+
+input.on('add', function(tag){
+  console.log(tag + ' added');
+});
+
+input.on('remove', function(tag){
+  console.log(tag + ' removed');
+});
+</pre></div>
+
+<h2>Events</h2>
+
+<ul>
+<li><code>add</code> (tag)</li>
+<li><code>remove</code> (tag)</li>
+</ul>
+
+<h2>API</h2>
+
+<h3>Pillbox#add(tag)</h3>
+
+<p>Add <code>tag</code> string if it does not already exist.</p>
+
+<h3>Pillbox#remove(tag)</h3>
+
+<p>Remove <code>tag</code> string if it exists.</p>
+
+<h3>Pillbox#values()</h3>
+
+<p>Return an array of the tags.</p>
+
+<h1>License</h1>
+
+<p>MIT</p>
+</article>
+</body>
+</html>

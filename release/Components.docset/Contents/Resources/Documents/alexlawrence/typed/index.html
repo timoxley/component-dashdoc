@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>alexlawrence/typed</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>typed</h1>
+
+<p>Static typing library for JavaScript. Works in Node.js and in most browsers.<br />Official page and live examples: <a href='http://alexlawrence.github.com/typed'>http://alexlawrence.github.com/typed</a></p>
+
+<h2>Static typing at runtime</h2>
+
+<p>typed provides static typing for function arguments at runtime without any compilation steps.<br />It works with native types (Boolean, Number, String, etc.), global available custom types and so called structures <br />(similar to interfaces, named after destructuring).<br />Just add type declaration comments to your arguments and wrap your functions inside the <strong>typed()</strong> function.</p>
+
+<div class="highlight"><pre lang="javascript">var Greeter = typed(function(greeting /*:String*/) {
+  this.greeting = greeting;
+});
+
+Greeter.prototype.greet = function() {
+  return "Hello, " + this.greeting;
+};
+
+var greeter = new Greeter("world");
+
+console.log(greeter.greet());
+</pre></div>
+
+<h2>How it works</h2>
+
+<p>typed consists of two parts: argument type parsing and runtime argument type checking. The built-in parsers (comment, suffix and no parser) search the source code of the passed functions for type declarations. By default the <strong>comment parser</strong> is used. Unfortunately some JavaScript environments like Firefox and IE7 do not provide the original code comments when reading a function's source code. However this does not result in any error. typed simply won't perform any type checking in un.</p>
+
+<h2>Alternative formats</h2>
+
+<p>If the argument comments don´t work for you can also use the <strong>suffix parser</strong> which searches in argument names for type suffixes. Another option is to use no parser and to provide the type information manually by populating the <strong>types</strong> array of a typed function. Look at the advanced examples to see the usage of these formats.</p>
+
+<h2>Performance and production environments</h2>
+
+<p>Since the type parsing and type checking is performed at runtime your code will obviously run a bit slower compared to not using typed. Alternatively, you can perform type checking only during development and turn typed off for production environments by setting <strong>typed.active</strong> to false. When deactivated typed will not decorate any passed in functions.</p>
+</article>
+</body>
+</html>

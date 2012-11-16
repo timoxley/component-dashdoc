@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>matthewmueller/io</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>io</h1>
+
+<p>event-emitter build on top of <a href="https://github.com/learnboost/engine.io">engine.io</a></p>
+
+<p>Requires the engine.io server to include the <code>event</code> key in their response.</p>
+
+<h2>Installation</h2>
+
+<pre><code>$ component install matthewmueller/io
+</code></pre>
+
+<h2>Example</h2>
+
+<div class="highlight"><pre lang="js">var io = IO({
+  host : 'ws.example.com',
+  port : 8080
+});
+
+// Custom events
+io.on('comment', function(comment) {...})
+
+// Raw socket messages
+io.socket.on('error', function(err) {...})
+
+// Send a message
+io.send('comment', comment);
+</pre></div>
+
+<h2>API</h2>
+
+<h3>IO(options)</h3>
+
+<p>Initialize a new instance of <code>IO</code>.</p>
+
+<h3>#on(event, fn)</h3>
+
+<p>Listen and respond to an <code>event</code>.</p>
+
+<h3>#socket</h3>
+
+<p>Access to the raw engine.io <code>socket</code>.</p>
+
+<h3>#send(event, message)</h3>
+
+<p>Send a <code>message</code> through the socket with the given <code>event</code>.</p>
+
+<h2>TODO</h2>
+
+<ul>
+<li>engine.io as a component <a href="https://github.com/LearnBoost/engine.io-client/issues/71">#71</a></li>
+</ul>
+
+<h2>License</h2>
+
+<p>MIT</p>
+</article>
+</body>
+</html>

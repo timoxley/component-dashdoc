@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>matthewmueller/color</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>color</h1>
+
+<p>Extremely basic color tinting component. Based on an answer to the SO question: <a href="http://stackoverflow.com/a/1787140/145435">Programmatically darken a Hex colour</a></p>
+
+<h2>Installation</h2>
+
+<pre><code>$ component install matthewmueller/color
+</code></pre>
+
+<h2>Example</h2>
+
+<div class="highlight"><pre lang="js">var color = require('color'),
+    c = 'red';
+
+color.darken(c, .5) // '#ff3232'
+color.lighten(c, .5) // '#cd3232'
+</pre></div>
+
+<h2>API</h2>
+
+<h3>darken(color, val)</h3>
+
+<p>Darkens the <code>color</code> by the given <code>val</code>.</p>
+
+<h3>lighten(color, val)</h3>
+
+<p>Lightens the <code>color</code> by the given <code>val</code>.</p>
+
+<h2>License</h2>
+
+<p>MIT</p>
+</article>
+</body>
+</html>

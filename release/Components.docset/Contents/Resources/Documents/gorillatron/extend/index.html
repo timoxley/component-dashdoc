@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>gorillatron/extend</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>extend</h1>
+
+<p>Merge properties from two objects into one new object.</p>
+
+<h2>Installation</h2>
+
+<pre><code>$ component install gorillatron/extend
+</code></pre>
+
+<h2>API</h2>
+
+<h3>extend( deep, objects... )</h3>
+
+<p>Like jquery extend, but doesnt mutate passed objects, only returns a fresh object with the extended properties.</p>
+
+<div class="highlight"><pre lang="js">
+var defaults = {
+  hide: false,
+  delay: 1500,
+  css: {
+    color: 'blue'
+  }
+}
+
+var settings = extend(true, defaults,{
+  delay: 1700,
+  css: {
+    border: '1px solid red'
+  }
+})
+
+expect(settings).to.eql({
+  hide: false,
+  delay: 1700,
+  css: {
+    color: 'blue',
+    border: '1px solid red'
+  }
+})
+
+</pre></div>
+
+<h2>License</h2>
+
+<p>MIT</p>
+</article>
+</body>
+</html>

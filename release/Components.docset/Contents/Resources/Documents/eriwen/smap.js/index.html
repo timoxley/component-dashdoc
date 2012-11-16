@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>eriwen/smap.js</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>smap.js - A forward polyfill for ES6 Maps</h1>
+
+<p>Use ES6 Maps with a bunch of convenience methods. Help improve the ES6 spec!</p>
+
+<div class="highlight"><pre lang="js">var map = new Map([['foo', 'bar']]);
+map.set(0, 42);
+
+// Filter map by a function
+map.filter(function(key, value, map) {
+   return typeof key == 'string';
+});
+=> new Map([[0, 42]])
+
+// Merge Maps
+map.merge(new Map([['baz', 'thing']]));
+=> new Map([[0, 42], ['baz', 'thing']])
+
+// map.get with a default
+map.fetch('NON_EXISTANT', 'default');
+=> 'default'
+
+// Invert map (makes keys->values and vice versa)
+map.invert();
+=> new Map([[42, 0], ['thing', 'baz']])
+
+// Destructive filter (inline map delete)
+map.reject(function(key, value, map) {
+  return index < 3;
+});
+map.has('thing');
+=> false
+
+// Remove all items
+map.clear();
+
+// Check if Map has no items
+map.isEmpty();
+=> true
+</pre></div>
+
+<h2>Installation</h2>
+
+<p>In browsers, include <a href="https://github.com/eriwen/smap.js/downloads">smap-shim.js</a> in your page:</p>
+
+<div class="highlight"><pre lang="html">
+<script type="text/javascript" src="https://raw.github.com/eriwen/smap.js/master/smap-shim.min.js"></script>
+
+</pre></div>
+
+<p>You can install this via:</p>
+
+<ul>
+<li>npm for <a href="http://nodejs.org">node.js</a> v0.8+: <code>npm install smap</code></li>
+<li><a href="https://github.com/component/component">component(1)</a>: <code>component install eriwen/smap.js</code></li>
+<li><a href="http://twitter.github.com/bower/">bower</a>: <code>bower install smap</code></li>
+</ul>
+
+<h3>Environment Support</h3>
+
+<p>If you also use the <a href="https://github.com/kriskowal/es5-shim">es5-shim</a>, you can use this in:</p>
+
+<ul>
+<li>IE9+</li>
+<li>Firefox 13+</li>
+<li>Google Chrome 21+</li>
+<li>Safari 4+</li>
+<li>Opera 12+</li>
+<li>Node.js 0.8+</li>
+<li>PhantomJS</li>
+</ul>
+
+<h2>Why this project exists</h2>
+
+<p>Boris Smus <a href="http://smus.com/how-the-web-should-work/">makes an excellent suggestion</a> for moving the web forward: <em>forward polyfills</em>.<br />I hope this project can be the basis for a future proposal to TC39. Please gratuitously <a href="https://github.com/eriwen/smap.js/issues">discuss Map and WeakMap workings in issues</a>, and add methods/tests with pull requests.</p>
+
+<p>This is for <em>everyone</em>, not just JavaScript gurus. Standards bodies want feedback from developers like you.</p>
+</article>
+</body>
+</html>

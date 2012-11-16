@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>yields/data</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>data</h1>
+
+<p>attach data to elements. think $.data().</p>
+
+<h2>Installation</h2>
+
+<pre><code>$ component install yields/data
+</code></pre>
+
+<h2>API</h2>
+
+<h3>api = data(el)</h3>
+
+<p>Get new data api for the given element.</p>
+
+<h3>api.set(key[, val])</h3>
+
+<p>Merge the provided <code>obj</code> or set<br /><code>key</code> to <code>val</code>.</p>
+
+<div class="highlight"><pre lang="javascript">data(el).set({ foo: 'bar' })
+data(el).set({ bar: 'foo' });
+data(el).get();
+// > { foo: 'bar', bar: 'foo' }
+</pre></div>
+
+<h3>api.get([key])</h3>
+
+<p>Get all data or a single value by <code>key</code>,<br />if the <code>key</code> does not exists it will be looked-up<br />in the element <code>data-*</code> attributes, when found<br />it will be cached and then returned.</p>
+
+<div class="highlight"><pre lang="javascript">data(el).get('foo');
+// > null
+data(el).get();
+// > {}
+</pre></div>
+
+<h3>api.has(key)</h3>
+
+<p>Wether or not <code>key</code> exists</p>
+
+<div class="highlight"><pre lang="">data(el).set('foo', 'bar').has('foo');
+// > true
+</pre></div>
+
+<h3>api.del([key])</h3>
+
+<p>Delete all data or a single <code>key</code> from cache.</p>
+
+<div class="highlight"><pre lang="javascript">data(el).del('some key');
+data(el).del(); // everything!
+</pre></div>
+
+<h3>api.cache</h3>
+
+<p>the element cache</p>
+
+<h3>api.el</h3>
+
+<p>the element.</p>
+
+<h3>add custom methods.</h3>
+
+<div class="highlight"><pre lang="javascript">data.api.getUserAge = function () {
+  return this.cache.user
+    && this.cache.user.age;
+};
+
+data(el).set({ user: { age: 99 } }).getUserAge();
+// > 99
+</pre></div>
+
+<h2>License</h2>
+
+<p>MIT</p>
+</article>
+</body>
+</html>

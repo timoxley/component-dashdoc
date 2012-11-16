@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>tmcw/happen</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<p><strong>happen</strong> wraps the <code>createEvent</code> DOM API to make real<br />event mocking in-browser palatable.</p>
+
+<h2>Installation</h2>
+
+<p>Raw:</p>
+
+<pre><code>wget <a href='https://raw.github.com/tmcw/happen/master/src/happen.js'>https://raw.github.com/tmcw/happen/master/src/happen.js</a>
+</code></pre>
+
+<p>With <a href="https://github.com/component/component">component</a></p>
+
+<pre><code>component install tmcw/happen
+</code></pre>
+
+<h2>Native API</h2>
+
+<div class="highlight"><pre lang="javascript">var element = document.getElementById('map');
+
+// click shortcut
+happen.click(element);
+
+// dblclick shortcut
+happen.dblclick(element);
+
+// custom options
+happen.dblclick(element, { shift: true });
+</pre></div>
+
+<h2>jQuery Plugin</h2>
+
+<div class="highlight"><pre lang="javascript">// Shortcut - 'click' is shorthand for { type: 'click' }
+$('.foo').happen('click');
+
+// Longhand - specify any sort of properties
+$('.foo').happen({ type: 'keyup', keyCode: 50 });
+
+// Works on any jQuery selection
+$('.foo, .bar').happen('dblclick');
+</pre></div>
+
+<p>Shortcuts:</p>
+
+<ul>
+<li><code>happen.click</code></li>
+<li><code>happen.dblclick</code></li>
+<li><code>happen.mousedown</code></li>
+<li><code>happen.mouseup</code></li>
+<li><code>happen.mousemove</code></li>
+<li><code>happen.keydown</code></li>
+<li><code>happen.keyup</code></li>
+<li><code>happen.keypress</code></li>
+</ul>
+
+<p>Use it with a testing framework, like <a href="http://pivotal.github.com/jasmine/">Jasmine</a><br />or <a href="http://visionmedia.github.com/mocha/">Mocha</a>.</p>
+
+<h2>See Also</h2>
+
+<ul>
+<li><a href="https://github.com/adamsanderson/trigger-event">trigger-event</a></li>
+</ul>
+
+<p>Licensed BSD.</p>
+</article>
+</body>
+</html>

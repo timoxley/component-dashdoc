@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>timoxley/to-array</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>to-array</h1>
+
+<p>Try convert an object into an Array</p>
+
+<h2>Installation</h2>
+
+<pre><code>$ component install timoxley/to-array
+</code></pre>
+
+<h2>Examples</h2>
+
+<div class="highlight"><pre lang="js">// Array-likes
+var divs = document.getElementsByTagName('div') `NodeList` of `HTMLDivElement`
+toArray(divs) // => Array of `HTMLDivElement`
+
+(function() {
+  toArray(arguments) // => [1, 2]
+})(1, 2)
+
+// Primitives
+toArray('hello') // => ['hello']
+toArray(12345) // => [12345]
+toArray(/regex/) // => [/regex/]
+toArray(null) // => [null]
+toArray({}) // => [{}]
+toArray(new Date) // => [Wed Nov 07 2012 04:40:26 GMT+1000 (EST)]
+
+// Special cases
+toArray(undefined) // => []
+toArray(window) // => []
+
+</pre></div>
+
+<h2>API</h2>
+
+<h3>toArray(collection): Array</h3>
+
+<p>Array-like structures like <code>arguments</code>, <code>NodeList</code><br />  or <code>HTMLCollection</code>, will be converted into <code>Array</code>s.</p>
+
+<p><code>Date</code>, <code>String</code>, <code>Regex</code>, <code>null</code>, <code>Object</code>, and <code>Function</code> will<br />  convert into an <code>Array</code>, with a single element being whatever was<br />  passed to <code>toArray</code>.</p>
+
+<p><code>window</code> and <code>undefined</code> will return an empty <code>Array</code></p>
+
+<h2>License</h2>
+
+<p>MIT</p>
+</article>
+</body>
+</html>

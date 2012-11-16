@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>component/reactive</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>reactive</h1>
+
+<p>Reactive template engine</p>
+
+<h2>Installation</h2>
+
+<pre><code>$ component install component/reactive
+</code></pre>
+
+<h2>Example</h2>
+
+<p>Simply invoke <code>reactive()</code> on the element to wish to<br />  become the "template" for <code>obj</code>. The given <code>obj</code> <em>must</em><br />  emit <code>"change"</code> events passing <code>(prop, val)</code>, the template<br />  will react to these changes.</p>
+
+<div class="highlight"><pre lang="js">var reactive = require('reactive');
+reactive(el, obj);
+</pre></div>
+
+<p>You may also map custom callbacks for formatting or messing with an element<br />  based on a change. The element, value, and object itself are passed as arguments.</p>
+
+<div class="highlight"><pre lang="js">var reactive = require('reactive');
+reactive(el, user, {
+  birthdate: function(el, date, user){
+    el.textContent = date.getFullYear() + '/' + date.getMonth() + '/' + date.getDate();
+  }
+});
+</pre></div>
+
+<h2>Todo</h2>
+
+<ul>
+<li>composition of smaller templates instead of conditionals etc..</li>
+<li>defer <code>.render()</code> and use <code>.change('birthdate', fn)</code> instead of object-literal</li>
+<li>moar docs / examples</li>
+</ul>
+
+<h2>License</h2>
+
+<p>MIT</p>
+</article>
+</body>
+</html>

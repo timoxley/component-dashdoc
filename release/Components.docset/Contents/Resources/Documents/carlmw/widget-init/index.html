@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>carlmw/widget-init</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>widget-init</h1>
+
+<p>initialises widgets bound to DOM elements through a data-attribute hook</p>
+
+<h2>Installation</h2>
+
+<pre><code>$ component install carlmw/widget-init
+</code></pre>
+
+<h2>Example</h2>
+
+<pre><code>&lt;div id="target" data-require="test-widget" data-foo-bar="baz"&gt;Target Element&lt;/div&gt;
+&lt;script&gt;
+require.register("test-widget", function(module){
+  module.exports = function (el, dataset) {
+    // el =&gt; div#target
+    // dataset =&gt; {fooBar: "baz", require: "test-widget"}
+  };
+});
+
+require('widget-init')(document);
+&lt;/script&gt;
+</code></pre>
+
+<h2>License</h2>
+
+<p>MIT</p>
+</article>
+</body>
+</html>

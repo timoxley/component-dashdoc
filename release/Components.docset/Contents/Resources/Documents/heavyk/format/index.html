@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>heavyk/format</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>format</h1>
+
+<p>printf, sprintf, and vsprintf for JavaScript</p>
+
+<h1>Installation</h1>
+
+<p>npm install format</p>
+
+<p>The code works in browsers as well, you can copy these functions into your project<br />or otherwise include them with your other JavaScript.</p>
+
+<h1>Usage</h1>
+
+<pre><code>var Format = require('format')
+  , printf = Format.printf
+  , format = Format.format // aliased as sprintf as well
+
+// Print 'hello world'
+printf('%s world', 'hello')
+
+var what = 'life, the universe, and everything'
+format('%d is the answer to %s', 42, what)
+// =&gt; '42 is the answer to life, the universe, and everything'
+</code></pre>
+
+<p>Supported format specifiers: b, c, d, f, o, s, x, and X.</p>
+
+<p>See <code>man 3 printf</code> or <code>man 1 printf</code> for details.</p>
+
+<h1>License</h1>
+
+<p>Copyright 2010 - 2011 Sami Samhuri <a href='mailto:sami@samhuri.net'>sami@samhuri.net</a></p>
+
+<p>ISC (see included <a href="/samsonjs/format/blob/master/LICENSE">LICENSE</a>)</p>
+</article>
+</body>
+</html>

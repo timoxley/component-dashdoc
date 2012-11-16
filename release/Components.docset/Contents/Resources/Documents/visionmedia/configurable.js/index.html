@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>visionmedia/configurable.js</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>configurable</h1>
+
+<p>Configuration mixin.</p>
+
+<h2>API</h2>
+
+<p>Make something configurable:</p>
+
+<div class="highlight"><pre lang="js">var Configurable = require('configurable');
+
+// plain obj
+var obj = {};
+Configurable(obj);
+
+// returns the obj itself
+var obj = Configurable({});
+
+// make a prototype configurable
+Configurable(MyThing.prototype);
+</pre></div>
+
+<p>The object will then have the following methods available:</p>
+
+<div class="highlight"><pre lang="js">.get(name)
+.set(name, val)
+.set(obj)
+.enable(name)
+.disable(name)
+.enabled(name)
+.disabled(name)
+</pre></div>
+
+<p><strong>NOTE</strong>: when assigning to a <code>.prototype</code> make sure to re-defined <code>.settings = {}</code><br />in the constructor so objects do not share these values.</p>
+
+<h2>License</h2>
+
+<p>(The MIT License)</p>
+
+<p>Copyright (c) 2012 TJ Holowaychuk &lt;<a href='mailto:tj@vision-media.ca'>tj@vision-media.ca</a>&gt;</p>
+
+<p>Permission is hereby granted, free of charge, to any person obtaining<br />a copy of this software and associated documentation files (the<br />'Software'), to deal in the Software without restriction, including<br />without limitation the rights to use, copy, modify, merge, publish,<br />distribute, sublicense, and/or sell copies of the Software, and to<br />permit persons to whom the Software is furnished to do so, subject to<br />the following conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be<br />included in all copies or substantial portions of the Software.</p>
+
+<p>THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,<br />EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF<br />MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.<br />IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY<br />CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,<br />TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE<br />SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
+</article>
+</body>
+</html>

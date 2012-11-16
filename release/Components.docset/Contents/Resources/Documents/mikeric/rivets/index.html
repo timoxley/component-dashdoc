@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>mikeric/rivets</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>Rivets.js</h1>
+
+<p>Rivets.js is a declarative data binding facility that plays well with existing frameworks such as <a href="http://backbonejs.org">Backbone.js</a>, <a href="http://spinejs.com">Spine.js</a> and <a href="http://hay.github.com/stapes/">Stapes.js</a>. It aims to be lightweight (2.3KB minified and gzipped), extensible, and configurable to work with any event-driven model.</p>
+
+<hr />
+
+<p>Rivets.js keeps your UI and model data in sync for you, so you can spend less time manually tying into the DOM and more time on your actual data and application logic.</p>
+
+<p>Out-of-the-box it’s got:</p>
+
+<ul>
+<li><strong>One-way</strong> and <strong>two-way</strong> binding to/from DOM elements.</li>
+<li><strong>Computed properties</strong> with dependent attributes.</li>
+<li><strong>Formatters</strong> to allow mutatating values through piping.</li>
+<li><strong>A powerful custom bindings API</strong> for building your own binding routines.</li>
+<li><strong>Easy debugging</strong> and manual bidirectional syncing of bindings.</li>
+</ul>
+
+<h2>Getting Started and Documentation</h2>
+
+<p>All documentation for Rivets.js is available on the <a href="http://rivetsjs.com">homepage</a>. See <a href="http://rivetsjs.com#configure">#configure</a> to learn how to properly configure Rivets.js for your app.</p>
+
+<h2>Building and Testing</h2>
+
+<p>Make sure to run npm install so that you have all the development dependencies. To have the test suite run as part of the build process, you'll also need to have PhantomJS installed.</p>
+
+<h4>Building</h4>
+
+<p>Rivets.js uses <a href="http://gruntjs.com/">grunt</a> as the build tool. Run <code>grunt build</code> from within the project root to compile + minify the source into <em>/lib</em>, or just run <code>grunt</code> to have it watch the source file for changes — it will compile + minify into <em>/lib</em> and run the test suite whenever the source file is saved.</p>
+
+<h4>Testing</h4>
+
+<p>Rivets.js uses <a href="http://pivotal.github.com/jasmine/">Jasmine</a> as the testing framework. You can run the test suite with <code>grunt spec</code> or by opening <em>/spec/index.html</em>.</p>
+
+<h2>Contributing</h2>
+
+<h4>Bug Reporting</h4>
+
+<ol>
+<li>Ensure the bug can be reproduced on the latest master release.</li>
+<li>Open an issue on GitHub and include an isolated JSFiddle demonstration of the bug. The more information you provide, the easier it will be to validate and fix.</li>
+</ol>
+
+<h4>Pull Requests</h4>
+
+<ol>
+<li>Fork the repository and create a topic branch.</li>
+<li>Be sure to associate commits to their corresponding issue using <code>[#1]</code> or <code>[Closes #1]</code> if the commit resolves the issue.</li>
+<li>Make sure not to commit any changes under <code>lib/</code> as they will surely cause merge conflicts with other's changes. Files under <code>lib/</code> are only committed when a new build is released.</li>
+<li>Include tests for your changes and make them pass.</li>
+<li>Push to your fork and submit a pull-request with an explanation and reference to the issue number(s).</li>
+</ol>
+</article>
+</body>
+</html>

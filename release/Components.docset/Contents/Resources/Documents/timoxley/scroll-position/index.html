@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>timoxley/scroll-position</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>scroll-position</h1>
+
+<p>Fire events when scrolling over dom elements.</p>
+
+<h2>Installation</h2>
+
+<pre><code>$ component install timoxley/scroll-position
+</code></pre>
+
+<h2>Example</h2>
+
+<div class="highlight"><pre lang="js">  // dom elements we want to track
+  var items = document.querySelectorAll('div')
+
+  var ScrollPosition = require('scroll-position')
+  var itemPosition = ScrollPosition(items)
+
+  itemPosition.on('scrollOut', function(el) {
+    console.log(el) // this element was scrolled out of the top of the viewport
+  })
+  itemPosition.on('scrollIn', function(el) {
+    console.log(el) // this element was scrolled in from the top of the viewport
+  })
+  itemPosition.on('scrollInOut', function(el) {
+    console.log(el) // this element was scrolled in or out of the top of the viewport
+  })
+</pre></div>
+
+<p><a href="http://timoxley.github.com/scroll-position/examples/menu">Demo</a></p>
+
+<h2>Events</h2>
+
+<h3>scrollOut</h3>
+
+<p>Fired whenever one of the supplied items is scrolled out the top of the viewport<br />e.g scrolling down, and the item goes past the top of the window.</p>
+
+<p>The first arguments to the event handler is the element that was scrolled out.</p>
+
+<h3>scrollIn</h3>
+
+<p>Fired whenever one of the supplied items is scrolled into the top of the viewport<br />e.g scrolling up, and the item enters the top of the window.</p>
+
+<p>The first arguments to the event handler is the element that was scrolled in.</p>
+
+<h3>scrollInOut</h3>
+
+<p>Fired whenever one of the supplied items is scrolled in or out of the top of the viewport<br />e.g scrolling up or down, and the item enters or leaves the top of the window.</p>
+
+<p>The first arguments to the event handler is the element that was scrolled in or out.</p>
+
+<h2>License</h2>
+
+<p>MIT</p>
+</article>
+</body>
+</html>

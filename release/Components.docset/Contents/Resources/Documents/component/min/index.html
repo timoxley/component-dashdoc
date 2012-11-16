@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>component/min</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>min</h1>
+
+<p>Min value utility</p>
+
+<h2>Installation</h2>
+
+<pre><code>$ component install component/min
+</code></pre>
+
+<h2>API</h2>
+
+<h3>min(array)</h3>
+
+<p>Return the min value in <code>array</code>:</p>
+
+<div class="highlight"><pre lang="js">min([1,5,6,1,2,0])
+</pre></div>
+
+<h3>min(array, fn)</h3>
+
+<p>Min value in <code>array</code> with callback <code>fn(val, i)</code>:</p>
+
+<div class="highlight"><pre lang="js">var age = min(users, function(u){ return u.age })
+</pre></div>
+
+<h3>min(array, string)</h3>
+
+<p>Min value in <code>array</code> with the given property <code>string</code>:</p>
+
+<div class="highlight"><pre lang="js">var age = min(users, 'age')
+</pre></div>
+
+<h1>License</h1>
+
+<p>MIT</p>
+</article>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>timoxley/element-collection</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>element-collection</h1>
+
+<p>Enumerable DOM Element Collection providing methods like find, select, reject, first, etc.</p>
+
+<h2>Installation</h2>
+
+<pre><code>$ component install timoxley/element-collection
+</code></pre>
+
+<h2>Example</h2>
+
+<div class="highlight"><pre lang="js">var nav = ElementCollection('.nav a') // < for example.
+
+// Select first nav item:
+var firstItem = nav.first()
+
+// Find nav item corresponding to current document.location.hash
+var selectedItem = nav.find(function(el) {
+  el.hash === document.location.hash
+})
+
+// attach click listeners to nav's links
+nav.each(function(link) {
+  link.addEventListener('click', function(e) {
+    tabs.select(e.target.hash)
+  })
+})
+
+// Hide all .hidden elements
+var hidden = ElementCollection('.hidden')
+hidden.each(hide)
+
+function hide(el) {
+  el.style.display = 'none'
+}
+</pre></div>
+
+<h2>API</h2>
+
+<p>ElementCollection(selector Array|String)</p>
+
+<p>Takes a selector or an Arrayish (e.g. <code>NodeList</code>), and returns a new ElementCollection with <a href="https://github.com/component/enumerable">enumerable</a> methods.</p>
+
+<ul>
+<li>.each()</li>
+<li>.map()</li>
+<li>.select()</li>
+<li>.unique()</li>
+<li>.reject()</li>
+<li>.compact()</li>
+<li>.find()</li>
+<li>.findLast()</li>
+<li>.none()</li>
+<li>.any()</li>
+<li>.count()</li>
+<li>.indexOf()</li>
+<li>.has()</li>
+<li>.grep()</li>
+<li>.reduce()</li>
+<li>.max()</li>
+<li>.sum()</li>
+<li>.first()</li>
+<li>.last()</li>
+<li>.inGroupsOf()</li>
+<li>.at()</li>
+<li>.value()</li>
+</ul>
+
+<h2>License</h2>
+
+<p>MIT</p>
+</article>
+</body>
+</html>

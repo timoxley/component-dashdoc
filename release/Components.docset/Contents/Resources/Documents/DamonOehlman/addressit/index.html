@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>DamonOehlman/addressit</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>addressit</h1>
+
+<p>AddressIt is a freeform street address parser, that is designed to take a piece of text and convert that into a structured address that can be processed in different systems.</p>
+
+<p>The focal point of <code>addressit</code> is on the street parsing component, rather than attempting to appropriately identify various states, counties, towns, etc, as these vary from country to country fairly dramatically.  These details are instead put into a generic regions array that can be further parsed based on your application needs.</p>
+
+<p><a href="http://travis-ci.org/#!/DamonOehlman/addressit"><img src="https://secure.travis-ci.org/DamonOehlman/addressit.png" alt="Build Status"></a></p>
+
+<h2>Example Usage</h2>
+
+<p>The following is a simple example of how address it can be used:</p>
+
+<div class="highlight"><pre lang="js">// parse a made up address, with some slightly tricky parts
+var address = addressit('Shop 8, 431 St Kilda Rd Melbourne');
+</pre></div>
+
+<p>The <code>address</code> object would now contain the following information:</p>
+
+<div class="highlight"><pre lang="">{ text: '8/431 ST KILDA RD MELBOURNE',
+  parts: [],
+  unit: 8,
+  country: undefined,
+  number: 431,
+  street: 'ST KILDA RD',
+  regions: [ 'MELBOURNE' ] }
+</pre></div>
+
+<p>For more examples, see the tests.</p>
+
+<h2>Built for Node and the Browser</h2>
+
+<p>The addressit module is designed to work both in the browser and in node.  If you do wish to use it in a node environment, simply install the package into your project:</p>
+
+<div class="highlight"><pre lang="">npm install addressit
+</pre></div>
+
+<p>For the browser, simply download either <a href="/DamonOehlman/addressit/master/addressit.js">addressit.js</a> or <a href="/DamonOehlman/addressit/master/addressit.min.js">addressit.min.js</a> and include it in your page.</p>
+</article>
+</body>
+</html>

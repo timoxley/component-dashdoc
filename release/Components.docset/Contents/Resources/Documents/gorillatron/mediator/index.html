@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>gorillatron/mediator</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>Mediator</h1>
+
+<p>Loosely coupled pub sub accross modules</p>
+
+<h2>Installation</h2>
+
+<div class="highlight"><pre lang="">$ component install component/Mediator
+</pre></div>
+
+<h2>Usage</h2>
+
+<div class="highlight"><pre lang="js">var mediator = new Mediator()
+
+mediator.subscribe( "chat", logChatEvent )
+mediator.subscribe( "chat::message", displayMessage )
+
+// 'chat' and 'chat::message' will fire because of namespacing
+mediator.publish( "chat::message", "shaggy87", "lol dope" )
+
+</pre></div>
+
+<h3>Api</h3>
+
+<h4>Mediator.prototype.subscribe( channel, callback, context )</h4>
+
+<p>Subscribe to the given channel/namespace. Call the given callback with the given context as 'this'<br />when that channels is published to.</p>
+
+<h4>Mediator.prototype.unsubscribe( channel, callback )</h4>
+
+<p>Unsubscribe from channel. If only channel is given all callbacks that match the channels namspace will be <br />removed. If callback is given it will only remove subscriptions that has that specific callback</p>
+
+<h4>Mediator.prototype.publish( channel, args.. )</h4>
+
+<p>Publishes to the channel, calling all subscribing callbacks with the rest of the arguments as arguments<br />to the calback function[s].</p>
+
+<h2>License</h2>
+
+<p>MIT licensed</p>
+</article>
+</body>
+</html>

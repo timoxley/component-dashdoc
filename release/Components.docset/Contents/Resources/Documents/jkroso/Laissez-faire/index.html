@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>jkroso/Laissez-faire</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>Laissez-faire</h1>
+
+<p>Its a promise class.</p>
+
+<p>It works in <a href="./src/index.js">node</a> and the <a href="./browser/Promise.js">browser</a>. Anything in the name? Yea its a French word meaning "let it be". Seemed apt for a library designed to eliminate the need to worry about when computation occurs.</p>
+
+<h2>Differences from other libraries</h2>
+
+<p>Laissez-faire is compliant with the <a href="http://wiki.commonjs.org/wiki/Promises/A">Promises/A</a> spec as far as I understand it. However, it does break from some patterns which are common in other implementations: </p>
+
+<ol>
+<li><p>Doesn't guarantee async calls to <code>then</code>; you use promises to abstract away the effects of time. Therefore, there shouldn't be any need to guarantee anything about when promises will be fulfilled. The reasoning behind this feature is usually that it makes promises easier to understand for beginners. I think its more like this feature makes it easier for users to misunderstand promises and treat them like a less ugly version of the callback pattern found in Node.</p></li>
+<li><p>Paranoia is optional; a goblin proof proxy object is not created when you create a new instance of laissez. If you want to be able to pass out access to your promises value without allowing them to also assign a value to your promise you call <code>promise.proxy()</code> A new proxy is generated with each call so you can pass out as many as you like. </p></li>
+<li><p>API:</p>
+
+<ol><li><code>new Laissez</code> instead of <code>lib.defer()</code></li>
+<li><code>deferred.proxy()</code> instead of <code>deferred.promise</code></li></ol></li>
+</ol>
+
+<p>The test suit is comprised mainly of the <a href="https://github.com/domenic/promise-tests">promises test suite</a> written by Domenic Denicola. I leave out the always-async test since I disagree with the concept. I have added a few extra suites for Laissez-faire specific features.</p>
+
+<h2>Performance</h2>
+
+<p><a href="https://github.com/jkroso/promise-perf-tests">Good</a> it seems.  </p>
+
+<h1>```javascript</h1>
+
+<h2>Test: defer-create x 10000</h2>
+
+<p>Name      Time ms   Avg ms   Diff %<br />laissez         1   0.0001        -<br />when           19   0.0019  1800.00<br />rsvp           35   0.0035  3400.00<br />deferred       40   0.0040  3900.00<br />q             453   0.0453 45200.00</p>
+
+<p>====================================</p>
+
+<h2>Test: promise-fulfill x 10000</h2>
+
+<p>Name      Time ms   Avg ms   Diff %<br />laissez         7   0.0007        -<br />when            9   0.0009    28.57<br />deferred       12   0.0012    71.43<br />rsvp           86   0.0086  1128.57<br />q             215   0.0215  2971.43</p>
+
+<p>====================================</p>
+
+<h2>Test: promise-reject x 10000</h2>
+
+<p>Name      Time ms   Avg ms   Diff %<br />laissez        13   0.0013        -<br />when           67   0.0067   415.38<br />rsvp          138   0.0138   961.54<br />deferred      162   0.0162  1146.15<br />q             279   0.0279  2046.15</p>
+
+<p>====================================</p>
+
+<h2>Test: promise-sequence x 10000</h2>
+
+<p>Name      Time ms   Avg ms   Diff %<br />laissez        15   0.0015        -<br />deferred       38   0.0038   153.33<br />when           41   0.0041   173.33<br />rsvp          222   0.0222  1380.00<br />q            4634   0.4634 30793.33<br /><div class="highlight"><pre lang=""></p>
+
+<h3>What makes it better</h3>
+
+<ol>
+<li>Smaller</li>
+<li>Faster</li>
+<li>Easier to debug (uncaught errors are logged)</li>
+<li>Flexible API</li>
+</ol>
+
+<h3>What makes it worse</h3>
+
+<ol>
+<li>I haven't got around to doing any interope testing so will most likely have some bugs if you are passing it promises from other libraries.</li>
+</ol>
+
+<h2>API</h2>
+
+<p></pre></div>javascript<br />var Promise = require('laissez-faire')<br />var promise = new Promise<br /><div class="highlight"><pre lang="">* <strong>promise.then(done, success)</strong><br />* <strong>promise.end(done, success)</strong><br />* <strong>promise.resolve(value)</strong><br />* <strong>promise.reject(error)</strong><br />* <strong>promise.assign(value|error)</strong><br />* <strong>promise.fail(value)</strong><br />* <strong>promise.success(value)</strong><br />* <strong>promise.proxy()</strong></p>
+
+<p>To handle uncaught errors just set <code>Promise.prepareException = function (failingPromise, error) {}</code> <br /><br />And a cenceler <code>Promise.cancelException = function (noLongerfailingPromise) {}</code>. In case an exception handler gets added after <code>prepareException</code> was called</p>
+
+<h2>Basic Usage</h2>
+
+<p></pre></div>javascript<br />var promise = new Promise();</p>
+
+<p>promise.then(function(value) {<br />  // success<br />}, function(value) {<br />  // failure<br />});</p>
+
+<p>// later...</p>
+
+<p>promise.resolve(value) // triggers first callback<br />// or...<br />promise.reject(error) // triggers second callback<br /><div class="highlight"><pre lang=""><br />Once a promise has been resolved or rejected, it cannot be resolved or<br />rejected again.</p>
+
+<p>Here is an example of a simple XHR2 wrapper written using Laissez-faire:</p>
+
+<p></pre></div>javascript<br />var getJSON = function(url) {<br />  var promise = new Promise()</p>
+
+<p>var client = new XMLHttpRequest()<br />  client.open("GET", url)<br />  client.onreadystatechange = handler<br />  client.responseType = "json"<br />  client.setRequestHeader("Accept", "application/json")<br />  client.send()</p>
+
+<p>function handler() {<br />    if (this.readyState === this.DONE) {<br />      if (this.status === 200) promise.resolve(this.response)<br />      else promise.reject(this)<br />    }<br />  };</p>
+
+<p>return promise;<br />  // or if you you think there might be goblins in your system<br />  // return promise.proxy()<br />};</p>
+
+<p>getJSON("/posts.json").then(function(json) {<br />  // continue<br />}, function(error) {<br />  // handle errors<br />});<br /><div class="highlight"><pre lang=""></p>
+
+<h2>Understanding promises</h2>
+
+<p>I struggled to understand promises and that is why I started playing with this project. It would be rude of me not to share my learnings. I hope my explanation prevents you from needing to take the same route in order to understand them. Every explanation I have read begins like this: "A promise represents the eventual value returned from the single completion of an operation". I have read a few and they all sounded suspiciously wrote. That one was from the Promises/A spec. Its a shame they all choose to use the word "eventual" since it is actually slightly misleading. Promises may be resolved now. Therefore, a simpler and more accurate way of introducing promises would be to say "A promise represents the value of a computation".<br />This of course would raise the question: isn't that what variables are for? Yes. Except variables break if the computation occurs at any time other than right now. The problem promises are designed to solve is uncertainty due to the timing of processes. Promises take the worry away. They add some messy syntax but allow you to focus on the process which will ultimatly makes things easier to reason about. In order to do this they need to do two things.</p>
+
+<ol>
+<li>Store the result of the computation as soon as it happens</li>
+<li>Provide a mechanism to connect further computations which depend on this value</li>
+</ol>
+
+<p>By providing these capabilities they allow you to ignore the timing of computation completely. They could easily become a language feature complimenting the less powerful variable. <br /><br />You saw promises in use in the previous section but lets walk through how they are used since they look nothing like variables syntactically. First we create the promise: <code>var promise = new Promise</code>. So we need to use a variable in order to use a promise. You could say then that we are creating an enhanced variable or more simply a container. Then we do some computation and assign our value to the promise <code>return promise.assign('some value')</code>. Note you must always <code>return</code> the promise now though you don't have to assign to it until you are good and ready. So your functions must know how to manage a promise, its a shame since semantically they aren't much different from variables, though blame that one on the language designers. Maybe one day JavaScript will be inspired and adopt message passing like Io and Smalltalk, maybe.</p>
+
+<p>In summary promises are a way of storing and accessing values devoid of when. That makes them very useful for situations where you can't be certain something is going to be sitting in memory ready to go but would like to take advantage of the speed if it is. Callbacks enable this and will always be faster, however promises provide the value and error propagation infrastructure to make these programs easier to reason about. Plus implementations like Laissez-faire are actually fairly light weight so offer good bang for your buck. The time they save you coding can be spent sleeping at night.</p>
+
+<!-- Comparison:
+Lets explore a few of the ways we can declare process in JS. This example is just addition but includes some errors and error handling.
+
+__Sync only:__
+```javascript
+var a = {},
+    b = 2
+try {
+  // var c = a + b
+  // Should throw but in JS it won't so for the sake of this example we will throw manually  
+  throw new Error
+} catch (e) {
+  c = 0
+}
+c += 1
+console.log(c)
+```
+
+__With promises:__
+```javascript
+var a = new Promise().assign({}),
+    b = new Promise().assign(2),
+    c = a
+.then(function(a){ 
+  return b.then(function(b) {
+    // return a + b
+    return new Error 
+  })
+})
+.then(null, function(e) { 
+  return 0 
+})
+.then(function (c) { 
+  return c + 1 
+})
+.then(console.log.bind(console))
+```
+
+Here we assigned values to the promises immediately, and therefore, the subsequent computations were run immediately. However, if it took all year for their values to be computed that would be fine. The first operation actually returns a promise. This is fine since when Laissez-faire et.al sees a promise being resolved with a promise it is smart enough to know not to take this literally and will instead fetch the value from the returned promise before resolving for real. In JavaScript the + operator returns a value instantly though the above code would work fine if it was to return a promise and take its sweet time doing the actual operation.
+
+__With callbacks:__
+```javascript
+var c
+getA(function(a){
+  getB(function(b){
+    try {
+      // c = a + b
+      throw new Error
+    } catch (e) {
+      c = 0
+    }
+    c.plus(1, console.log.bind(console))
+  }))
+})
+```
+Notice: that we used a plus method with a callback. Since that for this entire operation to be free from the need for instant operation every operation must be async/sync safe. It still depends on the assignment operation being done instantly, but I won't make this example any weirder.  
+
+__With generators:__
+```javascript
+var gen = (function* () {
+  var a = yeild getA()
+  var b = yeild getB()
+  return a + b
+}()
+while (true) {
+  try {
+    gen.next()
+  } catch (e) {
+    c = e.value
+    break
+  }
+}
+``` -->
+
+<h2>Chaining</h2>
+
+<p>If you return a regular value, it will be passed, as is, to the next<br />handler.</p>
+
+<p></pre></div>javascript<br />getJSON("/posts.json")<br />.then(function(json) {<br />  return json.post<br />})<br />.then(function(post) {<br />  // proceed<br />});<br /><div class="highlight"><pre lang=""><br />Returned promises are recognized as promises and have their resolved value used to resolve the promise they were returned to</p>
+
+<p></pre></div>javascript<br />getJSON("/post/1.json")<br />.then(function(post) {<br />  // save off post<br />  return getJSON(post.commentURL)<br />})<br />.then(function(comments) {<br />  // proceed with access to posts and comments<br />})<br /><div class="highlight"><pre lang=""></p>
+
+<h2>Error Handling</h2>
+
+<p>Errors also propagate:</p>
+
+<p></pre></div>javascript<br />getJSON("/badurl.json")<br />.then(function(posts) {</p>
+
+<p>})<br />.then(null, function(error) {<br />  // even though no error callback was passed to the<br />  // first <code>.then</code>, the error propagates<br />})<br /><div class="highlight"><pre lang=""><br />Technically a promise can never throw an error since at any time in the future a user could add a child promise and handle the exception. However in practice the promise user will bind their error handlers immediately, so in most cases unhandled rejections which sit around for more than one tick of the event loop are genuine errors. Laissez-faire provides a mechanism for you to hook into these errors. See the source for details. It actually uses this mechanism itself to provide a nice default behavior which is to log the errors to the console after a 1 second delay. If this doesn't suit you then it is easy to override the behavior.</p>
+
+<h2>Finishing with a promise</h2>
+
+<p>Promises represent values. Like any other value you can never be sure it will never be used again until nobody has access to it. If however you have a promise and you know the next operation you do one it will be your last there is no need to create a chainable promise from it. To allow you to reduce the cost this operation (by a little) Laissez-faire provides an <code>end</code> method. It will provide the promises value to your callbacks as usual but will not return a new promise. Thereby, saving some computation. We also take advantage of the situation and allow any uncaught errors to blow up since we know you have no plans of catching them. Furthermore, <code>end</code> will return <code>this</code> thereby allowing a jquery style use of promises which is nice where appropriate.</p>
+
+<p></pre></div>javascript<br />var p = new Promise().assign(1)<br />.end(function(val){<br />  // val === 1<br />  return val + 1<br />})<br />.end(function(val){<br />  // val === 1<br />  return val + 1<br />})<br />.end(function(val){<br />  // this error will not be caught<br />  throw new Error<br />})<br />.then(function(val){<br />  // val === 1<br />  return val + 1<br />}, function(){<br />  // will not handle exception since it is on another branch<br />})<br />.then(function(val){<br />  // finally val === 2<br />  console.log(val)<br />})<br />```</p>
+
+<p>I'd be surprised if that code sample conjured the picture in your head I wanted so hear is a diagram illustrating the structure of the process.  </p>
+
+<p><img src="https://docs.google.com/drawings/pub?id=1MiWhL77a7X457fWy529--ic-pKI9AG1WCmY_pZdENVg&amp;w=960&amp;h=720" alt=" process " title="" />  </p>
+
+<p>Each box represents a process of some kind. The circles below some of the processes represent the values they expose. The first box creates the promise and exposes itself for binding. The three calls to <code>end</code> each create a process but don't create new promises. Therefore, any values they might generate are lost. The fourth call, to <code>then</code>, does the same thing as the others except it exposes a value to the outside world. This value is represented by a promise, therefore to access it we must use either <code>then</code> or <code>end</code>. In this case we used <code>then</code> which resulting in the final value being exposed. This final value is 2. The flow of data is represented by the arrows with the red boxes showing the value of the data. Hopefully this illustration makes it obvious what is happing when you access the value of a promise via <code>then</code> or <code>end</code>, you are creating a branch in the process. Values flow down these branches in the same way as errors. Though they are of course handled by separate functions. Because we chose to use <code>then</code> as the final call on the fourth branch we will be able to continue processing at any time where we left of. Be that with an error or a value, no matter, so long as the <code>p</code> variable doesn't go out of scope. <br /><br />In summary then we can say promises provide a mechanism to freeze process. Ready to defrost and continue via <code>then</code> and <code>end</code> as soon or as long as you like.</p>
+
+<h2>Mutability</h2>
+
+<p>Its widely considered that promises should be immutable and I agree. I though its interesting to note what happens to promises when they are implemented in a mutable way. So when a promise has its value changed it propagates this value to any child promises. At which point you would of switched to the <a href="http://en.wikipedia.org/wiki/Reactive_programming">Reactive programming</a> paradigm. The change in implementation to create this effect is trivial. I guess we can say then that promises borderline bring a new paradigm to JavaScript. Its amazing how flexible this language is. </p>
+</article>
+</body>
+</html>

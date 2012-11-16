@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>matthewmueller/autocomplete</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>autocomplete</h1>
+
+<p>Autocomplete component</p>
+
+<p><img src="http://f.cl.ly/items/1X2L2Y3P3t2d1p411W3Y/autocomplete.png" alt="autocomplete" title="" /></p>
+
+<h2>Installation</h2>
+
+<pre><code>$ component install matthewmueller/autocomplete
+</code></pre>
+
+<h2>Example</h2>
+
+<div class="highlight"><pre lang="html"><input type="search" id="search" name="keyword">
+</pre></div>
+
+<div class="highlight"><pre lang="js">autocomplete(document.getElementById('search'), '/search/:keyword')
+  .parse('result')
+  .label('title')
+  .value('url')
+  .format(function(label, q) {
+    var r = new RegExp('(?:' + q + ')', 'i');
+    return label.replace(r, '<span class="highlight">$&</span>');
+  })
+  .on('select', function(url) {
+    img.src = url;
+  })
+</pre></div>
+
+<h2>Events</h2>
+
+<ul>
+<li><code>enabled</code> autocomplete is now listening for user input</li>
+<li><code>disabled</code> autocomplete is no longer listening for user input</li>
+<li><code>response</code> (res) response object after running through <code>autocomplete#parse</code></li>
+<li><code>error</code> (err) emitted when the server responds with an error</li>
+<li><code>select</code> (value) emitted when you select an item from the autocomplete menu</li>
+</ul>
+
+<h2>API</h2>
+
+<h3>autocomplete(el, url, [opts])</h3>
+
+<p>Initialize a new <code>Autocomplete</code> instance. Pass in an <code>input</code> el, a <code>url</code> endpoint and some options.</p>
+
+<p><code>url</code> may take a single express-style parameter to be used as the query key. You can specify the query key by either setting the <code>input[name]</code> or calling <code>autocomplete#key(...)</code>. If no query key is present, autocomplete will pass the query through as a querystring.</p>
+
+<p>Available options include:</p>
+
+<ul>
+<li><code>throttle</code> : <em>Defaults to 500</em>. Throttles the user input to reduce the number of AJAX calls.</li>
+</ul>
+
+<div class="highlight"><pre lang="js">autocomplete(el, "<a href='https://api.github.com/legacy/repos/search/:keyword'>https://api.github.com/legacy/repos/search/:keyword</a>")
+</pre></div>
+
+<h3>#enable()</h3>
+
+<p>Enables the autocomplete.</p>
+
+<div class="highlight"><pre lang="js">autocomplete.enable()
+</pre></div>
+
+<h3>#disable()</h3>
+
+<p>Disables the autocomplete.</p>
+
+<div class="highlight"><pre lang="js">autocomplete.disable()
+</pre></div>
+
+<h3>#key(key)</h3>
+
+<p>The query key used as either part of the query string or express-style parameter. May also be set by adding a <code>name</code> attribute to the input <code>el</code>.</p>
+
+<div class="highlight"><pre lang="js">autocomplete.key('q') // <a href='http://google.com/?q='>http://google.com/?q=</a>...
+</pre></div>
+
+<h3>#display(display)</h3>
+
+<p>Displays the menu. <code>display</code> defaults to <code>true</code>. You may set this <code>false</code> if you just want to use the search feature without the autocomplete menu.</p>
+
+<div class="highlight"><pre lang="js">autocomplete.display(false)
+</pre></div>
+
+<h3>#parse(key)</h3>
+
+<p>Parses the result object called immediately after a successful response from the server. This is useful for preparing the data. Many times you don't recieve a direct result set, but instead an object containing the results, maybe something like <code>{ result : [...] }</code>. <code>key</code> may be a string or a function and supports <a href="https://github.com/component/to-function">to-function</a> notation.</p>
+
+<div class="highlight"><pre lang="js">autocomplete.parse('result')
+</pre></div>
+
+<p>or as a function</p>
+
+<div class="highlight"><pre lang="js">autocomplete.parse(function(res) {
+  return res.result;
+})
+</pre></div>
+
+<h3>#label(key)</h3>
+
+<p>Determines which key from the result object should be used to map label names in the menu. <code>key</code> may be a string or a function. label uses <a href="https://github.com/component/to-function">to-function</a>, so you may use dot notation to traverse the result object.</p>
+
+<div class="highlight"><pre lang="js">autocomplete.label('name.first')
+</pre></div>
+
+<p>or as a function</p>
+
+<div class="highlight"><pre lang="js">autocomplete.label(function(item) {
+  return item.name.first;
+})
+</pre></div>
+
+<h3>#value(key)</h3>
+
+<p>Determines which key from the result object should be used to map to values in the menu. This data is what will be passed when the user selects an item on the menu. <code>key</code> may be a string or a function and supports <a href="https://github.com/component/to-function">to-function</a> notation.</p>
+
+<div class="highlight"><pre lang="js">autocomplete.value('url')
+</pre></div>
+
+<p>or as a function</p>
+
+<div class="highlight"><pre lang="js">autocomplete.value(function(item) {
+  return item.url;
+})
+</pre></div>
+
+<h3>#format(formatter)</h3>
+
+<p>Format the menu items. Pass a <code>formatter(label, query)</code> function in to modify menu items. Useful for styling the result, such as providing query highlighting.</p>
+
+<p>Here's how to highlight the query within the menu</p>
+
+<div class="highlight"><pre lang="js">autocomplete.format(function(label, query) {
+  var r = new RegExp('(?:' + q + ')', 'i');
+  return label.replace(r, '<span class="highlight">$&</span>');
+})
+</pre></div>
+
+<h3>#search(fn)</h3>
+
+<p>Call <code>search</code> to manually execute a search. This is usually called by default as you type, but may be useful for one-off searches or if you disabled autocomplete. Optionally you may pass an <code>fn</code> function to handle the results or listen for the <code>response</code> event. Please note that <code>res</code> is run through <code>autocomplete#parse</code> beforehand.</p>
+
+<div class="highlight"><pre lang="js">autocomplete.search(function(err, res) {
+  if(err) throw err;
+  console.log(res);
+})
+</pre></div>
+
+<h3>#menu</h3>
+
+<p>Access to the raw <a href="https://github.com/component/menu">menu</a> component. Useful for listening to specific <code>menu</code> events.</p>
+
+<h3>#position(fn)</h3>
+
+<p>Used to manually modify the position of the menu. May be useful for providing additional menu styling like carets and stuff. <code>fn</code> must return a position object with <code>x</code> and <code>y</code> keys.</p>
+
+<p>Here's the default <code>fn</code></p>
+
+<div class="highlight"><pre lang="js">autocomplete.position(function(el) {
+  var coords = getOffset(el),
+      x = coords.left,
+      y = coords.top + el.offsetHeight;
+
+  return { x : x, y : y };
+})
+</pre></div>
+
+<h2>Test</h2>
+
+<pre><code>$ make test
+$ open <a href='http://localhost:7000'>http://localhost:7000</a>
+</code></pre>
+
+<h2>License</h2>
+
+<p>MIT</p>
+</article>
+</body>
+</html>

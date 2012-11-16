@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>godmodelabs/statsc</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>StatsC</h1>
+
+<p>StatsC lets you log statistics to your graphite/statsd servers straight from the browser.</p>
+
+<p>Just like StatsD, StatsC is a fire and forget thing. StatsC can't take your site down if it fails, only statistics won't get logged.</p>
+
+<p>StatsC is <strong>transport agnostic</strong> so you can use whatever transport method you want.</p>
+
+<p>By default it uses script-tags to provide cross domain ajax without using any libraries. Logging operations are buffered for 5s and then transmitted together.</p>
+
+<h2>Installation</h2>
+
+<h3>Server</h3>
+
+<div class="highlight"><pre lang="bash">$ sudo npm install -g statsc
+$ statsc-server
+  StatsC server listening on port 8127
+</pre></div>
+
+<p>or</p>
+
+<div class="highlight"><pre lang="bash">$ npm install statsc
+</pre></div>
+
+<div class="highlight"><pre lang="javascript">var statsc = require('statsc');
+var http = require('http');
+
+http.createServer(statsc.http).listen(8127, function() {
+  console.log('StatsC server listening on port 8127');
+});
+</pre></div>
+
+<h3>Client</h3>
+
+<p>In your <code>&lt;head&gt;</code>:</p>
+
+<div class="highlight"><pre lang="html">
+<script src="https://raw.github.com/godmodelabs/statsc/master/client.js"></script>
+
+</pre></div>
+
+<p>StatsC automatically sends collected metrics to <code><a href='http://localhost:8127/'>http://localhost:8127/</a></code> over the standard transport.</p>
+
+<p>You can scale this thing up easily by just picking one of your available servers randomly, like:</p>
+
+<div class="highlight"><pre lang="javascript">var availablePorts = [8127, 8128, 8129];
+var port = availablePorts[Math.round(Math.random()*availablePorts.length)-1];
+stats.connect('addr:'+port);
+</pre></div>
+
+<h2>Server API</h2>
+
+<h3>statsc.http(req, res)</h3>
+
+<p>HTTP(s) server handle. Pass to http(s).createServer() in order to handle the standard script-tag transport.</p>
+
+<h3>statsc.receive(op)</h3>
+
+<p>Logs <code>op</code> to StatsD.</p>
+
+<p>You have to use this if you don't use <code>statsc.http</code>.</p>
+
+<p>Example with Learnboost/socket.io:</p>
+
+<div class="highlight"><pre lang="javascript">socket.on('statsc', function(data) {
+ statsc.receive(data);
+});
+</pre></div>
+
+<h3>statsc.setAddress(addr)</h3>
+
+<p>Configure the address at which StatsD runs.</p>
+
+<h2>Client API</h2>
+
+<h3>statsc.connect(addr)</h3>
+
+<p>Use this if the server isnt listening on <code><a href='http://localhost:8127'>http://localhost:8127</a></code> or perhaps if you are using a custom <code>send</code> method.</p>
+
+<h3>statsc.increment(stat[, sampleRate])</h3>
+
+<p>Increment the counter at <code>stat</code> by 1.</p>
+
+<h3>statsc.decrement(stat[, sampleRate])</h3>
+
+<p>Decrement the counter at <code>stat</code> by 1.</p>
+
+<h3>statsc.gauge(stat, value[, sampleRate])</h3>
+
+<p>Set the gauge at <code>stat</code> to <code>value</code>.</p>
+
+<h3>statsc.timing(stat, time[, sampleRate])</h3>
+
+<p>Log <code>time</code> to <code>stat</code>.</p>
+
+<p><code>time</code> can either be</p>
+
+<ul>
+<li>a number in milliseconds</li>
+<li>a Date object, created at the timer's start</li>
+<li>a synchronous function to be timed</li>
+</ul>
+
+<h3>statsc.timer(stat[, sampleRate])</h3>
+
+<p>Timer utility in functional style.</p>
+
+<p>Returns a function you can call when you want to mark your timer as resolved.</p>
+
+<h3>statsc.send(data)</h3>
+
+<p>Standard implementation of a <code>send</code> method using script tags. This shouldn't need to be called manually.</p>
+
+<p>Overwrite this if you want to use websockets or jsonp or whatever.</p>
+
+<p>Example using LearnBoost/socket.io:</p>
+
+<div class="highlight"><pre lang="javascript">statsc.send = function(data) {
+ socket.emit('statsc', data);
+};
+</pre></div>
+
+<h2>License</h2>
+
+<p>(MIT)</p>
+
+<p>Copyright (c) 2012 Julian Gruber &lt;<a href='mailto:jgruber@boerse-go.de'>jgruber@boerse-go.de</a>&gt;</p>
+
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
+
+<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
+</article>
+</body>
+</html>

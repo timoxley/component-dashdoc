@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>superjoe30/diacritics</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>diacritics</h1>
+
+<p>remove diacritics from strings</p>
+
+<p>useful when implementing some kind of search or filter functionality.</p>
+
+<h2>Node.js Installation</h2>
+
+<pre><code>$ npm install diacritics
+</code></pre>
+
+<h2>Component Installation</h2>
+
+<pre><code>$ component install superjoe30/diacritics
+</code></pre>
+
+<h2>API</h2>
+
+<div class="highlight"><pre lang="js">var removeDiacritics = require('diacritics').remove;
+console.log(removeDiacritics("Iлｔèｒｎåｔïｏｎɑｌíƶａｔï߀ԉ"));
+// prints "internationalization"
+</pre></div>
+
+<h2>License</h2>
+
+<p>MIT</p>
+</article>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>yields/take</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>take</h1>
+
+<p>take N elements from array</p>
+
+<h2>Installation</h2>
+
+<pre><code>$ component install yields/take
+</code></pre>
+
+<h2>API</h2>
+
+<h4>take(arr, n)</h4>
+
+<div class="highlight"><pre lang="javascript">take([1, 2, 3], 2);
+// > [1, 2]
+take([1, 2, 3], function () {});
+// > []
+take([1, 2, 3], function (i, el) { return 3 == el });
+// > [3]
+</pre></div>
+
+<h2>Test</h2>
+
+<div class="highlight"><pre lang="bash">$ make test
+</pre></div>
+
+<h2>License</h2>
+
+<p>MIT</p>
+</article>
+</body>
+</html>

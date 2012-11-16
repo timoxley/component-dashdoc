@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>matthewmueller/debounce</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>debounce</h1>
+
+<p>Underscore's <a href="http://underscorejs.org/#debounce">debounce</a> method as a component.</p>
+
+<p>Useful for implementing behavior that should only happen after the input has stopped arriving. For example: rendering a preview of a Markdown comment, recalculating a layout after the window has stopped being resized, and so on.</p>
+
+<h2>Installation</h2>
+
+<pre><code>$ component install matthewmueller/debounce
+</code></pre>
+
+<h2>Example</h2>
+
+<p><div class="highlight"><pre lang="js">    var debounce = require('debounce');<br />    window.onresize = debounce(resize, 200);</p>
+
+<pre><code>function resize(e) {
+  console.log('height', window.innerHeight);
+  console.log('width', window.innerWidth);
+}
+</code></pre>
+
+<p></pre></div></p>
+
+<h2>API</h2>
+
+<h3>debounce(fn, wait, [ immediate ])</h3>
+
+<p>Creates and returns a new debounced version of the passed function that will postpone its execution until after wait milliseconds have elapsed since the last time it was invoked.</p>
+
+<p>Pass true for the <code>immediate</code> parameter to cause debounce to trigger the function on the leading instead of the trailing edge of the wait interval. Useful in circumstances like preventing accidental double-clicks on a "submit" button from firing a second time.</p>
+
+<h2>License</h2>
+
+<p>MIT</p>
+</article>
+</body>
+</html>

@@ -61,7 +61,7 @@ dom('li').select(function(el){
 <li><a href="#cssprop">.css(prop)</a></li>
 </ul>
 
-<p><a name="domid" /></p>
+<p><a name="domid"></a></p>
 
 <h3>dom(id)</h3>
 
@@ -73,7 +73,7 @@ assert(1 == list.length(), 'expected length of 1');
 assert('bar' == list.get(0).textContent);
 </pre></div>
 
-<p><a name="domhtml" /></p>
+<p><a name="domhtml"></a></p>
 
 <h3>dom(html)</h3>
 
@@ -83,7 +83,7 @@ assert('bar' == list.get(0).textContent);
 assert('Hello' == list.get(0).textContent);
 </pre></div>
 
-<p><a name="length" /></p>
+<p><a name="length"></a></p>
 
 <h3>.length()</h3>
 
@@ -93,7 +93,7 @@ assert('Hello' == list.get(0).textContent);
 assert(1 == list.length());
 </pre></div>
 
-<p><a name="geti" /></p>
+<p><a name="geti"></a></p>
 
 <h3>.get(i)</h3>
 
@@ -103,7 +103,7 @@ assert(1 == list.length());
 assert('Hello' == list.get(0).textContent);
 </pre></div>
 
-<p><a name="ati" /></p>
+<p><a name="ati"></a></p>
 
 <h3>.at(i)</h3>
 
@@ -113,7 +113,7 @@ assert('Hello' == list.get(0).textContent);
 assert('Hello' == list.at(0).get(0).textContent);
 </pre></div>
 
-<p><a name="first" /></p>
+<p><a name="first"></a></p>
 
 <h3>.first()</h3>
 
@@ -123,7 +123,7 @@ assert('Hello' == list.at(0).get(0).textContent);
 assert('foo' == list.first().text());
 </pre></div>
 
-<p><a name="last" /></p>
+<p><a name="last"></a></p>
 
 <h3>.last()</h3>
 
@@ -133,7 +133,7 @@ assert('foo' == list.first().text());
 assert('bar' == list.last().text());
 </pre></div>
 
-<p><a name="addclassname" /></p>
+<p><a name="addclassname"></a></p>
 
 <h3>.addClass(name)</h3>
 
@@ -144,7 +144,7 @@ list.addClass('foo').addClass('bar');
 assert('foo bar' == list.get(0).className);
 </pre></div>
 
-<p><a name="removeclassname" /></p>
+<p><a name="removeclassname"></a></p>
 
 <h3>.removeClass(name)</h3>
 
@@ -155,7 +155,7 @@ list.addClass('foo').addClass('bar').removeClass('foo');
 assert('bar' == list.get(0).className);
 </pre></div>
 
-<p><a name="toggleclassname" /></p>
+<p><a name="toggleclassname"></a></p>
 
 <h3>.toggleClass(name)</h3>
 
@@ -170,7 +170,7 @@ list.toggleClass('show');
 assert('' == list.get(0).className);
 </pre></div>
 
-<p><a name="hasclassname" /></p>
+<p><a name="hasclassname"></a></p>
 
 <h3>.hasClass(name)</h3>
 
@@ -186,7 +186,7 @@ assert(true === list.hasClass('show'));
 assert(false === list.hasClass('hide'));
 </pre></div>
 
-<p><a name="findselector" /></p>
+<p><a name="findselector"></a></p>
 
 <h3>.find(selector)</h3>
 
@@ -197,7 +197,7 @@ list = list.find('li');
 assert(2 == list.length());
 </pre></div>
 
-<p><a name="eachfn" /></p>
+<p><a name="eachfn"></a></p>
 
 <h3>.each(fn)</h3>
 
@@ -220,7 +220,7 @@ assert(list.get(0) == values[0].get(0));
 assert(list.get(1) == values[1].get(0));
 </pre></div>
 
-<p><a name="foreachfn" /></p>
+<p><a name="foreachfn"></a></p>
 
 <h3>.forEach(fn)</h3>
 
@@ -243,7 +243,7 @@ assert(list.get(0) == values[0]);
 assert(list.get(1) == values[1]);
 </pre></div>
 
-<p><a name="mapfn" /></p>
+<p><a name="mapfn"></a></p>
 
 <h3>.map(fn)</h3>
 
@@ -258,7 +258,7 @@ var ret = list.map(function(el, i){
 assert('foo|bar' == ret);
 </pre></div>
 
-<p><a name="selectfn" /></p>
+<p><a name="selectfn"></a></p>
 
 <h3>.select(fn)</h3>
 
@@ -274,7 +274,7 @@ assert(1 == selected.length(), 'invalid length');
 assert(selected.get(0) == list.get(1));
 </pre></div>
 
-<p><a name="filterfn" /></p>
+<p><a name="filterfn"></a></p>
 
 <h3>.filter(fn)</h3>
 
@@ -283,7 +283,7 @@ assert(selected.get(0) == list.get(1));
 <div class="highlight"><pre lang="js">assert(dom.List.prototype.filter == dom.List.prototype.select);
 </pre></div>
 
-<p><a name="cssprop-value" /></p>
+<p><a name="cssprop-value"></a></p>
 
 <h3>.css(prop, value)</h3>
 
@@ -294,7 +294,7 @@ list.css('display', 'none');
 assert('none' == list.get(0).style.display);
 </pre></div>
 
-<p><a name="cssprop" /></p>
+<p><a name="cssprop"></a></p>
 
 <h3>.css(prop)</h3>
 

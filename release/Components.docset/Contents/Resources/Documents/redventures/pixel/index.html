@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>redventures/pixel</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>pixel</h1>
+
+<p>Simple "pixel" library for component, inspired heavily by <a href="https://github.com/visionmedia/superagent">superagent</a>.</p>
+
+<h2>Installation</h2>
+
+<pre><code>$ component install redventures/pixel
+</code></pre>
+
+<h2>API</h2>
+
+<h3>.pixel(type)</h3>
+
+<p>Instantitates a new pixel for the given <code>type</code>. The supported types are:</p>
+
+<ul>
+<li>image</li>
+<li>script</li>
+</ul>
+
+<div class="highlight"><pre lang="javascript">var pixel = require('pixel');
+
+pixel('image')
+  .send({ key1: 'value1' })
+  .send({ key2: 'value2' })
+  .end();
+
+pixel('script')
+  .send('key1', 'value1')
+  .send('key2', 'value2')
+  .end(function(){
+    // optional callback
+  });
+</pre></div>
+
+<h3>.send(key, value)</h3>
+
+<p>Appends <code>key=value</code> as a querystring parameter of the pixel request. <em>Note that this will urlencode the values for you</em>.</p>
+
+<div class="highlight"><pre lang="javascript">pixel('image')
+  .send('key1', 'value 1')
+  .send({ key2: 'value 2' })
+  .send({ 
+    key3: 'value 3',
+    key4: 'value 4'
+  })
+  .end();
+</pre></div>
+
+<h3>.set(key, value)</h3>
+
+<p>Sets the configuration value for the request. If you want to change it for all requests, see <code>.defaults()</code>.</p>
+
+<div class="highlight"><pre lang="javascript">pixel('script')
+  .set('host', 'foo.com')
+  .set('path', '/bar.js')
+  .send('key', 'value')
+  .end();
+</pre></div>
+
+<h3>.end([callback])</h3>
+
+<p>Sends the actual HTTP request for the pixel, invoking the optional <code>callback</code>.</p>
+
+<h3>pixel.defaults(options)</h3>
+
+<p>Sets the defaults for every pixel instantiated. The options and predefined defaults are:</p>
+
+<ul>
+<li><code>host</code>: Remote hostname. Defaults to <code>location.hostname</code>.</li>
+<li><code>path</code>: Remote path. Defaults to <code>/pixel</code>.</li>
+<li><code>protocol</code>: Remote protocol. Defaults to <code>location.protocol</code></li>
+<li><code>cacheBust</code>: Whether to append a random "cache bust" to the URL.</li>
+</ul>
+
+<div class="highlight"><pre lang="javascript">var pixel = require('pixel');
+
+pixel.defaults({
+  host: '//google.com',
+  path: '/api'
+});
+
+pixel('script')
+  .send('key', 'value')
+  .end();
+</pre></div>
+
+<h2>TODO</h2>
+
+<ul>
+<li>more tests, specially IE and mobile.</li>
+<li>passing responses back to <code>.end(callback)</code>. Probably only for <code>script</code> type.</li>
+</ul>
+
+<h2>License</h2>
+
+<p>Copyright 2012 Red Ventures</p>
+
+<p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this work except in compliance with the License. You may obtain a copy of the License in the LICENSE file, or at:</p>
+
+<p><a href="http://www.apache.org/licenses/LICENSE-2.0"><a href='http://www.apache.org/licenses/LICENSE-2.0'>http://www.apache.org/licenses/LICENSE-2.0</a></a></p>
+
+<p>Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.</p>
+</article>
+</body>
+</html>

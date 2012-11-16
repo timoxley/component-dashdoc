@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>component/ease</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>ease</h1>
+
+<p>Easing functions (for canvas etc)</p>
+
+<ul>
+<li>linear</li>
+<li>inQuad</li>
+<li>outQuad</li>
+<li>inOutQuad</li>
+<li>inCube</li>
+<li>outCube</li>
+<li>inOutCube</li>
+<li>inQuart</li>
+<li>outQuart</li>
+<li>inOutQuart</li>
+<li>inQuint</li>
+<li>outQuint</li>
+<li>inOutQuint</li>
+<li>inSine</li>
+<li>outSine</li>
+<li>inOutSine</li>
+<li>inExpo</li>
+<li>outExpo</li>
+<li>inOutExpo</li>
+<li>inCirc</li>
+<li>outCirc</li>
+<li>inOutCirc</li>
+<li>inBack</li>
+<li>outBack</li>
+<li>inOutBack</li>
+<li>inBounce</li>
+<li>outBounce</li>
+<li>inOutBounce</li>
+</ul>
+
+<h2>Aliases</h2>
+
+<ul>
+<li>in-quad</li>
+<li>out-quad</li>
+<li>in-out-quad</li>
+<li>in-cube</li>
+<li>out-cube</li>
+<li>in-out-cube</li>
+<li>in-quart</li>
+<li>out-quart</li>
+<li>in-out-quart</li>
+<li>in-quint</li>
+<li>out-quint</li>
+<li>in-out-quint</li>
+<li>in-sine</li>
+<li>out-sine</li>
+<li>in-out-sine</li>
+<li>in-expo</li>
+<li>out-expo</li>
+<li>in-out-expo</li>
+<li>in-circ</li>
+<li>out-circ</li>
+<li>in-out-circ</li>
+<li>in-back</li>
+<li>out-back</li>
+<li>in-out-back</li>
+<li>in-bounce</li>
+<li>out-bounce</li>
+<li>in-out-bounce</li>
+</ul>
+
+<h2>Example</h2>
+
+<div class="highlight"><pre lang="js">var ease = require('ease');
+var requestAnimationFrame = require('raf');
+var canvas = document.querySelector('canvas');
+var ctx = canvas.getContext('2d');
+
+var stop = false;
+function animate() {
+  if (stop) return;
+  requestAnimationFrame(animate);
+  draw();
+}
+
+var startx = 20;
+var x = startx;
+var destx = 300;
+var y = 400 / 2;
+var duration = 1000;
+var start = Date.now();
+var end = start + duration;
+
+function draw() {
+  var now = Date.now();
+  if (now - start >= duration) stop = true;
+  var p = (now - start) / duration;
+  val = ease.inOutBounce(p);
+  x = startx + (destx - startx) * val;
+  canvas.width = canvas.width;
+  ctx.fillStyle = 'red';
+  ctx.arc(x, y, 10, 0, Math.PI * 2, false);
+  ctx.fill();
+}
+
+animate();
+
+</pre></div>
+
+<h1>License</h1>
+
+<p>MIT</p>
+</article>
+</body>
+</html>

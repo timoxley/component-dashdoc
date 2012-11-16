@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>btknorr/ejs</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>Client-side EJS Component</h1>
+
+<h2>Installation</h2>
+
+<pre>
+$ component install btknorr/ejs
+</pre>
+
+<p>For more info see the <a href="http://github.com/component">Component framework</a></p>
+
+<h2>Usage</h2>
+
+<pre>
+var ejs = require('ejs');
+
+ejs.render('/pathTo/ejsFileName', {myLocal:'hello'}, function(err, html) {
+    document.getElementById('testDiv').innerHTML = html;
+});
+</pre>
+
+<h1>The following is the original visionmedia documentation:</h1>
+
+<h1>EJS</h1>
+
+<p>Embedded JavaScript templates.</p>
+
+<h2>Installation</h2>
+
+<pre><code>$ npm install ejs
+</code></pre>
+
+<h2>Features</h2>
+
+<ul>
+<li>Complies with the <a href="http://expressjs.com">Express</a> view system</li>
+<li>Static caching of intermediate JavaScript</li>
+<li>Unbuffered code for conditionals etc <code>&lt;% code %&gt;</code></li>
+<li>Escapes html by default with <code>&lt;%= code %&gt;</code></li>
+<li>Unescaped buffering with <code>&lt;%- code %&gt;</code></li>
+<li>Supports tag customization</li>
+<li>Filter support for designer-friendly templates</li>
+<li>Includes</li>
+<li>Client-side support</li>
+<li>Newline slurping with <code>&lt;% code -%&gt;</code> or <code>&lt;% -%&gt;</code> or <code>&lt;%= code -%&gt;</code> or <code>&lt;%- code -%&gt;</code></li>
+</ul>
+
+<h2>Example</h2>
+
+<pre><code>&lt;% if (user) { %&gt;
+    &lt;h2&gt;&lt;%= user.name %&gt;&lt;/h2&gt;
+&lt;% } %&gt;
+</code></pre>
+
+<h2>Usage</h2>
+
+<pre><code>ejs.compile(str, options);
+// =&gt; Function
+
+ejs.render(str, options);
+// =&gt; str
+</code></pre>
+
+<h2>Options</h2>
+
+<ul>
+<li><code>cache</code>           Compiled functions are cached, requires <code>filename</code></li>
+<li><code>filename</code>        Used by <code>cache</code> to key caches</li>
+<li><code>scope</code>           Function execution context</li>
+<li><code>debug</code>           Output generated function body</li>
+<li><code>compileDebug</code>    When <code>false</code> no debug instrumentation is compiled</li>
+<li><code>client</code>          Returns standalone compiled function</li>
+<li><code>open</code>            Open tag, defaulting to "&lt;%"</li>
+<li><code>close</code>           Closing tag, defaulting to "%>"</li>
+<li><ul><li>All others are template-local variables</li></ul></li>
+</ul>
+
+<h2>Includes</h2>
+
+<p>Includes are relative to the template with the <code>include</code> statement,<br /> for example if you have "./views/users.ejs" and "./views/user/show.ejs"<br /> you would use <code>&lt;% include user/show %&gt;</code>. The included file(s) are literally<br /> included into the template, <em>no</em> IO is performed after compilation, thus<br /> local variables are available to these included templates.</p>
+
+<div class="highlight"><pre lang="">
+<ul>
+  <% users.forEach(function(user){ %>
+    <% include user/show %>
+  <% }) %>
+</ul>
+
+</pre></div>
+
+<h2>Custom delimiters</h2>
+
+<p>Custom delimiters can also be applied globally:</p>
+
+<pre><code>var ejs = require('ejs');
+ejs.open = '{{';
+ejs.close = '}}';
+</code></pre>
+
+<p>Which would make the following a valid template:</p>
+
+<pre><code>&lt;h1&gt;{{= title }}&lt;/h1&gt;
+</code></pre>
+
+<h2>Filters</h2>
+
+<p>EJS conditionally supports the concept of "filters". A "filter chain"<br />is a designer friendly api for manipulating data, without writing JavaScript.</p>
+
+<p>Filters can be applied by supplying the <em>:</em> modifier, so for example if we wish to take the array <code>[{ name: 'tj' }, { name: 'mape' },  { name: 'guillermo' }]</code> and output a list of names we can do this simply with filters:</p>
+
+<p>Template:</p>
+
+<pre><code>&lt;p&gt;&lt;%=: users | map:'name' | join %&gt;&lt;/p&gt;
+</code></pre>
+
+<p>Output:</p>
+
+<pre><code>&lt;p&gt;Tj, Mape, Guillermo&lt;/p&gt;
+</code></pre>
+
+<p>Render call:</p>
+
+<pre><code>ejs.render(str, {
+    users: [
+      { name: 'tj' },
+      { name: 'mape' },
+      { name: 'guillermo' }
+    ]
+});
+</code></pre>
+
+<p>Or perhaps capitalize the first user's name for display:</p>
+
+<pre><code>&lt;p&gt;&lt;%=: users | first | capitalize %&gt;&lt;/p&gt;
+</code></pre>
+
+<h2>Filter list</h2>
+
+<p>Currently these filters are available:</p>
+
+<ul>
+<li>first</li>
+<li>last</li>
+<li>capitalize</li>
+<li>downcase</li>
+<li>upcase</li>
+<li>sort</li>
+<li>sort_by:'prop'</li>
+<li>size</li>
+<li>length</li>
+<li>plus:n</li>
+<li>minus:n</li>
+<li>times:n</li>
+<li>divided_by:n</li>
+<li>join:'val'</li>
+<li>truncate:n</li>
+<li>truncate_words:n</li>
+<li>replace:pattern,substitution</li>
+<li>prepend:val</li>
+<li>append:val</li>
+<li>map:'prop'</li>
+<li>reverse</li>
+<li>get:'prop'</li>
+</ul>
+
+<h2>Adding filters</h2>
+
+<p>To add a filter simply add a method to the <code>.filters</code> object:</p>
+
+<div class="highlight"><pre lang="js">ejs.filters.last = function(obj) {
+  return obj[obj.length - 1];
+};
+</pre></div>
+
+<h2>Layouts</h2>
+
+<p>Currently EJS has no notion of blocks, only compile-time <code>include</code>s,<br />  however you may still utilize this feature to implement "layouts" by<br />  simply including a header and footer like so:</p>
+
+<div class="highlight"><pre lang="html"><% include head %>
+
+
+<h1>Title</h1>
+
+
+<p>My page</p>
+
+<% include foot %>
+
+</pre></div>
+
+<h2>client-side support</h2>
+
+<p>include <code>./ejs.js</code> or <code>./ejs.min.js</code> and <code>require("ejs").compile(str)</code>.</p>
+
+<h2>License</h2>
+
+<p>(The MIT License)</p>
+
+<p>Copyright (c) 2009-2010 TJ Holowaychuk &lt;<a href='mailto:tj@vision-media.ca'>tj@vision-media.ca</a>&gt;</p>
+
+<p>Permission is hereby granted, free of charge, to any person obtaining<br />a copy of this software and associated documentation files (the<br />'Software'), to deal in the Software without restriction, including<br />without limitation the rights to use, copy, modify, merge, publish,<br />distribute, sublicense, and/or sell copies of the Software, and to<br />permit persons to whom the Software is furnished to do so, subject to<br />the following conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be<br />included in all copies or substantial portions of the Software.</p>
+
+<p>THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,<br />EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF<br />MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.<br />IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY<br />CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,<br />TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE<br />SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
+</article>
+</body>
+</html>

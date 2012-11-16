@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>timoxley/is-collection</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>is-collection</h1>
+
+<p>Evaluates <em>obj</em> to determine if it's an array, an array-like collection, or<br />something else. This is useful when working with the function <code>arguments</code><br />collection, <code>NodeLists</code> and <code>HTMLElement</code> collections.</p>
+
+<p>Note: This implementation doesn't consider elements that are also<br />collections, such as <code>&lt;form&gt;</code> and <code>&lt;select&gt;</code>, to be array-like.</p>
+
+<h2>Installation</h2>
+
+<pre><code>$ component install timoxley/is-collection
+</code></pre>
+
+<h2>Usage</h2>
+
+<div class="highlight"><pre lang="js">
+isCollection(document.querySelectorAll('div')) // => truthy (2)
+isCollection([]) // => truthy (1)
+
+function() {
+  return isCollection(arguments)
+}() // => truthy (2)
+
+</pre></div>
+
+<h2>API</h2>
+
+<h3>isCollection(object)</h3>
+
+<p>Takes an object and returns a number indicating the results of the test:</p>
+
+<ul>
+<li>0: Neither an array nor an array-like collection.</li>
+<li>1: Real array.</li>
+<li>2: Array-like collection.</li>
+</ul>
+
+<h2>Credit</h2>
+
+<p>Original code adapted from<br /><a href="http://yuilibrary.com/yui/docs/api/files/yui_js_yui-array.js.html#l252">YUI</a>.</p>
+
+<h2>License</h2>
+
+<p><a href="http://yuilibrary.com/license/">BSD</a></p>
+</article>
+</body>
+</html>

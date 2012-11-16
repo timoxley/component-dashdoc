@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>rvagg/traversty</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>Traversty &mdash; headache-free DOM collection management and traversal</h1>
+
+<p>Traversty is a library-agnostic DOM utility for traversal and element collection manipulation. Traversty doesn't provide any DOM manipulation features; instead, Traversty is used for managing collections of DOM elements and navigating the DOM.</p>
+
+<p><strong>Current file size:</strong> 15.7 kB raw, 5.7 kB min, <strong>2.1 kB gzip</strong></p>
+
+<p><a href="#api"><i>Just show me the API!</i></a></p>
+
+<h2>Traversal</h2>
+
+<p>The core DOM traversal methods are inspired by <a href="http://prototypejs.org">Prototype</a>'s excelent "DOM traversal toolkit", you get <a href="#up"><code>up()</code></a>, <a href="#down"><code>down()</code></a>, <a href="#next"><code>next()</code></a> and <a href="#previous"><code>previous()</code></a> with optional <code>selector</code> and <code>index</code> arguments, all in a multi-element environment&mdash;jQuery-like rather than Prototype's single-element implementation.</p>
+
+<p>In addition, jQuery-compatible traversal methods extend this functionality: <a href="#parents"><code>parents()</code></a>, <a href="#closest"><code>closest()</code></a>, <a href="#children"><code>children()</code></a>, <a href="#siblings"><code>siblings()</code></a> and <a href="#prev"><code>prev()</code></a> a simple alias for <a href="#previous"><code>previous()</code></a>.</p>
+
+<h2>Collection filtering</h2>
+
+<p>Traversty operates on DOM element collections, jQuery-style, so it also gives you methods to filter and manipulate that collection. The filtering methods are designed to be jQuery-compatible. You get: <a href="#first"><code>first()</code></a>, <a href="#last"><code>last()</code></a>, <a href="#eq"><code>eq()</code></a>, <a href="#not"><code>not()</code></a>, <a href="#slice"><code>slice()</code></a>, <a href="#filter"><code>filter()</code></a>, <a href="#has"><code>has()</code></a> and <a href="#is"><code>is()</code></a> (this last method returns a boolean rather than a collection).</p>
+
+<p>Traversty emulates an Array and includes additional methods to help you manage it as if it were one: <a href="#get"><code>get()</code></a>, <a href="#toArray"><code>toArray()</code></a>, <a href="#size"><code>size()</code></a>, <a href="#push"><code>push()</code></a>, <a href="#sort"><code>sort()</code></a>, <a href="#splice"><code>splice()</code></a>.</p>
+
+<h3>Ender integration</h3>
+
+<p>Traversty is designed to be integrated in an <a href="http://ender.no.de/">Ender</a> build, to augment what's already available in <a href="https://github.com/ded/bonzo">Bonzo</a> but can just as easily be used as a stand-alone utility.</p>
+
+<div class="highlight"><pre lang="">$ ender build jeesh traversty
+</pre></div>
+
+<h3>Component integration</h3>
+
+<p>You can also install Traversty as a <a href="https://github.com/component/component">component</a>:</p>
+
+<div class="highlight"><pre lang="">$ component install rvagg/traversty
+</pre></div>
+
+<p>Wiring in a selector engine is up to you in your component build. You'll need to make one-off call to <code>setSelectorEngine()</code> once you have a selector engine to inject, otherwise Traversty will simply use native <code>querySelectorAll()</code> and <code>matchesSelector()</code> if available. See the <a href="#setSelectorEngine"><code>setSelectorEngine()</code></a> for more details on how this works.</p>
+
+<div class="highlight"><pre lang="js">var zest = require('zest')
+  , $ = require('traversty').setSelectorEngine(zest)
+</pre></div>
+
+<h2>Example usage</h2>
+
+<p>This bit of craziness comes from Traversty's integration tests. The bulk of this code is used to test Traversty's integration with Ender where the <code>css()</code> method is provided by <a href="https://github.com/ded/bonzo">Bonzo</a> but there is also a <a href="https://github.com/rvagg/traversty/blob/master/test/integration/traversty_css_qwery.html">vanilla version</a> with only <a href="https://github.com/ded/qwery">Qwery</a> for the selector engine and a <code>css()</code> method added using Traversty's <a href="#aug"><code>aug()</code></a> method (see the <a href="https://github.com/rvagg/traversty/blob/master/examples/aug-css.js">/examples/aug-css.js</a> file for how this is done).</p>
+
+<div class="highlight"><pre lang="js">var $ = traversty
+$.setSelectorEngine(qwery)
+$('#fixtures > ul') // Traversty operates on collections of elements
+  .down(0).css('color', 'red')
+  .next('li', 1).css('color', 'green')
+  .next().down('li', 2).css('color', 'blue')
+  .next().down().css('color', 'yellow')
+  .up(2).next().css('color', 'purple')
+  .siblings(3).css('fontWeight', 'bold')
+  .children().css('textDecoration', 'underline')
+  .children(1).css('borderLeft', 'solid 5px red')
+  .parents('*').filter('ul').css('borderTop', 'dashed 2px green')
+  .not('.second').css('borderBottom', 'solid 3px blue')
+  .down('.second li').has('span').css('marginTop', '10px')
+  .up('ul').eq(-1).css('borderLeft', 'solid 5px orange')
+  .closest('#fixtures').down('li').slice(-10,-9).css('fontSize', '25px')
+  // Note: the css() method is not native to Traversty but is added with aug()
+</pre></div>
+
+<p>The return type from the <code>traversty()</code> method is not a true <code>Array</code> but can be used like an array in almost all respects, it has <code>.length</code> and <code>[]</code> subscript element access and other standard <code>Array</code> methods.</p>
+
+<p><a href="#api"></a></p>
+
+<h2>API</h2>
+
+<ul>
+<li><a href="#ctor"><code><b>traversty()</b></code></a></li>
+<li><a href="#next"><code>traversty().<b>next()</b></code></a></li>
+<li><a href="#previous"><code>traversty().<b>previous()</b></code></a></li>
+<li><a href="#previous"><code>traversty().<b>prev()</b></code></a></li>
+<li><a href="#up"><code>traversty().<b>up()</b></code></a></li>
+<li><a href="#parents"><code>traversty().<b>parents()</b></code></a></li>
+<li><a href="#closest"><code>traversty().<b>closest()</b></code></a></li>
+<li><a href="#down"><code>traversty().<b>down()</b></code></a></li>
+<li><a href="#children"><code>traversty().<b>children()</b></code></a></li>
+<li><a href="#siblings"><code>traversty().<b>siblings()</b></code></a></li>
+<li><a href="#first"><code>traversty().<b>first()</b></code></a></li>
+<li><a href="#last"><code>traversty().<b>last()</b></code></a></li>
+<li><a href="#eq"><code>traversty().<b>eq()</b></code></a></li>
+<li><a href="#slice"><code>traversty().<b>slice()</b></code></a></li>
+<li><a href="#filter"><code>traversty().<b>filter()</b></code></a></li>
+<li><a href="#not"><code>traversty().<b>not()</b></code></a></li>
+<li><a href="#has"><code>traversty().<b>has()</b></code></a></li>
+<li><a href="#is"><code>traversty().<b>is()</b></code></a></li>
+<li><a href="#get"><code>traversty().<b>get()</b></code></a></li>
+<li><a href="#each"><code>traversty().<b>each()</b></code></a></li>
+<li><a href="#toArray"><code>traversty().<b>toArray()</b></code></a></li>
+<li><a href="#size"><code>traversty().<b>size()</b></code></a></li>
+<li><a href="#push"><code>traversty().<b>push()</b></code></a></li>
+<li><a href="#sort"><code>traversty().<b>sort()</b></code></a></li>
+<li><a href="#splice"><code>traversty().<b>splice()</b></code></a></li>
+<li><a href="#aug"><code>traversty.<b>aug()</b></code></a></li>
+<li><a href="#setSelectorEngine"><code>traversty.<b>setSelectorEngine()</b></code></a></li>
+<li><a href="#noConflict"><code>traversty.<b>noConflict()</b></code></a></li>
+</ul>
+
+<hr />
+
+<p><a name="ctor"></a></p>
+
+<h3>traversty(element | elements | selector)</h3>
+
+<p><code>traversty()</code> gives you a new Traversty instance containing the elements you provide.</p>
+
+<p>Once you have a collection, you can call any of the Traversty methods on that collection. You can give a single DOM element or an array of DOM elements. If you provide a string argument it will be used as a selector to either query the DOM via the browser's native <code>querySelectorAll()</code> implementation or use a selector engine which you provide (see <a href="#setSelectorEngine"><code>setSelectorEngine()</code></a>).</p>
+
+<p>You can pluck individual elements with array accessors (subscript), e.g. <code>traversty(document.body)[0] // → document.body</code> </p>
+
+<p>When included in an Ender build, <code>$(element | elements | selector)</code> does the same thing and all the Traversty methods will be available on the resulting Ender object.</p>
+
+<hr />
+
+<p><a name="next"></a></p>
+
+<h3>next([selector [, index = 0]])</h3>
+
+<p><code>traversty(elements).next()</code> returns a new Traversty instance containing <em>nextSibling</em> elements according to the arguments provided.</p>
+
+<ul>
+<li><code>selector</code> <em>(String)</em> is an optional CSS selector</li>
+<li><code>index</code> <em>(Number)</em> is an optional array-ish index argument (defaults to <code>0</code>, i.e. first match)</li>
+</ul>
+
+<p>You will get elements that match the given <em>selector</em> (if provided) starting from the <em>nextSibling</em> of the starting element(s), all the way across to the last <em>nextSibling</em>.</p>
+
+<p>If no <code>index</code> or <code>selector</code> is given then you get just the <em>nextSibling</em>s of the elements; i.e. you shift <em>across</em> by one.</p>
+
+<p>If just an <code>index</code> is provided then you'll get the <code>index+1</code> <em>nextSibling</em>s of the element(s). i.e. <code>index</code> is 0-based, like arrays, 0 is <em>nextSibling</em> and 1 is <em>nextSibling.nextSibling</em>, unless you provide a <code>selector</code> of course, in which case it'll skip over non-matching elements.</p>
+
+<p>If just a <code>selector</code> is provided then no <code>index</code> will be assumed, you'll get <strong>all</strong> matching <em>nextSibling</em> elements.</p>
+
+<h4>Examples</h4>
+
+<div class="highlight"><pre lang="js">traversty('li:first-child').next();
+  // →  returns the second `<li>` of every list in the document
+traversty('li.allstarts').next('li', 1);
+  // →  returns the `nextSibling` of the `nextSibling` of the starting elements
+traversty('li:first-child').next('li');
+  // →  returns all `<li>` elements, except for the first-children of every lits in the document
+</pre></div>
+
+<hr />
+
+<p><a name="previous"></a></p>
+
+<h3>previous([selector [, index = 0]])</h3>
+
+<p><code>traversty(elements).previous()</code> returns a new Traversty instance containing <em>previousSibling</em> elements according to the arguments provided.</p>
+
+<ul>
+<li><code>selector</code> <em>(String)</em> is an optional CSS selector</li>
+<li><code>index</code> <em>(Number)</em> is an optional array-ish index argument (defaults to <code>0</code>, i.e. first match)</li>
+</ul>
+
+<p>Exactly the same as <a href="#next"><code>next()</code></a> except it works on <em>previousSibling</em>, so you move <em>backwards</em> amongst sibling elements.</p>
+
+<h4>Examples</h4>
+
+<div class="highlight"><pre lang="js">traversty('li:nth-child(20)').previous();
+  // →  returns 19th child of the every list in the document (where it exists)
+traversty('li.allstarts').previous('li', 1);
+  // →  returns the `previousSibling` of the `previousSibling` of the starting element
+traversty('li:nth-child(20)').previous('.interesting');
+  // →  returns all `<li>` elements with class "interesting" up to the 19th child of every list
+  //     in the document where there are at least 20 children.
+</pre></div>
+
+<hr />
+
+<p><a name="prev"></a></p>
+
+<h3>prev([selector [, index = 0]])</h3>
+
+<p><code>traversty(elements).prev()</code> is a simple alias for <a href="#previous"><code>previous()</code></a>, provided mainly for jQuery compatibility.</p>
+
+<hr />
+
+<p><a name="up"></a></p>
+
+<h3>up([selector [, index = 0]])</h3>
+
+<p><code>traversty(elements).up()</code> returns a new Traversty instance containing <em>parentNode</em> elements according to the arguments provided.</p>
+
+<ul>
+<li><code>selector</code> <em>(String)</em> is an optional CSS selector</li>
+<li><code>index</code> <em>(Number)</em> is an optional array-ish index argument (defaults to <code>0</code>, i.e. first match)</li>
+</ul>
+
+<p>Similar to <a href="#next"><code>next()</code></a> and <a href="#previous"><code>previous()</code></a> except that it works on <em>parentNode</em>s and will continue all the up to the document root depending on what you're asking for.</p>
+
+<p>If no <code>index</code> or <code>selector</code> is given then you get just the `parentNode*s of the elements.</p>
+
+<p>If just an <code>index</code> is provided then you'll get the <code>index+1</code> <em>parentNode</em>s of the element. i.e. <code>index</code> is 0-based, like arrays, 0 is <em>parentNode</em> and 1 is <em>parentNode.parentNode</em>, unless you provide a <code>selector</code> of course, in which case it'll skip over non-matching elements.</p>
+
+<p>If just a <code>selector</code> is provided then no <code>index</code> will be assumed, you'll get <strong>all</strong> matching ancestor elements.</p>
+
+<h4>Examples</h4>
+
+<div class="highlight"><pre lang="js">traversty('li#start').up();
+  // →  returns the `<ul>` parent element
+traversty('li.allstarts').up('ul', 1);
+  // →  returns the grandparent `<ul>` elements if the start elements are nested at two levels
+traversty('li.allstarts').up('ul');
+  // →  returns all ancestor `<ul>` elements, no matter how deep the nesting
+</pre></div>
+
+<hr />
+
+<p><a name="parents"></a></p>
+
+<h3>parents([selector = '*' [, index ]])</h3>
+
+<p><code>traversty(elements).parents()</code> returns a new Traversty instance containing <em>parentNode</em> elements according to the arguments provided, similar, but not identical to <a href="#up"><code>up()</code></a>.</p>
+
+<ul>
+<li><code>selector</code> <em>(String)</em> is an optional CSS selector (defaults to <code>'*'</code>, i.e. match <em>all</em> ancestor elements)</li>
+<li><code>index</code> <em>(Number)</em> is an optional array-ish index argument (defaults to <code>0</code>, i.e. first match)</li>
+</ul>
+
+<p>Performs exactly the same as <a href="#up"><code>up()</code></a>, <em>except</em>, the <code>'selector'</code> argument defaults to <code>'*'</code> which has the effect of matching <em>all</em> ancestor elements, not just the first one. <code>parents()</code> will return exactly the same collection as <code>up('*')</code>. Provided mainly for jQuery compatibility.</p>
+
+<hr />
+
+<p><a name="closest"></a></p>
+
+<h3>closest([selector = '*' [, index = 0]])</h3>
+
+<p><code>traversty(elements).closest()</code> returns a new Traversty instance containing the elements and/or <em>parentNode</em> elements according to the arguments provided, similar, but not identical to <a href="#parents"><code>parents()</code></a>.</p>
+
+<ul>
+<li><code>selector</code> <em>(String)</em> is an optional CSS selector (defaults to <code>'*'</code>, i.e. match <em>all</em> ancestor elements)</li>
+<li><code>index</code> <em>(Number)</em> is an optional array-ish index argument (defaults to <code>0</code>, i.e. the current element)</li>
+</ul>
+
+<p>Performs exactly the same operation as <a href="#parents"><code>parents()</code></a> except for two important differences:</p>
+
+<ul>
+<li>Matching starts at the <strong>current</strong> elements rather than the direct parent elements. So a <code>closest('*')</code> will return the current elements because they match the selector <code>'*'</code>.</li>
+<li>The <code>index</code> argument defaults to <code>0</code>, just like <a href="#up"><code>up()</code></a>, so you will only get the first match. An index of <code>n</code>, you will get the <em>nth</em> match, start with the current elements.</li>
+</ul>
+
+<hr />
+
+<p><a name="down"></a></p>
+
+<h3>down([selector [, index = 0]])</h3>
+
+<p><code>traversty(elements).down()</code> returns a new Traversty instance containing descendant elements according to the arguments provided.</p>
+
+<ul>
+<li><code>selector</code> <em>(String)</em> is an optional CSS selector</li>
+<li><code>index</code> <em>(Number)</em> is an optional array-ish index argument (defaults to <code>0</code>, i.e. first match)</li>
+</ul>
+
+<p>While <code>down()</code> is very similar to the other methods, it's perhaps best to think of it as what you might get with a <code>find()</code> method from a selector engine.</p>
+
+<p><code>down()</code> works on elements <strong>in document-order</strong>, so it operates on child elements and children of children but it also moves through child-siblings on the way to children of children.</p>
+
+<p>The following fragment should illustrate the <code>index</code>ing you get when you use <code>down()</code>:</p>
+
+<div class="highlight"><pre lang="html">
+<ul id="root">
+  <li>first</li>   <!-- 0 -->
+  <li>second</li>  <!-- 1 -->
+  <li>third        <!-- 2 -->
+    <ul>           <!-- 3 -->
+      <li>i</li>   <!-- 4 -->
+      <li>ii</li>  <!-- 5 -->
+      <li>iii</li> <!-- 6 -->
+    </ul>
+  </li>
+  <li>fourth</li>  <!-- 7 -->
+</ul>
+
+</pre></div>
+
+<p>So</p>
+
+<div class="highlight"><pre lang="js">traversty('#root').down(5)
+  // →  will give you `<li>ii</li>`
+traversty('#root').down('li', 5)
+  // →  will give you `<li>i</li>` because the `<ul>` is ignored
+</pre></div>
+
+<p>Of course <code>down()</code> works on multiple elements simultaneously just like the other methods.</p>
+
+<hr />
+
+<p><a name="children"></a></p>
+
+<h3>children([selector [, index = 0]])</h3>
+
+<p><code>traversty(elements).children()</code> returns a new Traversty instance containing direct descendant (child) elements according to the arguments provided.</p>
+
+<div class="highlight"><pre lang="html">
+<ul id="root">
+  <li>first
+    <ul>
+      <li><a href="#">i</a></li>
+      <li>ii
+        <ul>
+          <li>a</li>
+          <li>b</li>
+        </ul>
+      </li>
+      <li>iii</li>
+      <li>iv</li>
+    </ul>
+  </li>
+  <li>second</li>
+</ul>
+
+</pre></div>
+
+<div class="highlight"><pre lang="js">traversty('#root > li').children()
+  // →  will give you *only* the second level `<ul>` element as it's
+  //    the only direct descendant of the top `<li>` elements
+traversty('#root > li').children().children()
+  // →  will give you *only* the second level `<li>` elements and none
+  //    of their children
+</pre></div>
+
+<hr />
+
+<p><a name="siblings"></a></p>
+
+<h3>siblings([selector [, index = 0]])</h3>
+
+<p><code>traversty(elements).siblings()</code> returns a new Traversty instance containing <em>previousSibling</em> and <em>nextSibling</em> elements according to the arguments provided. It's important to note that the resulting collection <strong>will not</strong> include the original elements unless they are siblings of each other. To illustrate:</p>
+
+<div class="highlight"><pre lang="html">
+<ul id="root">
+  <li>first</li>
+  <li>second</li>
+  <li>third</li>
+  <li>fourth</li>
+</ul>
+
+</pre></div>
+
+<div class="highlight"><pre lang="js">traversty('#root :nth-child(2)').siblings()
+  // →  will give you all `<li>` elements except the second
+traversty('#root :nth-child(2n)').siblings()
+  // →  will give you all `<li>` elements because they are all siblings of
+  //    the original collection's elements
+</pre></div>
+
+<p><code>siblings()</code> is the only method in Traversty that is not guaranteed to return a collection of elements in document-order (i.e. in the order they appear in the HTML). If you call <code>siblings()</code> on elements that are already siblings then the collection mechanism may mean that the results are out of order. Generally this shouldn't matter but you are warned if order matters to you for some reason.</p>
+
+<hr />
+
+<p><a name="first"></a></p>
+
+<h3>first()</h3>
+
+<p><code>traversty(elements).first()</code> returns a new Traversty instance containing <em>only</em> the first element in the original collection.</p>
+
+<hr />
+
+<p><a name="last"></a></p>
+
+<h3>last()</h3>
+
+<p><code>traversty(elements).last()</code> returns a new Traversty instance containing <em>only</em> the last element in the original collection.</p>
+
+<hr />
+
+<p><a name="eq"></a></p>
+
+<h3>eq(index)</h3>
+
+<p><code>traversty(elements).eq()</code> returns a new Traversty instance containing <em>only</em> the element at the index specified.</p>
+
+<p>Indexes are zero-based and can also be negative. A negative index will count backwards from the end of the collection.</p>
+
+<div class="highlight"><pre lang="html">
+<ul id="root">
+  <li>first</li>
+  <li>second</li>
+  <li>third</li>
+  <li>fourth</li>
+</ul>
+
+</pre></div>
+
+<div class="highlight"><pre lang="js">traversty('#root li').eq(1)
+  // →  will give you `<li>second</li>`
+traversty('#root li').eq(-2)
+  // →  will give you `<li>third</li>`
+</pre></div>
+
+<hr />
+
+<p><a name="slice"></a></p>
+
+<h3>slice(start [, end])</h3>
+
+<p><code>traversty(elements).slice()</code> returns a new Traversty instance containing <em>only</em> the elements between the <code>start</code> and <code>end</code> indexes. The <code>end</code> is optional, if left out then elements from <code>start</code> to the end of the collection are included.</p>
+
+<p>Indexes are zero-based and can also be negative. A negative index will count backwards from the end of the collection. See the example above for <a href="#eq"><code>eq()</code></a> for how this works.</p>
+
+<hr />
+
+<p><a name="filter"></a></p>
+
+<h3>filter(selector | function | element)</h3>
+
+<p><code>traversty(elements).filter()</code> returns a new Traversty instance containing <em>only</em> the elements that satisfy the filter condition.</p>
+
+<p>A <code>selector</code> string argument will simply check each element against the selector and return only elements that match.</p>
+
+<p>A <code>function</code> argument will execute that function for each element in the collection and return only elements for which it receives a <em>truthy</em> response from the function. <code>this</code> within the function will be the element being checked and the single argument to the function will be the index within the collection.</p>
+
+<p>An <code>element</code> argument will return a collection containing only that DOM element *only if * it exists within the collection.</p>
+
+<div class="highlight"><pre lang="html">
+<ul id="root">
+  <li>first
+    <ul>
+      <li><a href="#">i</a></li>
+      <li>ii
+        <ul>
+          <li>a</li>
+          <li>b</li>
+        </ul>
+      </li>
+      <li>iii</li>
+      <li>iv</li>
+    </ul>
+  </li>
+  <li>second</li>
+</ul>
+
+</pre></div>
+
+<div class="highlight"><pre lang="js">var els = traversty('#root *')
+  // →  start off with all 12 descendant elements under #root
+els = els.filter('li')
+  // →  returns only the 8 `<li>` elements within the collection
+els = els.filter(function () { return /^i/.test(this.innerHTML) })
+  // →  returns only the 3 `<li>` elements start have content starting with 'i'
+  //    i.e. only 'ii', 'iii' and 'iv' (not 'i')
+els = els.filter(traversty('#root ul > li')[1])
+  // →  we're using `traversty()` here as a simple selector to fetch the 'iii' element
+  //    which we pass in to `filter()`. Because this element is in the collection we get
+  //    back a collection with only this element.
+</pre></div>
+
+<hr />
+
+<p><a name="not"></a></p>
+
+<h3>not(selector | function | element)</h3>
+
+<p><code>traversty(elements).not()</code> returns a new Traversty instance containing <em>only</em> the elements that <strong>do not</strong> satisfy the filter condition.</p>
+
+<p><code>not()</code> is the exact inverse of <a href="#filter"><code>filter()</code></a>, it takes the same arguments but returns only elements that don't match your conditions.</p>
+
+<hr />
+
+<p><a name="has"></a></p>
+
+<h3>has(selector | element)</h3>
+
+<p><code>traversty(elements).has()</code> returns a new Traversty instance containing <em>only</em> the elements that have descendant elements that match the provided <code>selector</code> argument, or have <code>element</code> as a descendant element.</p>
+
+<p>If a <code>selector</code> string argument is provided, each element in the collection effectively has a <code>find(selector)</code>-type operation performed on it, if any matching descendant elements are found, the parent element is retained for the new collection; otherwise it is not included.</p>
+
+<p>If an <code>element</code> argument is provided then the only element included in the resulting collection is an ancestor of that <code>element</code>, if the <code>element</code> is not a descendant of any of the elements in the collection then the resulting collection will be empty.</p>
+
+<div class="highlight"><pre lang="html">
+<ul id="root">
+  <li>first
+    <ul>
+      <li><a href="#">i</a></li>
+      <li>ii
+        <ul>
+          <li>a</li>
+          <li>b</li>
+        </ul>
+      </li>
+      <li>iii</li>
+      <li>iv</li>
+    </ul>
+  </li>
+  <li>second</li>
+</ul>
+
+</pre></div>
+
+<div class="highlight"><pre lang="js">var els = traversty('#root *')
+  // →  start off with all 12 descendant elements under #root
+els = els.has('li')
+  // →  returns a collection of 4 elements which have `<li>` descendants: the 'first' `<li>`,
+  //    the `<ul>` directly under it, the 'ii' `<li>` and the `<ul>` directly under that.
+els.has(traversty('#root a')[0])
+  // →  we're using `traversty()` here as a simple selector to fetch the `<a>` element
+  //    which we pass in to `has()`. There are two elements that have this single element
+  //    as a descendant, the 'first' `<li>` element and the `<ul>` directly under it.
+</pre></div>
+
+<hr />
+
+<p><a name="is"></a></p>
+
+<h3>is(selector | function | element)</h3>
+
+<p><code>traversty(elements).is()</code> returns a <strong>boolean</strong> indicating whether at least one of the elements within the collection matches the condition. The method should be thought of as a version of <a href="#filter"><code>filter()</code></a> that returns a boolean if the resulting collection has at least one element; i.e. <code>traversty(elements).filter(condition).length &gt; 0</code>.</p>
+
+<hr />
+
+<p><a name="each"></a></p>
+
+<h3>each(function [, thisContext])</h3>
+
+<p><code>traversty(elements).each()</code> will execute the provided <code>function</code> on each of the elements in the current collection. <code>each()</code> will return the original collection so you can continue chaining method calls.</p>
+
+<p>Your <code>function</code> will be called with <code>this</code> equal to the individual elements or the <code>thisContext</code> argument if supplied. The arguments provided to the function are:</p>
+
+<ol>
+<li><code>element</code>: the current element in the collection</li>
+<li><code>index</code>: the index of the current element in the collection</li>
+<li><code>collection</code>: the entire Traversty object for this collection</li>
+</ol>
+
+<p>Note the ordering of arguments 1 and 2 are different to the <a href="http://api.jquery.com/each/"><code>jQuery().each()</code></a>, instead Traversty is closer to ES5 <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Array/forEach"><code>Array.prototype.forEach</code></a>.</p>
+
+<div class="highlight"><pre lang="js">traversty('li').each(function (el, i) {
+  this.innerHTML += ' (I am ' + i + ')'
+})
+</pre></div>
+
+<hr />
+
+<p><a name="get"></a></p>
+
+<h3>get(index)</h3>
+
+<p><code>traversty(elements).get()</code> returns a single DOM element at the specified index of the collection. Indexes are zero-based and can be negative. See <a href="#eq"><code>eq()</code></a> for specifics.</p>
+
+<hr />
+
+<p><a name="toArray"></a></p>
+
+<h3>toArray()</h3>
+
+<p><code>traversty(elements).toArray()</code> returns a true <code>Array</code> object containing elements within the collection. See <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Array">MDN</a> for details on what you get.</p>
+
+<hr />
+
+<p><a name="size"></a></p>
+
+<h3>size()</h3>
+
+<p><code>traversty(elements).size()</code> returns an number indicating the number of elements in the collection. Works exactly the same as <code>.length</code> on an <code>Array</code> (indeed, you can call <code>.length</code> on a Traversty object and get the same value).</p>
+
+<hr />
+
+<p><a name="push"></a></p>
+
+<h3>push(element1 [, element2 [...]])</h3>
+
+<p><code>traversty(elements).push()</code> reuses <code>Array.prototype.push</code>. See <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Array/push">MDN</a> for details.</p>
+
+<p>Beware of pushing non-DOM elements onto a Traversty object! This is not supported behaviour.</p>
+
+<hr />
+
+<p><a name="sort"></a></p>
+
+<h3>sort([compareFunction])</h3>
+
+<p><code>traversty(elements).sort()</code> reuses <code>Array.prototype.sort</code> to sort the collection. See <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Array/sort">MDN</a> for details.</p>
+
+<hr />
+
+<p><a name="splice"></a></p>
+
+<h3>splice(index, howMany [, element1 [...]])</h3>
+
+<p><code>traversty(elements).splice()</code> reuses <code>Array.prototype.splice</code> to splice the collection. See <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Array/splice">MDN</a> for details.</p>
+
+<hr />
+
+<p><a name="aug"></a></p>
+
+<h3>aug(methodMap)</h3>
+
+<p><code>traversty.aug()</code> extends Traversty's functionality with custom methods off the main Traversty prototype. The <code>methodMap</code> is simply a map of method names to functions. The functions will respond when called off a collection: <code>traversty().method(args)</code>.</p>
+
+<div class="highlight"><pre lang="js">traversty.aug({ append: function (element) {
+  // make sure we return 'this', which we can get from each()
+  return this.each(function (el, i) {
+    // append original to first element, append a clone to the rest
+    el.appendChild(i > 0 ? element.cloneNode(true) : element)
+  })
+}})
+
+var span = document.createElement('span')
+span.innerHTML = 'BOOM!'
+traversty('li').append(span)
+</pre></div>
+
+<hr />
+
+<p><a name="setSelectorEngine"></a></p>
+
+<h3>setSelectorEngine(selectorEngine)</h3>
+
+<p><code>traversty.setSelectorEngine()</code> injects a selector engine for Traversty to use. See the next section for details. Returns the main <code>Traversty</code> object for chainability, e.g.: <code>var $ = traversty.setSelectorEngine(qwery)</code>.</p>
+
+<h2>Selector engines</h2>
+
+<p>Traversty should work out-of-the-box on modern browsers as it leverages native <code>querySelectorAll()</code> and <code>matchesSelector()</code> where they exist. This means that you should be able to use Traversty without a selector engine on most smartphone browsers without any problems.</p>
+
+<p>Unfortunately, this doesn't work with older browsers, particularly IE8 and below. While IE8 has a CSS2-compliant <code>querySelectorAll()</code>, it doesn't have a <code>matchesSelector()</code> which Traversty makes heavy use of.</p>
+
+<p>Traversty allows you to plug in your favourite selector engine so it can work on whatever browsers your engine supports. Traversty is tested to support <a href="https://github.com/ded/qwery">Qwery</a>, <a href="https://github.com/amccollum/sel">Sel</a>, <a href="https://github.com/jquery/sizzle">Sizzle</a>, <a href="https://github.com/dperini/nwmatcher">NWMatcher</a> and <a href="https://github.com/chjj/zest">Zest</a>.</p>
+
+<p>Traversty uses <em>feature detection</em> to figure out how to use your selector engine, it tries to find the method used to <em>find</em> elements given a element root and the method used to determine if an element <em>matches</em> a given selector. If it can't figure out how to use your selector engine then you just need to pretend that it works like one of the supported ones and it should be OK.</p>
+
+<p>For example:</p>
+
+<div class="highlight"><pre lang="js">traversty.setSelectorEngine({
+    select: function(selector, root) {
+      return MyEngine(selector, root);
+    }
+  , is: function(selector, root) {
+      return MyEngine(root).isTheSameAs(selector);
+    }
+});
+</pre></div>
+
+<p>Traversty will also do some trickery to make up for deficiencies in some selector engines, such as out-of-order results when selecting on groups ('a,b').</p>
+
+<p>If you have a new selector engine that you want Traversty to support then either let me know or fork, patch and submit.</p>
+
+<h2>I want a demo!</h2>
+
+<p>You'll have to make do with the integration tests:</p>
+
+<h3>Ender</h3>
+
+<p><a href="http://rvagg.github.com/traversty/test/integration/ender_qwery.html">Here</a> is Traversty running in an Ender build with Qwery and Bonzo. You can also see it running with <a href="http://rvagg.github.com/traversty/test/integration/ender_sel.html">Sel</a>, <a href="http://rvagg.github.com/traversty/test/integration/ender_sizzle.html">Sizzle</a>, <a href="http://rvagg.github.com/traversty/test/integration/ender_nwmatcher.html">NWMatcher</a> and <a href="http://rvagg.github.com/traversty/test/integration/ender_sel.html">without a selector engine</a> (works in modern browsers, including IE9+).</p>
+
+<p>View-source to see what it's doing, note that it's operating on 2 lists at the same time.</p>
+
+<h3>Vanilla</h3>
+
+<p><a href="https://github.com/rvagg/traversty/blob/master/test/integration/traversty_css_qwery.html">Here</a> is Traversty bundled with Qwery as the selector engine and the <code>css()</code> augmenting example code <a href="https://github.com/rvagg/traversty/blob/master/examples/aug-css.js">/examples/aug-css.js</a> performing the same integration tests. There is also the same example using Zest instead <a href="https://github.com/rvagg/traversty/blob/master/test/integration/traversty_css_zest.html">here</a></p>
+
+<h2>Things to note</h2>
+
+<ul>
+<li><p>Traversty always does a <strong>uniqueness</strong> check on its collection of elements so you should never end up with duplicates. If you do a <code>traversty('body,ul').down('li')</code> you would still only get a unique list of all <code>&lt;li&gt;</code> elements in the document.</p></li>
+<li><p>Traversty ignores text and comment nodes and should only ever operate on the DOM element nodes you would expect (i.e. with <code>.nodeType === 1</code>).</p></li>
+<li><p>Traversty currently orders results (for each element in the starting list) in document-order, so <code>previous('*')</code> will give you results starting from the <em>firstChild</em> of the parent element up to the <em>previousSibling</em> of the starting element, rather than starting with the <em>previousSibling</em> and listing backwards (this doesn't impact on indexing, which still works backwards, only the order of result lists). The single <strong>exception</strong> to this is <a href="#siblings"><code>siblings()</code></a>, see the note in that section for details.</p></li>
+</ul>
+
+<h2>Supported browsers</h2>
+
+<p>Traversty is tested with IE6+, Firefox 3+, Safari 4+, Opera current and Chrome current. You'll need a supported selector engine to operate on some of these older browsers.</p>
+
+<h2>Ender integration</h2>
+
+<p>Traversty is designed to be inserted into an Ender build. It's in npm so simply include it in your build command, something like: <code>ender build sel bonzo traversty</code></p>
+
+<p>Traversty will attempt to use whatever selector engine you've included in your Ender build.</p>
+
+<h3>What about Bonzo?</h3>
+
+<p>Traversty is designed to add to the goodness you get in Bonzo, although Bonzo isn't a dependency. Bonzo has <code>next()</code> and <code>previous()</code> and a few other methods already and it is intended that Traversty replace these in your Ender build (because they are way-better!). Argument-less they should do exactly the same thing but Traversty adds the extra arguments for greater flexibility. If you are using Bonzo in Ender along with Traversty then you should make sure Traversty is included <em>after</em> Bonzo. Unfortunately, <a href="https://github.com/ender-js/Ender/issues/63">Ender doesn't guarantee order</a> so you may have to fiddle a bit. The Ender 1.0 CLI does correct ordering but that's not formally released yet, you can use it by installing ender via npm with <code>npm install ender@dev</code>.</p>
+
+<h2>Contributing</h2>
+
+<p>Awesome! Just do it, fork and submit your pull requests and they will be promptly considered.</p>
+
+<p>I'd also love it if you could contribute tests for bugs you find or features you add.</p>
+
+<h3>Tests</h3>
+
+<p>Traversty uses <a href="http://busterjs.org">Buster</a> for unit testing.</p>
+
+<p>Since Buster is still in Beta, the capture-server/client is a bit buggy and can be frustrating. So, instead, simply run <em>index.html</em> file in the <em>tests</em> directory in each of the browsers you need to test. It'll load and run all of the tests.</p>
+
+<h2>Credits</h2>
+
+<ul>
+<li>Firstly, much credit should go to the awesome Prototype guys and their excellent API that I initially ripped off for Traversty 0.x.</li>
+<li>Obviously, kudos goes to John Resig and the jQuery team for their traversal and filtering API that I've so shamelessly ripped off.</li>
+<li>Thanks to <a href="http://github.com/ded">@ded</a> and <a href="http://github.com/fat">@fat</a> for Ender, particularly @ded for Bonzo, upon which Traversty is designed to build.</li>
+</ul>
+
+<h2>Licence</h2>
+
+<p>Traversty is Copyright (c) 2012 Rod Vagg <a href="https://twitter.com/rvagg">@rvagg</a> and licenced under the MIT licence. All rights not explicitly granted in the MIT license are reserved. See the included LICENSE file for more details.</p>
+</article>
+</body>
+</html>

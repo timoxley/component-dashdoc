@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>yields/visibility</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>visibility</h1>
+
+<p>Sane page visibility API</p>
+
+<h2>Installation</h2>
+
+<pre><code>$ component install yields/visibility
+</code></pre>
+
+<h2>API</h2>
+
+<h3>visibility([fn])</h3>
+
+<div class="highlight"><pre lang="javascript">visibility(function (e, state) {
+  if ('visible' == state) dostuff();
+});
+</pre></div>
+
+<h3>visible(fn)</h3>
+
+<p>Execute the given <code>fn</code> when the page is visible.</p>
+
+<div class="highlight"><pre lang="javascript">visibility()
+  .visible(function (e) {});
+</pre></div>
+
+<h3>hidden(fn)</h3>
+
+<p>Execute the given <code>fn</code> when the page is hidden.</p>
+
+<div class="highlight"><pre lang="javascript">visibility()
+  .hidden(function (e) {});
+</pre></div>
+
+<h3>prerender(fn)</h3>
+
+<p>Execute the given <code>fn</code> on prerender.</p>
+
+<div class="highlight"><pre lang="javascript">visibility()
+  .prerender(function () {});
+</pre></div>
+
+<h2>todo</h2>
+
+<ul>
+<li>add tests.</li>
+<li>test in all browsers, currently tested only in Chrome.</li>
+</ul>
+
+<h2>License</h2>
+
+<p>MIT</p>
+</article>
+</body>
+</html>

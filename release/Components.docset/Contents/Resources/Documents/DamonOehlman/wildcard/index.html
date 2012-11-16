@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>DamonOehlman/wildcard</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>wildcard</h1>
+
+<p>Very simple wildcard matching, which is designed to provide the same functionality that is found in the <a href="https://github.com/DmitryBaranovskiy/eve">eve</a> eventing library.</p>
+
+<p><a href="http://travis-ci.org/#!/DamonOehlman/wildcard"><img src="https://secure.travis-ci.org/DamonOehlman/wildcard.png" alt="Build Status"></a></p>
+
+<p>It works with strings:</p>
+
+<div class="highlight"><pre lang="js">wildcard('foo.*', 'foo.bar'); // true
+wildcard('foo.*', 'foo'); // true
+</pre></div>
+
+<p>Arrays:</p>
+
+<div class="highlight"><pre lang="js">var testdata = [
+    'a.b.c',
+    'a.b',
+    'a',
+    'a.b.d'
+];
+
+wildcard('a.b.*', testdata); // ['a.b.c', 'a.b', 'a.b.d']
+</pre></div>
+
+<p>Objects (matching against keys):</p>
+
+<div class="highlight"><pre lang="js">var testdata = {
+    'a.b.c' : {},
+    'a.b'   : {},
+    'a'     : {},
+    'a.b.d' : {}
+};
+
+wildcard('a.*.c', testdata); // { 'a.b.c': {} }
+</pre></div>
+
+<p>While the library works in Node, if you are are looking for file-based wildcard matching then you should have a look at:</p>
+
+<p><a href='https://github.com/isaacs/node-glob'>https://github.com/isaacs/node-glob</a></p>
+</article>
+</body>
+</html>

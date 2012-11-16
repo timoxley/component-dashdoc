@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>weepy/attr</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>component-attr</h1>
+
+<p>evented attributes with automatic dependencies</p>
+
+<h2>API</h2>
+
+<h3>attr(val)</h3>
+
+<p>Create a new attr with value set to val</p>
+
+<div class="highlight"><pre lang="javascript">attr = require('attr')
+
+name = attr('Homer Simpson')
+</pre></div>
+
+<h3>xxx()</h3>
+
+<p>Read a value</p>
+
+<div class="highlight"><pre lang="javascript">name() // => 'Homer Simpson'
+</pre></div>
+
+<h3>xxx(val)</h3>
+
+<p>Write a value</p>
+
+<div class="highlight"><pre lang="javascript">name('Bart Simpson')
+
+name() // => 'Bart Simpson'
+</pre></div>
+
+<ul>
+<li>Emits "change" event with <code>(value, previousValue)</code>.</li>
+</ul>
+
+<div class="highlight"><pre lang="javascript">name.on('change', function(new_name, old_name) {
+  console.log('my name changed from', old_name, 'to', new_name)
+})
+</pre></div>
+
+<h3>.toggle()</h3>
+
+<p>Flips truthy to false and falsey to true</p>
+
+<h3>.incr(val)</h3>
+
+<p>Increments value by 1 or val</p>
+
+<h3>.change(fn)</h3>
+
+<p>Binds fn to the <code>change</code> event</p>
+
+<h3>.change()</h3>
+
+<p>force a change event</p>
+
+<h3>.value</h3>
+
+<p>contains the current value. Use to get value without running the getter (most useful for computed properties)</p>
+
+<h3>.old</h3>
+
+<p>contains the last value </p>
+
+<h3>.dependencies</h3>
+
+<p>Contains a list of dependencies (this will be null for simple attr)</p>
+
+<h2>Computed properties</h2>
+
+<p>These have the same API, except no setter and a function is passed in and is run to determine the initial value</p>
+
+<h3>attr.computed(fn, dependencies)</h3>
+
+<p>Creates a computed attr. <br />  Dependencies are automatically calculated unless set explicitly.</p>
+
+<div class="highlight"><pre lang="javascript">var cattr = require('attr').computed
+
+fullName = cattr(function() {
+  return firstName() + ' ' + surName()
+})
+
+fullName() // => 'Homer Simpson'
+
+fullName.dependencies // => [ firstName, surName ]
+</pre></div>
+
+<h3>attr.dependencies(fn)</h3>
+
+<p>Calculates a list of the simple attributes called by running this function</p>
+
+<h1>Testing</h1>
+
+<p>make &amp;&amp; open test/index.html </p>
+
+<h1>License</h1>
+
+<p>MIT</p>
+</article>
+</body>
+</html>

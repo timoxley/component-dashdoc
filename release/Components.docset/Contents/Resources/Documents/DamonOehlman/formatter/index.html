@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>DamonOehlman/formatter</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>formatter</h1>
+
+<p><a href="http://travis-ci.org/#!/DamonOehlman/formatter"><img src="https://secure.travis-ci.org/DamonOehlman/formatter.png" alt="Build Status"></a></p>
+
+<p>This is a simple library designed to do one thing and one thing only - replace variables in strings with variable values.  It is built in such a way that the formatter strings are parsed and you are provided with a function than can efficiently be called to provide the custom output.</p>
+
+<p><strong>NOTE</strong>: Formatter is not designed to be a templating library and if you are already using something like Handlebars or <a href="https://github.com/twitter/hogan.js">hogan</a> in your library or application stack consider using them instead.</p>
+
+<p>For example:</p>
+
+<div class="highlight"><pre lang="js">// create the "I like food formatter"
+var likefood = formatter('I like {{ 0 }}, {{ 0 }} is excellent and kicks the pants off {{ 1 }}.');
+
+// I can then log out how much I like bacon
+console.log(likefood('bacon', 'bread'));
+</pre></div>
+
+<p>If you have a look at your console output, you should see the following:</p>
+
+<div class="highlight"><pre lang="">I like bacon, bacon is excellent and kicks the pants off bread.
+</pre></div>
+
+<h2>Using named variables</h2>
+
+<p>In the examples above we saw how the formatter can be used to replace function arguments in a formatter string.  We can also set up a formatter to use particular key values from an input string instead if that is more suitable:</p>
+
+<div class="highlight"><pre lang="js">// create the "I like food formatter" (named style)
+var likefood = formatter('I like {{ great }}, {{ great }} is excellent and kicks the pants off {{ poor }}.');
+
+// I can then log out how much I like bacon
+console.log(likefood({ great: 'bacon', poor: 'bread' }));
+</pre></div>
+
+<p>This will yield the same output as our first example.</p>
+
+<h3>Nested Property Values</h3>
+
+<p>Since version <code>0.1.0</code> you can also access nested property values, as you can with templates like handlebars.</p>
+
+<h2>Performance</h2>
+
+<p>I've done some <a href="http://jsperf.com/formatter-performance">performance benchmarks</a> and formatter is faster than handlebars, but that isn't surprising as it is far simpler and doesn't have the smarts of HBS.  The test is really there to ensure that I didn't do anything too silly...</p>
+
+<p>Additionally, it should be noted that using formatter is 100% slower than concatenating strings, so don't use it where performance is critical.  Do use it where not repeating yourself is.</p>
+
+<h2>Modifiers</h2>
+
+<h3>Length Modifier (len)</h3>
+
+<p>The length modifier is used to ensure that a string is exactly the length specified.  The string is sliced to the required max length, and then padded out with spaces (or a specified character) to meet the required length.</p>
+
+<div class="highlight"><pre lang="js">// pad the string test to 10 characters
+formatter('{{ 0|len:10 }}')('test');   // 'test      '
+
+// pad the string test to 10 characters, using a as the padding character
+formatter('{{ 0|len:10:a }}')('test'); // 'testaaaaaa'
+</pre></div>
+</article>
+</body>
+</html>

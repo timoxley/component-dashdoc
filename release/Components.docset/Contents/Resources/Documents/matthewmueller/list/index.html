@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>matthewmueller/list</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>list</h1>
+
+<p>Generic list component, based on the <a href="https://github.com/component/menu">menu component</a>.</p>
+
+<p>Useful for creating inboxes, contact lists, etc.</p>
+
+<p><img src="http://f.cl.ly/items/0R073N0e1f0b0a390z3Y/Screen%20Shot%202012-10-21%20at%201.51.31%20PM.png" alt="list example" title="" /></p>
+
+<p><img src="http://f.cl.ly/items/0G091L250Q2c0n002b0b/Screen%20Shot%202012-10-21%20at%204.40.04%20PM.png" alt="inbox example" title="" /></p>
+
+<h2>Installation</h2>
+
+<pre><code>$ component install matthewmueller/list
+</code></pre>
+
+<h2>Features</h2>
+
+<ul>
+<li>Events for composition</li>
+<li>Structural CSS</li>
+<li>Fluent API</li>
+</ul>
+
+<h2>Events</h2>
+
+<ul>
+<li><code>add</code> (item) when an item is added</li>
+<li><code>remove</code> (item) when an item is removed</li>
+<li><code>select</code> (item) when an item is selected</li>
+</ul>
+
+<h2>Example</h2>
+
+<h3>Message Template:</h3>
+
+<div class="highlight"><pre lang="html">
+<script type="text/template" id="message">
+  <a href='#'>
+    <span class='from'>{{from}}</span>
+    <span class='subject'><strong>{{subject}}</strong></span>
+    <span class='message'><small>{{message}}</small></span>
+  </a>
+</script>
+
+</pre></div>
+
+<h3>Usage:</h3>
+
+<div class="highlight"><pre lang="js">var List = require('list'),
+    inbox = new List,
+    hogan = require('matthewmueller-hogan'),
+    message = document.getElementById('message').text,
+    tpl = hogan.compile(message);
+
+inbox.template(tpl)
+
+var messages = [
+  { from : 'jim', subject : 'hey', message : 'blah'},
+  { from : 'matt', subject : 'sup', message : 'cool'},
+  { from : 'drew', subject : 'howdy', message : 'yah'},
+]
+
+inbox.add(messages, function(message) {
+  console.log('invoked fn', message);
+})
+
+inbox.el.appendTo('body');
+
+inbox.on('add', function(message) {
+  console.log('message added:', message);
+});
+
+inbox.on('remove', function(message) {
+  console.log('message removed:', message);
+})
+
+inbox.on('select', function(message) {
+  console.log('message selected:', message);
+});
+
+inbox.add({
+  from : 'zak',
+  subject : 'no way',
+  message : 'crazy'
+});
+
+inbox.remove(3);
+</pre></div>
+
+<h2>API</h2>
+
+<h3>List()</h3>
+
+<p>Create a new <code>List</code>:</p>
+
+<div class="highlight"><pre lang="js">var List = require('list');
+var list = new List(); // or...
+var list = List();
+</pre></div>
+
+<h3>List#template(fn)</h3>
+
+<p>Add a template <code>fn</code> to be used when adding items.</p>
+
+<h3>List#add(arr | obj, [fn])</h3>
+
+<p>Add a new list item. Pass each <code>obj</code> into the templating function. When <code>selected</code> the optional callback <code>fn</code> will be invoked.</p>
+
+<div class="highlight"><pre lang="js">list.add({ name : 'apple' }, function(item) {
+  console.log('You selected:', item.name);
+})
+</pre></div>
+
+<h3>List#unshift(arr | obj, [fn])</h3>
+
+<p>Add a new list item to the front of the list. Pass each <code>obj</code> into the templating function. When <code>selected</code> the optional callback <code>fn</code> will be invoked.</p>
+
+<div class="highlight"><pre lang="js">list.add({ name : 'apple' }, function(item) {
+  console.log('You selected:', item.name);
+})
+</pre></div>
+
+<p>You can also use arrays:</p>
+
+<div class="highlight"><pre lang="js">list.add([{ name : 'apple' }, { name : 'pear' }]);
+</pre></div>
+
+<p>You can also use text and the default template:</p>
+
+<div class="highlight"><pre lang="js">list.add('apple'); // <li><a href="#">apple</a></li>
+</pre></div>
+
+<h3>List#remove(i)</h3>
+
+<p>Remove an item by it's place in the list</p>
+
+<div class="highlight"><pre lang="js">list.remove(0);
+</pre></div>
+
+<h3>List.has(i)</h3>
+
+<p>Checks to see if an item exists.</p>
+
+<div class="highlight"><pre lang="js">list.has(1);
+</pre></div>
+
+<h2>License</h2>
+
+<p>MIT</p>
+</article>
+</body>
+</html>

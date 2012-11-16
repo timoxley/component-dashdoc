@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>colinf/listbox-menu</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>Listbox Menu</h1>
+
+<p>A Listbox Menu component with structural styling to give you a clean slate.</p>
+
+<p>The Listbox Menu component is built on top of <a href="http://github.com/component/menu">Menu</a>.</p>
+
+<p><img src="http://colinf.github.com/listbox-menu/images/Listbox-Menu.png" alt="js listbox menu component" title="" /></p>
+
+<h2>Installation</h2>
+
+<div class="highlight"><pre lang="">component install colinf/listbox-menu
+</pre></div>
+
+<p>You can find out more about using and installing components <a href="https://github.com/component/component">here</a>.</p>
+
+<h2>Features</h2>
+
+<ul>
+<li>events for composition</li>
+<li>structural CSS letting you decide on style</li>
+<li>fluent API</li>
+</ul>
+
+<h2>Events</h2>
+
+<p>Events are inherited from Menu as listed below.<br />  - <code>show</code> when shown<br />  - <code>hide</code> when hidden<br />  - <code>remove</code> (item) when an item is removed<br />  - <code>select</code> (item) when an item is selected<br />  - <code>*</code> menu item events are emitted when clicked</p>
+
+<h2>Example</h2>
+
+<div class="highlight"><pre lang="js">var listboxMenu = require('listbox-menu');
+
+var data = [
+  {
+    league: "Scottish Premier League",
+    teams: ["Aberdeen", "Celtic", "Dundee", "Dundee Utd", "Hearts", "Hibs", "Inverness CT", "Kilmarnock", "Motherwell", "Ross County", "St Johnstone", "St Mirren"]
+  },
+  {
+    league: "First Division",
+    teams: ["Airdrie", "Cowdenbeath", "Dumbarton", "Dunfermline", "Falkirk", "Hamilton", "Livingston", "Morton", "Partick Thistle", "Raith Rovers"]
+  },
+  {
+    league: "Second Division",
+    teams: ["Albion Rovers", "Alloa", "Arbroath", "Ayr Utd", "Brechin", "East Fife", "Forfar", "Queen of the South", "Stenhousemuir", "Stranraer"]
+  },
+  {
+    league: "Third Division",
+    teams: ["Annan Athletic", "Berwick Rangers", "Clyde", "East Stirlingshire", "Elgin City", "Montrose", "Peterhead", "Queens Park", "Rangers", "Stirling Albion" ]
+  }
+];
+
+var menu = new listboxMenu();
+var submenu = new listboxMenu();
+submenu.setSelectChecker(function(item) {
+  return confirm("Do you really want to do this?");
+});
+
+for (var i = 0; i < data.length; i++) {
+  menu.add(i, data[i].league);
+};
+
+menu.on('select', function(item){
+  var teams;
+  submenu.reset();
+  teams = data[parseInt(item)].teams;
+  for (var i = 0; i < teams.length; i++) {
+    submenu.add(teams[i]);
+  };
+}); 
+
+submenu.on('select', function(item){
+  console.log('selected "%s"', item);
+});
+
+ menu.moveTo(100, 100);
+ submenu.moveTo(275,100);
+ menu.show();
+ submenu.show();
+</pre></div>
+
+<h2>API</h2>
+
+<p>As well as the Menu API, Listbox Menu adds the following.</p>
+
+<h3>ListboxMenu()</h3>
+
+<p>Create a new <code>ListboxMenu</code>:</p>
+
+<div class="highlight"><pre lang="js">var ListboxMenu = require('listbox-menu');
+var menu = new ListboxMenu();
+</pre></div>
+
+<h3>ListboxMenu#reset()</h3>
+
+<p>Empties all items from the menu.</p>
+
+<h3>ListboxMenu#setSelectChecker(fn)</h3>
+
+<p>Add a function to the Listbox Menu which will be called when a menu item is clicked. If the function returns false then the select event will be abandoned. This allows functionality such as a confirmation dialog prior to switching to a new menu item.</p>
+
+<h2>Summary of Differences from Menu</h2>
+
+<ul>
+<li>Intended to be used as on-screen navigation menu as opposed to  a contect menu</li>
+<li>Listbox Menu doesn't hide when clicked</li>
+<li>Selected item is not deselected on hover</li>
+<li>Allows validation of selection events (via setSelectChecker)</li>
+<li>Listbox menu currently doesn't support keyboard navigation</li>
+</ul>
+
+<h2>License</h2>
+
+<p>MIT</p>
+</article>
+</body>
+</html>

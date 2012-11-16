@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>enyo/md5</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>MD5</h1>
+
+<p>MD5 algorithm written by Paul Johnston</p>
+
+<h2>Installation</h2>
+
+<pre><code>$ component install enyo/md5
+</code></pre>
+
+<h2>API</h2>
+
+<div class="highlight"><pre lang="js">// MD5
+md5 = require('md5'); // Hex
+
+md5sum = md5('content');
+
+
+md5 = require('md5').hex; // Identical
+md5B64 = require('md5').b64; // Base 64
+md5Any = require('md5').any;
+
+// Hmac
+hmac = require('md5').hmac; // Hex
+hmac = require('md5').hmac.hex; // Identical
+hmacB64 = require('md5').hmac.b64; // Base 64
+hmacAny = require('md5').hmac.any;
+
+</pre></div>
+
+<h2>License</h2>
+
+<p>MIT</p>
+</article>
+</body>
+</html>

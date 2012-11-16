@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>visionmedia/minstache</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>minstache</h1>
+
+<p>Mini mustache template engine.</p>
+
+<h2>Installation</h2>
+
+<pre><code>$ npm install minstache
+$ component install visionmedia/minstache
+</code></pre>
+
+<h2>minstache(1)</h2>
+
+<p>The <code>minstache(1)</code> executable can compile a file to a valid <br />  stand-alone commonjs module for you, there's no need to have minstache<br />  as a dependency:</p>
+
+<p>hello.mustache:</p>
+
+<div class="highlight"><pre lang="">Hello {{name}}! {{^authenticated}}<a href="/login">login</a>{{/authenticated}}
+</pre></div>
+
+<p>convert it:</p>
+
+<div class="highlight"><pre lang="">$ minstache < hello.mustache > hello.js
+</pre></div>
+
+<p>hello.js:</p>
+
+<div class="highlight"><pre lang="js">module.exports = function anonymous(obj) {
+
+  function escape(html) {
+    return String(html)
+      .replace(/&/g, '&amp;')
+      .replace(/"/g, '&quot;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+  };
+
+  function section(obj, prop, negate, str) {
+    var val = obj[prop];
+    if ('function' == typeof val) return val.call(obj, str);
+    if (negate) val = !val;
+    if (val) return str;
+    return '';
+  };
+
+  return "Hello " + escape(obj.name) + "! " + section(obj, "authenticated", true, "<a href=\"/login\">login</a>") + "\n"
+}
+</pre></div>
+
+<h2>API</h2>
+
+<h3>minstache(string, [obj])</h3>
+
+<p>Compile and render the given mustache <code>string</code> with optional context <code>obj</code>.</p>
+
+<h3>minstache.compile(string)</h3>
+
+<p>Compile the mustache <code>string</code> to a stand-alone <code>Function</code> accepting a context <code>obj</code>.</p>
+
+<h2>Divergence</h2>
+
+<p>Minstache also allows <code>{</code> as an alias of <code>{{</code> to reduce the noise.</p>
+
+<p>Partials are not supported, this lib is meant to be a small template engine solution for stand-alone <a href="http://github.com/component">component</a> templates. If your template takes "partials" then pass other rendered strings to it. If you need a full-blown mustache solution Hogan.js is still great.</p>
+
+<h2>License</h2>
+
+<p>MIT</p>
+</article>
+</body>
+</html>

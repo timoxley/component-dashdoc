@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>RetroFOX/buttonset</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>ButtonSet</h1>
+
+<p>ButtonSet component</p>
+
+<p>!<a href="http://f.cl.ly/items/2T2j301q1M0K0P3a1h21/Screen%20Shot%202012-09-19%20at%206.01.08%20PM.png">js buttonset<br />  component</a></p>
+
+<h2>Installation</h2>
+
+<div class="highlight"><pre lang="">$ npm install buttonset-component
+</pre></div>
+
+<h2>Events</h2>
+
+<ul>
+<li><code>set</code> (button, index) when an button is selected.</li>
+<li><code>unset</code> (button, index) when an button is unselected.</li>
+</ul>
+
+<h2>Example</h2>
+
+<div class="highlight"><pre lang="js">var ButtonSet = require('buttonset');
+
+var bset = new ButtonSet('.buttonset-placeholder');
+bset.add('A');
+bset.add('B', 'C', 'D');
+
+bset.set(1);
+
+bset.on('set', function(button, index){
+  console.log('SET button "%s". index: %s', button.text(), index);
+});
+
+bset.on('unset', function(button, index){
+  console.log('UNSET button "%s". index: %s', button.text(), index);
+});
+</pre></div>
+
+<h2>API</h2>
+
+<h3>ButtonSet(el, options)</h3>
+
+<p>Creates a new <code>ButtonSet</code> append to the given el element with the follows (optional) options.</p>
+
+<ul>
+<li>buttons {Array} initial buttons</li>
+<li>unselectable {Boolean} allows unset the current selected option (default false)</li>
+<li>multiple {Boolean} allows multiple selections (default false)</li>
+<li>select {Number} allows select initial option</li>
+</ul>
+
+<h3>ButtonSet#set(button)</h3>
+
+<p>Add <code>button</code> to the buttonset.</p>
+
+<h3>ButtonSet#unset(button)</h3>
+
+<p>Unset <code>button</code> from the buttonset, returning <strong>true</strong> when present,<br />  otherwise returning <strong>false</strong>.</p>
+
+<h2>License</h2>
+
+<p>(The MIT License)<br />Copyright(c) 2012 Damian Suarez <a href="&#x6D;&#97;&#x69;&#108;&#x74;&#x6F;:&#x72;&#100;&#x73;&#x75;&#x61;&#114;&#101;z&#64;&#103;&#109;ai&#108;&#x2E;&#x63;&#111;&#109;">&#x72;&#100;&#x73;&#x75;&#x61;&#114;&#101;z&#64;&#103;&#109;ai&#108;&#x2E;&#x63;&#111;&#109;</a></p>
+
+<p>Permission is hereby granted, free of charge, to any person obtaining<br />a copy of this software and associated documentation files (the<br />'Software'), to deal in the Software without restriction, including<br />without limitation the rights to use, copy, modify, merge, publish,<br />distribute, sublicense, and/or sell copies of the Software, and to<br />permit persons to whom the Software is furnished to do so, subject to<br />the following conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be<br />included in all copies or substantial portions of the Software.</p>
+
+<p>THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,<br />EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF<br />MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.<br />IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY<br />CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,<br />TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE<br />SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
+</article>
+</body>
+</html>

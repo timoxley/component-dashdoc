@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>eriwen/es6-map-shim</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>es6-map-shim - A polyfill for ES6 Maps</h1>
+
+<p>This is a <em>destructive</em> shim that implements the ES6 Map specification as closely as possible.</p>
+
+<p>It is <em>slow</em> (lookups in O(n) time for now) and not intended for use in a production environment.</p>
+
+<div class="highlight"><pre lang="js">var map = new Map([['foo', 'bar'], [-0, function(){}]]);
+map.set(null, 42);
+
+map.get(-0);
+=> function(){}
+
+map.has(null);
+=> true
+
+map.keys();
+=> ['foo', -0, null]
+
+map.values();
+=> ['bar', function(){}, 42]
+
+map.items();
+=> [['foo', 'bar'], [-0, function(){}], [null, 42]]
+
+map.forEach(function(value, key, mapReference) {
+  console.log(typeof value);
+});
+=> 'string'\n'function'\n'number'\n
+
+var iterator = map.iterator();
+iterator.next();
+=> ['foo', 'bar']
+iterator.next();
+=> [-0, function(){}]
+
+map.delete(null);
+=> true
+
+// Remove all items
+map.clear();
+map.size;
+=> 0
+
+map.toString();
+=> '[object Map]'
+</pre></div>
+
+<h2>Installation</h2>
+
+<p>In browsers, include <a href="https://github.com/eriwen/es6-map-shim/downloads">es6-map-shim.js</a> in your page:</p>
+
+<div class="highlight"><pre lang="html">
+<script type="text/javascript" src="https://raw.github.com/eriwen/es6-map-shim/master/es6-map-shim.js"></script>
+
+</pre></div>
+
+<p>You can install this via:</p>
+
+<ul>
+<li>npm for <a href="http://nodejs.org">node.js</a> v0.8+: <code>npm install es6-map-shim</code></li>
+<li><a href="https://github.com/component/component">component(1)</a>: <code>component install eriwen/es6-map-shim</code></li>
+<li><a href="http://twitter.github.com/bower/">bower</a>: <code>bower install es6-map-shim</code></li>
+</ul>
+
+<h3>Environment Support</h3>
+
+<p>If you also use the <a href="https://github.com/kriskowal/es5-shim">es5-shim</a>, you can use this in:</p>
+
+<ul>
+<li>IE7+ (not fully tested yet)</li>
+<li>Firefox 15+</li>
+<li>Google Chrome 21+</li>
+<li>Safari 4+</li>
+<li>Opera 12+</li>
+<li>Node.js 0.8+</li>
+<li>PhantomJS</li>
+</ul>
+</article>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>matthewmueller/events</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>events</h1>
+
+<p>Stand-alone event bindings, based on how Backbone's views handle events. </p>
+
+<h2>Installation</h2>
+
+<pre><code>$ component install matthewmueller/events
+</code></pre>
+
+<h2>Example</h2>
+
+<div class="highlight"><pre lang="js">var Events = require('events'),
+    $ = require('jquery');
+
+function Datepicker() {
+  var el = $('<div class="datepicker">');
+  this.bind('hover', 'highlight', 'select')
+      .bind('keypress', function(e) { ... });
+      .bind('click .day', 'select')
+      .bind('click .next', this.next)
+}
+
+// Mixin `Events`
+Events(Datepicker.prototype);
+
+// Methods
+Datepicker.prototype.select = function(e) { ... };
+Datepicker.prototype.next = function(e) { ... };
+Datepicker.prototype.highlight = function(e) { ... };
+</pre></div>
+
+<h2>API</h2>
+
+<h3>Events(obj)</h3>
+
+<p>Mixin <code>Events</code> into an object or prototype.</p>
+
+<div class="highlight"><pre lang="js">Events(Colorpicker.prototype);
+</pre></div>
+
+<h3>Events#bind([el], event, fns...)</h3>
+
+<p>Bind mouse and keyboard events to <code>el</code>. If no element is defined, Events tries binding to <code>this.el</code>.</p>
+
+<p>The <code>event</code> signature is <code>event [selector]</code>. If no <code>selector</code> is specified, the event is attached to <code>el</code>. Here's a couple valid examples:</p>
+
+<div class="highlight"><pre lang="">click .color
+dblclick #save
+mouseout div
+keypress
+hover
+</pre></div>
+
+<p>You may bind an arbitrary number of <code>fns</code> to the event. The functions context are set to <code>this</code> (none of that <code>_.bindAll</code> jazz). You may also pass strings that get resolved by <code>this[fn]</code>.</p>
+
+<h3>Events#unbind([el], [event], [fn]);</h3>
+
+<p>TODO: Finish me... Right now you can simply unbind all events off <code>el</code>.</p>
+
+<h2>TODO</h2>
+
+<ul>
+<li>Finish unbind  </li>
+<li>Replace <code>component/jquery</code> with <code>component/event</code> and <code>component/delegate</code></li>
+</ul>
+
+<h2>License</h2>
+
+<p>MIT</p>
+</article>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>pazguille/jvent</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>jvent</h1>
+
+<p>Event Emitter Class for the browser based on NodeJS EventEmitter.</p>
+
+<h2>Installation</h2>
+
+<pre><code>$ component install pazguille/jvent
+</code></pre>
+
+<h2>API</h2>
+
+<h3>Jvent#addListener(event, listener, once)</h3>
+
+<h3>Jvent#on(event, listener, once)</h3>
+
+<p>Adds a listener to the collection for a specified event.</p>
+
+<h3>Jvent#once(event, listener)</h3>
+
+<p>Adds a one time listener to the collection for a specified event. It will execute only once.</p>
+
+<h3>Jvent#removeListener(event, listener)</h3>
+
+<h3>Jvent#off(event, listener)</h3>
+
+<p>Removes a listener from the collection for a specified event.</p>
+
+<h3>Jvent#removeAllListeners(event)</h3>
+
+<p>Removes all listeners from the collection for a specified event.</p>
+
+<h3>Jvent#setMaxListeners(n)</h3>
+
+<p>Removes all listeners from the collection for a specified event.</p>
+
+<h3>Jvent#listeners(event)</h3>
+
+<p>Returns all listeners from the collection for a specified event.</p>
+
+<h3>Jvent#emit(event, [arg1], [arg2], [...])</h3>
+
+<p>Execute each of the listener collection in order with the data object.</p>
+
+<h2>How-to</h2>
+
+<div class="highlight"><pre lang="js">// Create a new instance
+var obj = new Jvent();
+
+// Create a listener
+var fn = function () {};
+
+// Methods
+obj.once('born', fn);
+obj.addListener('live', fn);
+obj.emit('live', 'param1', 'param2');
+obj.removeListener('live', fn);
+</pre></div>
+
+<h2>Contact</h2>
+
+<ul>
+<li>Guillermo Paz (Frontend developer - JavaScript developer | Web standards lover)</li>
+<li>E-mail: <a href="mailto:<a href='mailto:guille87paz@gmail.com'>guille87paz@gmail.com</a>"><a href='mailto:guille87paz@gmail.com'>guille87paz@gmail.com</a></a></li>
+<li>Twitter: <a href="http://twitter.com/pazguille">@pazguille</a></li>
+<li>Web: <a href="http://pazguille.me"><a href='http://pazguille.me'>http://pazguille.me</a></a></li>
+</ul>
+
+<h2>License</h2>
+
+<h3> The MIT License</h3>
+
+<p>Copyright (c) 2012 <a href="http://twitter.com/pazguille">@pazguille</a></p>
+
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy<br />of this software and associated documentation files (the "Software"), to deal<br />in the Software without restriction, including without limitation the rights<br />to use, copy, modify, merge, publish, distribute, sublicense, and/or sell<br />copies of the Software, and to permit persons to whom the Software is<br />furnished to do so, subject to the following conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be included in<br />all copies or substantial portions of the Software.</p>
+
+<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR<br />IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,<br />FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE<br />AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER<br />LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,<br />OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN<br />THE SOFTWARE.</p>
+</article>
+</body>
+</html>

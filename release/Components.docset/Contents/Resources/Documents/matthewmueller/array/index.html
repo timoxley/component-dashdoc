@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>matthewmueller/array</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>array</h1>
+
+<p>A more vocal array</p>
+
+<p>Properly mixes an event emitter into your arrays, without modifying <code>Array.prototype</code> and leaving all the original functionality intact.</p>
+
+<h2>Example</h2>
+
+<div class="highlight"><pre lang="js">var array = require('array'),
+    arr = array(['a', 'b', 'c']);
+
+arr.on('add', function(val) {
+  console.log('added', val);
+})
+
+arr.on('remove', function(val) {
+  console.log('removed', val);
+})
+
+arr.on('reverse', function(arr) {
+  console.log('reversed', arr);
+})
+
+arr.push('d');
+arr.shift();
+arr.reverse();
+console.log(arr.length) // 3;
+</pre></div>
+
+<h2>Installation</h2>
+
+<pre><code>$ component install matthewmueller/array
+</code></pre>
+
+<h2>Events</h2>
+
+<ul>
+<li><code>add</code> (item, ...) - emitted when items are added to the array (push, unshift, splice)</li>
+<li><code>remove</code> (item, ...) - emitted when items are removed from the array (pop, shift, splice)</li>
+<li><code>pop</code> (item) - emits the removed array item</li>
+<li><code>push</code> (length) - emits the new length of the array</li>
+<li><code>reverse</code> (array) - emits the reversed array</li>
+<li><code>shift</code> (item) - emits the removed item</li>
+<li><code>sort</code> (array) - emits the sorted array</li>
+<li><code>splice</code> (array) - emits the removed items</li>
+<li><code>unshift</code> (length) - emits the new length of the array</li>
+</ul>
+
+<h2>Design</h2>
+
+<p>All array mutator functions emit events. Those events will simply emit the return value of the array.</p>
+
+<p>The higher-level <code>add</code> and <code>remove</code> events will be emitted when items are added or removed from the array. If more than one item is added to the array, the <code>add</code> event will be emitted for each added item</p>
+
+<div class="highlight"><pre lang="js">arr.on('add', function(val) {
+  console.log(val); // called twice: "hi" then "hello"
+})
+
+arr.push('hi', 'hello')
+</pre></div>
+
+<p>One of the more interesting functions is <code>splice</code> that can both add and remove items. Both <code>add</code> and <code>remove</code> events may be emitted.</p>
+
+<div class="highlight"><pre lang="js">var arr = array([1, 2, 3])
+
+arr.on('add', function(val) {
+  console.log('added', val) // called twice: "added a" then "added b"
+})
+
+arr.on('remove', function(val) {
+  console.log('removed', val) // removed 2
+})
+
+arr.splice(1, 2, 'a', 'b')
+console.log(arr); // [1, "a", "b"]
+</pre></div>
+
+<h2>API</h2>
+
+<p>The API is the same as the mutator functions of a normal array. See <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Array/prototype#Mutator_methods">MDN: Array.prototype</a> for more information.</p>
+
+<h2>TODO</h2>
+
+<ul>
+<li>Try jQuery model to improve performance (V8 is not good at optimizing this kind of sorcery)</li>
+</ul>
+
+<h2>License</h2>
+
+<p>MIT</p>
+</article>
+</body>
+</html>

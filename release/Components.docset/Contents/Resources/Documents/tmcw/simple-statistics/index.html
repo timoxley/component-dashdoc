@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>tmcw/simple-statistics</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<p><a href="http://travis-ci.org/tmcw/simple-statistics"><img src="https://secure.travis-ci.org/tmcw/simple-statistics.png?branch=master" alt="Build Status" title="" /></a></p>
+
+<p>A project to learn about and make simple reference implementations<br />of statistics algorithms.</p>
+
+<p>This code is designed to work in browsers (including IE)<br />as well as in node.js.</p>
+
+<div class="highlight"><pre lang="javascript">// Require simple statistics
+var ss = require('simple-statistics');
+
+// The input is a simple array
+var list = [1, 2, 3];
+
+// Many different descriptive statistics are supported
+var sum = ss.sum(list),
+    mean = ss.mean(list),
+    min = ss.min(list),
+    max = ss.min(list),
+    quantile = ss.quantile(0.25);
+
+// For a linear regression, it's a two-dimensional array
+var data = [ [1, 2], [2, 3] ];
+
+// simple-statistics can produce a linear regression and return
+// a friendly javascript function for the line.
+var line = ss.linear_regression()
+    .data(data)
+    .line();
+
+// get a point along the line function
+line(0);
+
+var line = ss.linear_regression()
+
+// Get the r-squared value of the line estimation
+ss.r_squared(data, line);
+</pre></div>
+
+<h2>Examples</h2>
+
+<ul>
+<li><a href="http://bl.ocks.org/3931800">Linear regression with simple-statistics and d3js</a></li>
+</ul>
+
+<h2>Usage</h2>
+
+<p>To use it in browsers, grab <a href="https://raw.github.com/tmcw/simple-statistics/master/src/simple_statistics.js">simple_statistics.js</a>.<br />To use it in node, install it with <a href="https://npmjs.org/">npm</a> or add it to your package.json.</p>
+
+<pre><code>npm install simple-statistics
+</code></pre>
+
+<p>To use it with <a href="https://github.com/component/component">component</a>,</p>
+
+<pre><code>component install tmcw/simple-statistics
+</code></pre>
+
+<h1><a href="https://github.com/tmcw/simple-statistics/blob/master/API.md">Documentation</a></h1>
+
+<h1><a href="http://travis-ci.org/#!/tmcw/simple-statistics">Tests</a></h1>
+
+<h1>Contributors</h1>
+
+<ul>
+<li>Tom MacWright</li>
+<li><a href="https://github.com/mattsa">Matt Sacks</a></li>
+</ul>
+
+<h2>See Also</h2>
+
+<ul>
+<li><a href="https://github.com/tmcw/stream-statistics">stream-statistics</a>, a sister project that implements
+many of the same measures for streaming data - as online algorithms</li>
+</ul>
+
+<h3>Javascript</h3>
+
+<ul>
+<li><a href="https://github.com/jasondavies/science.js">science.js</a></li>
+<li><a href="https://github.com/nsfmc/atoll.js">atoll.js</a></li>
+<li><a href="https://github.com/thirtysixthspan/descriptive_statistics">descriptive_statistics</a></li>
+<li><a href="http://www.jstat.org/">jStat</a></li>
+<li><a href="https://github.com/harthur/classifier">classifier</a> is a naive bayesian classifier (though specialized for the words-spam case)</li>
+</ul>
+
+<h3>Python</h3>
+
+<ul>
+<li><a href="http://pandas.pydata.org/">Pandas</a></li>
+<li><a href="http://www.scipy.org/">SciPy</a></li>
+</ul>
+
+<h3>Their Own Language</h3>
+
+<ul>
+<li><a href="http://julialang.org/">Julia Language</a></li>
+<li><a href="http://www.r-project.org/">R language</a></li>
+</ul>
+</article>
+</body>
+</html>

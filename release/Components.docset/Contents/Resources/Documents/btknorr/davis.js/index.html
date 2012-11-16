@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>btknorr/davis.js</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>Davis.js</h1>
+
+<h2>Description</h2>
+
+<p>Davis.js is a small JavaScript library using HTML5 history.pushState that allows simple Sinatra style routing for your JavaScript apps.</p>
+
+<h2>Why</h2>
+
+<p>Using the history pustState and popstate events allows the links and forms in your app to have hrefs and actions that point to real end points on your server.  This allows complex JavaScript apps to degrade gracefully when JavaScript is unavailable and combining this with a template system that can be used both client and server side allows for large amounts of code reuse.</p>
+
+<p>Davis.js is heavily inspired by <a href="https://github.com/quirkey/sammy">Sammy.js</a> (hence the name), it is however intentionally much lighter than Sammy.js because I never use any of the template rendering etc that it includes.  All Davis.js does is provide a simple routing layer, nothing more, nothing less.</p>
+
+<h2>Requirements</h2>
+
+<p>Davis.js requires jQuery 1.4.2+ as well as a modern browser that supports HTML5 history.pushState and the onpopstate event.  At the moment that means FireFox 4+, Safari 5+, Chrome, iOS Safari 4+*, Android Browser 2.2+, Opera 11.50+.</p>
+
+<p>In all other browsers Davis.js is currently unsupported, all links and forms will have their default behaviour.  You can bind to the 'unsupported' event on an app to handle this situation in your code.  Fallback to <code>location.hash</code> and <code>onhashchange</code> is a possibility in the future.</p>
+
+<p>*Whilst pushState is supported in iOS it has several, fairly serious bugs.  Davis will not fire the unsupported event though as <em>technically</em> iOS does support davis.</p>
+
+<h2>Installation</h2>
+
+<p>Download davis.min.js and include it on your page after jquery.</p>
+
+<h2>Example</h2>
+
+<p>A very simple example of a Davis.js app:</p>
+
+<pre><code>var app = Davis(function () {
+  this.get('/welcome/:name', function (req) {
+    $('body').append('&lt;h1&gt;Hello there, ' + req.params['name'] + '!&lt;/h1&gt;')
+  })
+})
+
+$(document).ready(function () {
+  // append a link to trigger the route
+  $('body').append('&lt;a href="/welcome/bob"&gt;Greet&lt;/a&gt;');
+
+  app.start();
+})
+</code></pre>
+
+<p>We create a new instance of a Davis.App using the Davis.js function, passing in a function that will draw the routes for the application.  Inside this function <code>this</code> is the instance of our application.</p>
+
+<p>We define a simple get route with a 'name' parameter and a callback that will append a message to the html body.  Inside the route callback <code>this</code> is set to the request that matches the route, this request is also passed as a parameter to the callback.</p>
+
+<p>Once the app is configure it needs to be started.  You start a Davis.js app by calling the <code>start</code> method, this must be done once the document is ready.  Now if you click on the link that we appended to the body our route should be called and a friendly greeting printed on the page.</p>
+
+<p>To use Davis your html file must be loaded from a server rather than just opening the file in your browser.</p>
+
+<h2>More</h2>
+
+<p><a href="http://olivernn.github.com/davis.js/docs">API docs</a></p>
+
+<p><a href="http://davis-example.heroku.com/notes">Example</a> using davis.js and a mustache templates shared between the client and the server, <a href="http://github.com/olivernn/notepad">code</a></p>
+
+<h2>Contributing</h2>
+
+<p>Contributions are more than welcome, to make the process easier and quicker please follow these guidelines:</p>
+
+<ul>
+<li>Open an issue detailing the bug fix or feature in your patch.</li>
+<li>Add test cases for your code.</li>
+<li>Don't change the version or build new versions as part of you patch.</li>
+</ul>
+
+<h2>Running examples</h2>
+
+<p>First you'll need <a href="http://nodejs.org">node</a> installed for the server. Then execute the following command and visit one of the examples: <code><a href='http://localhost:3000/examples/todo.html'>http://localhost:3000/examples/todo.html</a></code>.</p>
+
+<pre><code>$ make test
+</code></pre>
+
+<h2>Feedback</h2>
+
+<p>Any feedback or suggestions are welcome via <a href="https://github.com/olivernn/davis.js/issues">issues</a>.</p>
+</article>
+</body>
+</html>

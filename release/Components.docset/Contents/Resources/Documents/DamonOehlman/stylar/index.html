@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>DamonOehlman/stylar</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>Stylar</h1>
+
+<p>Badass CSS Styling Helpers</p>
+
+<h2>Usage</h2>
+
+<p>Get the current transform on an element</p>
+
+<div class="highlight"><pre lang="js">console.log(stylar(targetElement, 'transform'));
+</pre></div>
+
+<p>Update the transform of an element:</p>
+
+<div class="highlight"><pre lang="js">stylar(targetElement, 'transform', 'translate(50px, 100px)');
+</pre></div>
+
+<p>Get the current transform of an element using the <code>get</code> helper:</p>
+
+<div class="highlight"><pre lang="js">stylar(targetElement).get('transform');
+</pre></div>
+
+<p>Set the current transform of the element using the <code>set</code> helper (chainable):</p>
+
+<div class="highlight"><pre lang="js">stylar(targetElement)
+    .set('transform', 'translate(50px, 100px)')
+    .set('background-color', 'red');
+</pre></div>
+
+<p><strong>NOTE:</strong> You can also use the set forms to update multiple elements at once:</p>
+
+<div class="highlight"><pre lang="js">stylar([element1, element2], 'transform', 'translate(50px, 100px)');
+</pre></div>
+</article>
+</body>
+</html>

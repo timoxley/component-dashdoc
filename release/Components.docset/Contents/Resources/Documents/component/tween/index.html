@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>component/tween</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>tween</h1>
+
+<p>Motion tween component using <a href="https://github.com/component/ease">ease</a>.</p>
+
+<h2>Installation</h2>
+
+<pre><code>$ component install component/tween
+</code></pre>
+
+<h2>Example</h2>
+
+<div class="highlight"><pre lang="js">var Tween = require('tween');
+var raf = require('raf');
+var button = document.querySelector('button');
+
+var tween = Tween({ rotate: 0, opacity: 0 })
+  .ease('out-bounce')
+  .to({ rotate: 360, opacity: 1  })
+  .duration(800);
+
+tween.update(function(o){
+  button.style.opacity = o.opacity;
+  button.style.webkitTransform = 'rotate(' + (o.rotate | 0) + 'deg)';
+});
+
+tween.on('end', function(){
+  animate = function(){};
+});
+
+function animate() {
+  raf(animate);
+  tween.update();
+}
+
+animate();
+</pre></div>
+
+<h2>API</h2>
+
+<h3>Tween(obj:Object|Array)</h3>
+
+<p>Initialize a new <code>Tween</code> with <code>obj</code>.</p>
+
+<h3>Tween#reset()</h3>
+
+<p>Reset the tween.</p>
+
+<h3>Tween#to(obj:Object|Array)</h3>
+
+<p>Tween to <code>obj</code> and reset internal state.</p>
+
+<pre><code> tween.to({ x: 50, y: 100 })
+</code></pre>
+
+<h3>Tween#duration(ms:Number)</h3>
+
+<p>Set duration to <code>ms</code> [500].</p>
+
+<h3>Tween#ease(fn:String|Function)</h3>
+
+<p>Set easing function to <code>fn</code>.</p>
+
+<pre><code> tween.ease('in-out-sine')
+</code></pre>
+
+<h3>Tween#update(fn:Function)</h3>
+
+<p>Set update function to <code>fn</code> or <br />  when no argument is given this performs<br />  a "step".</p>
+
+<h2>License</h2>
+
+<p>MIT</p>
+</article>
+</body>
+</html>

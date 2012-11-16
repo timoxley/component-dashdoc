@@ -17,9 +17,14 @@ ms('5s')      // 5000
 ms('100')     // 100
 </pre></div>
 
-<div class="highlight"><pre lang="js">ms(60000)             // "1 minute"
-ms(2 * 60000)         // "2 minutes"
-ms(ms('10 hours'))    // "10 hours"
+<div class="highlight"><pre lang="js">ms(60000)             // "1m"
+ms(2 * 60000)         // "2m"
+ms(ms('10 hours'))    // "10h"
+</pre></div>
+
+<div class="highlight"><pre lang="js">ms(60000, { long: true })             // "1 minute"
+ms(2 * 60000, { long: true })         // "2 minutes"
+ms(ms('10 hours', { long: true }))    // "10 hours"
 </pre></div>
 
 <ul>

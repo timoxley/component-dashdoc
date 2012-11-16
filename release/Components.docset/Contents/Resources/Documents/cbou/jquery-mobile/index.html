@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>cbou/jquery-mobile</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>jQuery Mobile</h1>
+
+<p>This is the main repository for the jQuery Mobile project. From the <a href="http://jquerymobile.com">official website</a>:</p>
+
+<blockquote>
+  <p>A unified, HTML5-based user interface system for all popular mobile device platforms, built on the rock-solid jQuery and jQuery UI foundation. Its lightweight code is built with progressive enhancement, and has a flexible, easily themeable design.</p>
+</blockquote>
+
+<p>jQuery Mobile 1.2 (1.2.0) works with versions of jQuery core from 1.7.0 to 1.8.2. You can find more information about how the library works, and what it is capable of, by reading the <a href="http://jquerymobile.com/demos/">documentation</a>.</p>
+
+<h2>Contributing</h2>
+
+<p>You can contribute to the project by reporting issues, suggesting new features, or submitting pull requests.<br />Please read our <a href="https://github.com/jquery/jquery-mobile/blob/master/CONTRIBUTING.md">Contributing Guidelines</a> before submitting.</p>
+
+<h2>Build/Customization</h2>
+
+<p>Currently the library is shipped on the jQuery CDN/download as a single monolithic JavaScript file that depends on jQuery Core (not included) and a similarly bundled CSS file. For users we support the following build targets:</p>
+
+<ul>
+<li><code>js</code> - resolve dependencies, build, concat, and minify the JavaScript used for jQuery Mobile</li>
+<li><code>css</code> - resolve dependencies, build, concat, and minify all the css, just the structure css, and just the theme css</li>
+<li><code>docs</code> - build the js and css, and make the docs ready for static consumption</li>
+<li><code>zip</code> - package all the JavaScript and all the css into a zip archive</li>
+</ul>
+
+<h3>Download Builder</h3>
+
+<p>The easiest way to obtain a custom build is to use the <a href="http://jquerymobile.com/download-builder/">download builder</a>. With it, you can select the parts of the library you need and both the CSS and JavaScript dependencies will be resolved for you as a packaged/minified whole.</p>
+
+<h3>Requirements</h3>
+
+<p>The <code>js</code> and <code>css</code> build targets require <a href="http://nodejs.org/">node.js</a> and its packaged NPM package manager. For the other build targets, <code>docs</code> and <code>zip</code>, bash is also required. For more information on installing node please see its <a href="http://nodejs.org/#download">documentation</a>. As for bash it's generally installed as the default shell in many POSIX compliant environments (OSX, Linux, BSD, etc).</p>
+
+<h3>Commands</h3>
+
+<p>With node installed you can run the <code>js</code> and <code>css</code> targets by simply issuing the following from the project root:</p>
+
+<pre><code>npm install
+node node_modules/.bin/grunt js # or css
+</code></pre>
+
+<p>Note that if you have the appropriate version of <a href="https://github.com/cowboy/grunt">grunt</a>, our build tool, installed globally you can substitute <code>grunt</code> wherever you see <code>node node_modules/.bin/grunt</code>. For the remainder of the build documentation we will prefer the more concise <code>grunt</code>.</p>
+
+<p>If you want to use the <code>docs</code> and <code>zip</code> targets you will need bash and they can be run with the following</p>
+
+<p><code>grunt docs #</code> or <code>grunt zip</code></p>
+
+<h3>JavaScript</h3>
+
+<p>As of version 1.1 the library uses dependency management in the JavaScript build by providing <a href="https://github.com/amdjs/amdjs-api/wiki/AMD">AMD modules</a> which can be added or removed from the core mobile meta module <code>js/jquery.mobile.js</code>.</p>
+
+<p>For example, if a user wished to exclude the form widgets to reduce the wire weight of their jQuery Mobile include they would first remove them from the meta module:</p>
+
+<div class="highlight"><pre lang="diff">diff --git a/js/jquery.mobile.js b/js/jquery.mobile.js
+index 6200fe6..3a4625c 100644
+--- a/js/jquery.mobile.js
++++ b/js/jquery.mobile.js
+@@ -19,12 +19,6 @@ define([
+        './jquery.mobile.listview.filter',
+        './jquery.mobile.listview.autodividers',
+        './jquery.mobile.nojs',
+-       './jquery.mobile.forms.checkboxradio',
+-       './jquery.mobile.forms.button',
+-       './jquery.mobile.forms.slider',
+-       './jquery.mobile.forms.textinput',
+-       './jquery.mobile.forms.select.custom',
+-       './jquery.mobile.forms.select',
+        './jquery.mobile.buttonMarkup',
+        './jquery.mobile.controlGroup',
+        './jquery.mobile.links',
+</pre></div>
+
+<p>And then run the build:</p>
+
+<pre><code>grunt js
+</code></pre>
+
+<h3>CSS</h3>
+
+<p>To create a new theme:</p>
+
+<ol>
+<li>Copy the <code>default</code> folder from CSS/Themes to a new folder named after your new theme (eg, <code>my-theme</code>).</li>
+<li>Add customizations to the <code>jquery.mobile.theme.css</code> file.</li>
+<li><p>From the project root run the following <code>grunt</code> command:</p>
+
+<pre><code>THEME=my-theme grunt css
+</code></pre></li>
+<li><p>The output will be available in the <code>$PROJECT_ROOT/compiled</code></p></li>
+</ol>
+
+<p>Again this assumes the theme css files are available in the <code>css/themes/$THEME/</code> directory relative to the project root, <code>css/themes/my-theme/</code> in the example.</p>
+
+<h2>Development</h2>
+
+<p>The root of the repository is also the root of the documentation and, along with the test suite, acts as the test bed for bug fixes and features. You'll need to set up a server and get the test suite running before you can contribute patches.</p>
+
+<h3>Server</h3>
+
+<p>Most of the documentation and testing pages rely on PHP 5+, and as a result Apache and PHP are required for development. You can install them using one of the following methods:</p>
+
+<ul>
+<li>one-click - <a href="http://www.mamp.info/en/downloads/index.html">MAMP</a> for OSX, <a href="http://www.apachefriends.org/en/xampp.html">XAMP</a> for OSX/Windows</li>
+<li>existing web server - eg, <code>~/Sites</code> directory on OSX.</li>
+<li>virtual machine - If <a href="http://vagrantup.com">Vagrant</a> is installed you can add <a href="https://github.com/johnbender/jquery-mobile/tree/vagrant">this remote/branch</a> and <code>vagrant up</code></li>
+</ul>
+
+<p>In addition to vanilla Apache the following modules are required:</p>
+
+<ul>
+<li>Rewrite (mod_rewrite.so)</li>
+<li>Expire (mod_expires.so)</li>
+<li>Header (mod_headers.so)</li>
+</ul>
+
+<p>Once you have your web server setup you can point it at the project directory.</p>
+
+<h3>Testing</h3>
+
+<p>Automated testing forms the backbone of the jQuery Mobile project's QA activities. As a contributor or patch submitter you will be expected to run the test suite for the code your patches affect. Our continuous integration server will address the remainder of the test suite.</p>
+
+<p>There are two primary ways to run the test suite. Both of them require a server configured in the previously prescribed manner. The location of which will hereafter be referred to as <code>$WEB_SERVER</code> and should include the protocol. First, you can run the tests individually by directing your browser to the different test pages associated with the area in which you are working. For example, to run the tests for <code>js/jquery.mobile.forms.slider.js</code> visit <code>$WEB_SERVER/tests/unit/slider/</code>. To find out which test pages are available you can list them with:</p>
+
+<pre><code>grunt config:test:pages
+</code></pre>
+
+<p><em>NOTE</em> See the <a href="#requirements">build requirements</a> for node/grunt install information.</p>
+
+<p>Second you can run the tests using the <a href="http://phantomjs.org/">PhantomJS</a> headless Webkit browser which must be <a href="http://code.google.com/p/phantomjs/wiki/Installation">installed</a>. Once <code>phantomjs</code> is in your <code>PATH</code> the following will execute the whole test suite:</p>
+
+<pre><code>JUNIT_OUTPUT=build/test-results/ ROOT_DOMAIN=$WEB_SERVER grunt test
+</code></pre>
+
+<p>You can confine the headless run to a single test page or set of test pages using the <code>TEST_PATH</code> environment variable. For example:</p>
+
+<pre><code>TEST_PATH=slider JUNIT_OUTPUT=build/test-results/ ROOT_DOMAIN=$WEB_SERVER grunt test
+</code></pre>
+
+<p>will only run the tests where the path contains the string <code>slider</code>, eg <code>tests/unit/slider/</code>. <em>NOTE</em> that the phantom tests currently require that the web server be running to access and run the tests properly because of the PHP dependency that many of them share. Additionally the test suite is run against many versions of jQuery using the <code>JQUERY</code> environment variable. For example if you wanted to run the test suite against two of the currently supported versions, 1.7.2 and 1.8.2, the command would take the following form:</p>
+
+<pre><code>JQUERY=1.7.2,1.8.2 JUNIT_OUTPUT=build/test-results/ ROOT_DOMAIN=$WEB_SERVER grunt test
+</code></pre>
+
+<h3>Rebasing</h3>
+
+<p>Often times when working on a feature or bug fix branch it's useful to pull in the latest from the parent branch. If you're doing this <em>before</em> submitting a pull request it's best to use git's rebase to apply your commits onto the latest from the parent branch. For example, working on <code>new-feature</code> branch where <code>upstream</code> is the remote at <code>git://github.com/jquery/jquery-mobile.git</code>:</p>
+
+<pre><code>git checkout new-feature
+git fetch upstream
+git rebase upstream/master
+## ... here you may have to resolve some conflicts ... ##
+</code></pre>
+
+<p>You can now push to your own fork and submit the pull request. Keep in mind that it's only a good idea to do this if you <em>haven't</em> already submitted a pull request unless you want to create a new one because your origin remote (your fork) will report a discrepancy. Again, please refer to the <a href="http://git-scm.com/book/ch3-6.html">chapter</a> in Pro Git on rebasing if you're new to it.</p>
+</article>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>jsantell/allen</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>allen</h1>
+
+<p><a href="https://travis-ci.org/jsantell/allen"><img src="https://travis-ci.org/jsantell/allen.png" alt="Build Status" title="" /></a></p>
+
+<p><strong>allen</strong> is a collection of utilities for the Web Audio API. As of right now, mostly type checking different objects to determine what kind of type of node an object is, but if you find yourself reusing the same methods when developing with the Web Audio API, please add them!</p>
+
+<h2>Installation</h2>
+
+<p>Install via <a href="https://npmjs.org/">npm</a>, <a href="http://twitter.github.com/bower/">bower</a> or <a href="https://github.com/component/component">component(1)</a></p>
+
+<div class="highlight"><pre lang="">npm install allen
+bower install allen
+component install jsantell/allen
+</pre></div>
+
+<h2>Methods</h2>
+
+<h3>getAudioContext()</h3>
+
+<p>Creates and returns an available <code>AudioContext</code> for the environment. If this method was called previously, or an <code>AudioContext</code> was set via <code>setAudioContext()</code>, then the same instance will be returned.</p>
+
+<h3>setAudioContext( context )</h3>
+
+<p>Sets the <code>AudioContext</code> to be returned from <code>getAudioContext()</code>.</p>
+
+<h3>isAudioContext( node )</h3>
+
+<p>Returns <code>true</code> if <code>node</code> is an <code>AudioContext</code>; <code>false</code> otherwise.</p>
+
+<h3>isAudioSource( node )</h3>
+
+<p>Returns <code>true</code> if <code>node</code> inherits from an <code>AudioSourceNode</code>, like <code>BufferSourceNode</code>, <code>MediaElementAudioSourceNode</code>, <code>MediaStreamAudioSourceNode</code> or <code>OscillatorNode</code>; <code>false</code> otherwise.</p>
+
+<h3>isAudioDestination( node )</h3>
+
+<p>Returns <code>true</code> if <code>node</code> is an <code>AudioDestinationNode</code>; <code>false</code> otherwise.</p>
+
+<h3>isAudioNode( node )</h3>
+
+<p>Returns <code>true</code> if <code>node</code> inherits from <code>AudioNode</code>; <code>false</code> otherwise.</p>
+
+<h3>isRegularAudioNode( node )</h3>
+
+<p>Returns <code>true</code> if <code>node</code> inherits from <code>AudioNode</code>, and is not a source or destination node; <code>false</code> otherwise.</p>
+
+<h3>isAudioParam( param )</h3>
+
+<p>Returns <code>true</code> if <code>param</code> inherits from <code>AudioParam</code>; <code>false</code> otherwise.</p>
+
+<h2>Example</h2>
+
+<div class="highlight"><pre lang="">  var
+    ctx = allen.getAudioContext(),
+    src = ctx.createMediaElementSource( new Audio() ),
+    gain = ctx.createGainNode();
+
+  allen.isAudioNode( gain );  // true
+  allen.isAudioNode( src );   // true
+  allen.isAudioSource( src ); // true
+  allen.isAudioSource( gain ); // false
+  allen.isAudioParam( gain.gain ); // true
+
+</pre></div>
+
+<h2>Development</h2>
+
+<p>You must have <a href="https://github.com/gruntjs/grunt">grunt</a> installed globally -- build <code>src</code> and specs and run tests with <code>grunt</code>, or fire off the watcher with <code>grunt watch</code> to build and test changes.</p>
+
+<p>Run tests with <code>grunt mocha</code>. In <code>test/mocks/mockContext.coffee</code>, there is a mock AudioContext object for running tests headlessly -- tests should pass in PhantomJS, as well as browsers.</p>
+</article>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>DamonOehlman/matchme</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>Match Me</h1>
+
+<p>This is an experimental library that will allow object matching based on a simple query language plus chainable function interface.</p>
+
+<p><a href="http://travis-ci.org/#!/DamonOehlman/matchme"><img src="https://secure.travis-ci.org/DamonOehlman/matchme.png" alt="Build Status"></a></p>
+
+<h2>Simple Example</h2>
+
+<p>Matching is done at an object level against object properties, e.g.</p>
+
+<div class="highlight"><pre lang="js">var test = { name: 'Ted', age: 40 };
+
+matchme(test, 'name == ted'); // true
+matchme(test, 'age > 25'); // true
+matchme(test, { caseSensitive: true }, 'name == ted'); // false
+matchme(test, 'name == ted && age > 45'); // false
+</pre></div>
+
+<p>In addition <code>matchme</code> can be used in conjunction the filter function (both the native JS implemenation or underscores):</p>
+
+<div class="highlight"><pre lang="js">var people = [
+    { name: 'Ted', age: 40 },
+    { name: 'Bill', age: 42 }
+];
+
+people.filter(matchme.filter('age > 40')); // [ { name: 'Bill', age: 42 }]
+</pre></div>
+
+<p>For more complicated examples, I'd recommend having a look at the tests (which run from both the browser and node).</p>
+
+<h2>A Note regarding Eval</h2>
+
+<p>In general, the use of <code>eval</code> is considered evil.  I have avoided using it for many, many years.  That said matchme makes use of eval to simplifying the parsing required to properly deal with complex expressions (BOMDAS, etc).</p>
+</article>
+</body>
+</html>

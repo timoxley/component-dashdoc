@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>juliangruber/shoe</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>shoe</h1>
+
+<p>Streaming sockjs for node and the browser.</p>
+
+<p>This is a more streaming,<br /><a href="http://www.faqs.org/docs/artu/ch01s06.html">more unixy</a><br />take on <a href="https://github.com/sockjs/sockjs-node">sockjs</a>.</p>
+
+<ul>
+<li>works with <a href="https://github.com/substack/node-browserify">browserify</a>
+(<a href="http://www.faqs.org/docs/artu/ch01s06.html#id2877537">modularity</a>)</li>
+<li>stream all the things
+(<a href="http://www.faqs.org/docs/artu/ch01s06.html#id2877684">composition</a>)</li>
+<li>emits a <code>'log'</code> event instead of spamming stdout
+(<a href="http://www.faqs.org/docs/artu/ch01s06.html#id2878450">silence</a>)</li>
+</ul>
+
+<p><img src="http://substack.net/images/shoe.png" alt="shoe point javascript" title="" /></p>
+
+<h1>example</h1>
+
+<h2>stream all the things</h2>
+
+<p>Browser code that takes in a stream of 0s and 1s from the server and inverts<br />them:</p>
+
+<div class="highlight"><pre lang=" js">var shoe = require('shoe');
+var domready = require('domready');
+var es = require('event-stream');
+
+domready(function () {
+    var result = document.getElementById('result');
+
+<pre><code>var stream = shoe('/invert');
+var s = es.mapSync(function (msg) {
+    result.appendChild(document.createTextNode(msg));
+    return String(Number(msg)^1);
+});
+s.pipe(stream).pipe(s);
+</code></pre>
+
+});
+</pre></div>
+
+<p>Server code that hosts some static files and emits 0s and 1s:</p>
+
+<div class="highlight"><pre lang=" js">var shoe = require('shoe');
+var http = require('http');
+
+var ecstatic = require('ecstatic')(__dirname + '/static');
+
+var server = http.createServer(ecstatic);
+server.listen(9999);
+
+var sock = shoe(function (stream) {
+    var iv = setInterval(function () {
+        stream.write(Math.floor(Math.random() * 2));
+    }, 250);
+
+<pre><code>stream.on('end', function () {
+    clearInterval(iv);
+});
+
+stream.pipe(process.stdout, { end : false });
+</code></pre>
+
+});
+sock.install(server, '/invert');
+</pre></div>
+
+<p>The server emits 0s and 1s to the browser, the browser inverts them and sends<br />them back, and the server dumps the binary digits to stdout.</p>
+
+<p>By default, there's no logspam on stdout to clutter the output, which is a<br />frustrating trend in realtimey websocket libraries that violates the<br /><a href="http://www.faqs.org/docs/artu/ch01s06.html#id2878450">rule of silence</a>.</p>
+
+<p>Just wait for a client to connect and you'll see:</p>
+
+<div class="highlight"><pre lang="">$ node server.js
+001011010101101000101110010000100
+</pre></div>
+
+<h2>with dnode</h2>
+
+<p>Since dnode has a simple streaming api it's very simple to plug into shoe.</p>
+
+<p>Just hack up some browser code:</p>
+
+<div class="highlight"><pre lang=" js">var domready = require('domready');
+var shoe = require('shoe');
+var dnode = require('dnode');
+
+domready(function () {
+    var result = document.getElementById('result');
+    var stream = shoe('/dnode');
+
+<pre><code>var d = dnode();
+d.on('remote', function (remote) {
+    remote.transform('beep', function (s) {
+        result.textContent = 'beep =&gt; ' + s;
+    });
+});
+d.pipe(stream).pipe(d);
+</code></pre>
+
+});
+</pre></div>
+
+<p>and hack up a server piping shoe streams into dnode:</p>
+
+<div class="highlight"><pre lang=" js">var shoe = require('shoe');
+var dnode = require('dnode');
+
+var http = require('http');
+var ecstatic = require('ecstatic')(__dirname + '/static');
+
+var server = http.createServer(ecstatic);
+server.listen(9999);
+
+var sock = shoe(function (stream) {
+    var d = dnode({
+        transform : function (s, cb) {
+            var res = s.replace(/[aeiou]{2,}/, 'oo').toUpperCase();
+            cb(res);
+        }
+    });
+    d.pipe(stream).pipe(d);
+});
+sock.install(server, '/dnode');
+</pre></div>
+
+<p>Then open up <code>localhost:9999</code> in your browser and you should see:</p>
+
+<div class="highlight"><pre lang="">beep => BOOP
+</pre></div>
+
+<h2>with express or connect</h2>
+
+<p>you must pass the return value of <code>app.listen(port)</code></p>
+
+<div class="highlight"><pre lang=" js">var shoe = require('shoe');
+
+var express = require('express')
+var app = express()
+
+var sock = shoe(function (stream) { ... });
+
+// *** must pass expcess/connect apps like this:
+sock.install(app.listen(9999), '/dnode');
+</pre></div>
+
+<h1>browser methods</h1>
+
+<div class="highlight"><pre lang=" js">var shoe = require('shoe')
+</pre></div>
+
+<h2>var stream = shoe(uri, cb)</h2>
+
+<p>Return a readable/writable stream from the sockjs path <code>uri</code>.<br /><code>uri</code> may be a full uri or just a path.</p>
+
+<p><code>shoe</code> will emit a <code>'connect'</code> event when the connection is actually open,<br />(just like in <a href="http://nodejs.org/api/net.html#net_net_connect_options_connectionlistener">net</a>).<br />writes performed before the <code>'connect'</code> event will be buffered. passing in <code>cb</code> to <br />shoe is a shortcut for <code>shoe(uri).on('connect', cb)</code></p>
+
+<h1>server methods</h1>
+
+<div class="highlight"><pre lang=" js">var shoe = require('shoe')
+</pre></div>
+
+<p>All the methods from the sockjs exports objects are attached onto the <code>shoe</code><br />function, but the <code>shoe()</code> function itself is special.</p>
+
+<h2>var sock = shoe(opts, cb)</h2>
+
+<p>Create a server with <code>sockjs.createServer(opts)</code> except this function also adds<br />the <code>.install()</code> function below.</p>
+
+<p>If <code>cb</code> is specified, it fires <code>cb(stream)</code> on <code>'connection'</code> events.</p>
+
+<h2>sock.install(server, opts)</h2>
+
+<p>Call <code>sock.installHandler()</code> with the default option of spamming stdout with log<br />messages switched off in place of just emitting <code>'log'</code> messages<br />on the <code>sock</code> object instead. This is a much less spammy default that gets out<br />of your way.</p>
+
+<p>If <code>opts</code> is a string, use it as the <code>opts.prefix</code>.</p>
+
+<h1>server events</h1>
+
+<p>All the messages that sockjs normally emits will be available on the <code>sock</code><br />object plus the events below:</p>
+
+<h2>sock.on('log', function (severity, msg) { ... })</h2>
+
+<p>Using the default logger with <code>sock.install()</code> will cause these <code>'log'</code> messages<br />to be emitted instead of spamming stdout.</p>
+
+<h1>install</h1>
+
+<p>With <a href="http://npmjs.org">npm</a> do:</p>
+
+<div class="highlight"><pre lang="">npm install shoe
+</pre></div>
+
+<h1>license</h1>
+
+<p>MIT</p>
+</article>
+</body>
+</html>

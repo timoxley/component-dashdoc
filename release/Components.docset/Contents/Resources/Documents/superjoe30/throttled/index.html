@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>superjoe30/throttled</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../../style.css">
+</head>
+<body id="readme">
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>throttled</h1>
+
+<p>Create functions which only run once per event loop.</p>
+
+<p>Available as an npm module or component module.</p>
+
+<h2>Usage</h2>
+
+<div class="highlight"><pre lang="js">var throttled = require('throttled'),
+  , assert = require('assert')
+  , count = 0
+  , cbCount = 0
+
+var tryThis = throttled(function(foo, cb) {
+  assert.strictEqual(foo, "foo");
+  count += 1;
+  cb(1, 2, 3, 4);
+});
+tryThis("foo", incrementCbCount);
+tryThis("foo", incrementCbCount);
+setTimeout(function() {
+  assert.strictEqual(count, 1);
+  assert.strictEqual(cbCount, 2);
+  cb();
+}, 10);
+function incrementCbCount(one, two, three, four) {
+  cbCount += 1;
+  assert.strictEqual(one, 1);
+  assert.strictEqual(two, 2);
+  assert.strictEqual(three, 3);
+  assert.strictEqual(four, 4);
+}
+</pre></div>
+
+<h2>License</h2>
+
+<p>MIT</p>
+</article>
+</body>
+</html>
